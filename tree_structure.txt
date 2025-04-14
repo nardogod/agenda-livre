@@ -1,4 +1,5 @@
 ├── .next
+│   ├── app-build-manifest.json
 │   ├── build-manifest.json
 │   ├── cache
 │   │   ├── swc
@@ -8,31 +9,75 @@
 │   │       ├── client-development
 │   │       │   ├── 0.pack.gz
 │   │       │   ├── 1.pack.gz
+│   │       │   ├── 10.pack.gz
+│   │       │   ├── 11.pack.gz
+│   │       │   ├── 12.pack.gz
+│   │       │   ├── 13.pack.gz
+│   │       │   ├── 14.pack.gz
+│   │       │   ├── 15.pack.gz
+│   │       │   ├── 16.pack.gz
+│   │       │   ├── 17.pack.gz
+│   │       │   ├── 18.pack.gz
+│   │       │   ├── 19.pack.gz
 │   │       │   ├── 2.pack.gz
+│   │       │   ├── 20.pack.gz
 │   │       │   ├── 3.pack.gz
 │   │       │   ├── 4.pack.gz
 │   │       │   ├── 5.pack.gz
 │   │       │   ├── 6.pack.gz
 │   │       │   ├── 7.pack.gz
 │   │       │   ├── 8.pack.gz
+│   │       │   ├── 9.pack.gz
 │   │       │   ├── index.pack.gz
 │   │       │   └── index.pack.gz.old
 │   │       ├── client-development-fallback
 │   │       │   ├── 0.pack.gz
-│   │       │   └── index.pack.gz
-│   │       └── server-development
-│   │           ├── 0.pack.gz
-│   │           ├── 1.pack.gz
-│   │           ├── 2.pack.gz
-│   │           ├── 3.pack.gz
-│   │           ├── 4.pack.gz
-│   │           ├── 5.pack.gz
-│   │           ├── 6.pack.gz
-│   │           ├── index.pack.gz
-│   │           └── index.pack.gz.old
+│   │       │   ├── 1.pack.gz
+│   │       │   ├── 2.pack.gz
+│   │       │   ├── index.pack.gz
+│   │       │   └── index.pack.gz.old
+│   │       ├── server-development
+│   │       │   ├── 0.pack.gz
+│   │       │   ├── 1.pack.gz
+│   │       │   ├── 10.pack.gz
+│   │       │   ├── 11.pack.gz
+│   │       │   ├── 12.pack.gz
+│   │       │   ├── 13.pack.gz
+│   │       │   ├── 14.pack.gz
+│   │       │   ├── 15.pack.gz
+│   │       │   ├── 16.pack.gz
+│   │       │   ├── 17.pack.gz
+│   │       │   ├── 18.pack.gz
+│   │       │   ├── 19.pack.gz
+│   │       │   ├── 2.pack.gz
+│   │       │   ├── 20.pack.gz
+│   │       │   ├── 21.pack.gz
+│   │       │   ├── 22.pack.gz
+│   │       │   ├── 23.pack.gz
+│   │       │   ├── 24.pack.gz
+│   │       │   ├── 3.pack.gz
+│   │       │   ├── 4.pack.gz
+│   │       │   ├── 5.pack.gz
+│   │       │   ├── 6.pack.gz
+│   │       │   ├── 7.pack.gz
+│   │       │   ├── 8.pack.gz
+│   │       │   ├── 9.pack.gz
+│   │       │   ├── index.pack.gz
+│   │       │   └── index.pack.gz.old
+│   │       └── server-production
+│   │           ├── 0.pack
+│   │           └── index.pack
 │   ├── package.json
 │   ├── react-loadable-manifest.json
 │   ├── server
+│   │   ├── app
+│   │   │   ├── _not-found
+│   │   │   │   ├── page.js
+│   │   │   │   └── page_client-reference-manifest.js
+│   │   │   └── test
+│   │   │       ├── page.js
+│   │   │       └── page_client-reference-manifest.js
+│   │   ├── app-paths-manifest.json
 │   │   ├── interception-route-rewrite-manifest.js
 │   │   ├── middleware-build-manifest.js
 │   │   ├── middleware-manifest.json
@@ -43,8 +88,11 @@
 │   │   │   ├── _app.js
 │   │   │   ├── _document.js
 │   │   │   ├── _error.js
-│   │   │   └── index.js
+│   │   │   ├── index.js
+│   │   │   └── login.js
 │   │   ├── pages-manifest.json
+│   │   ├── server-reference-manifest.js
+│   │   ├── server-reference-manifest.json
 │   │   ├── vendor-chunks
 │   │   │   ├── @swc.js
 │   │   │   ├── date-fns.js
@@ -53,13 +101,23 @@
 │   │   └── webpack-runtime.js
 │   ├── static
 │   │   ├── chunks
+│   │   │   ├── _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
+│   │   │   ├── app
+│   │   │   │   ├── _not-found
+│   │   │   │   │   └── page.js
+│   │   │   │   ├── layout.js
+│   │   │   │   └── test
+│   │   │   │       └── page.js
+│   │   │   ├── app-pages-internals.js
+│   │   │   ├── main-app.js
 │   │   │   ├── main.js
 │   │   │   ├── pages
 │   │   │   │   ├── _app.js
 │   │   │   │   ├── _error.js
-│   │   │   │   └── index.js
+│   │   │   │   ├── index.js
+│   │   │   │   └── login.js
 │   │   │   ├── polyfills.js
 │   │   │   ├── react-refresh.js
 │   │   │   └── webpack.js
@@ -67,127 +125,34 @@
 │   │   │   ├── _buildManifest.js
 │   │   │   └── _ssgManifest.js
 │   │   └── webpack
-│   │       └── 633457081244afec._.hot-update.json
-│   └── trace
+│   │       ├── 041c63c08085183a.webpack.hot-update.json
+│   │       ├── 0b0d9589f915e1e2.webpack.hot-update.json
+│   │       ├── 4c8e45bda6818317.webpack.hot-update.json
+│   │       ├── 633457081244afec._.hot-update.json
+│   │       ├── 64592b2f9170807d.webpack.hot-update.json
+│   │       ├── 72d362dfde024334.webpack.hot-update.json
+│   │       ├── 8a5de2b0e2e4d6ab.webpack.hot-update.json
+│   │       ├── 9fed2a706668a4e4.webpack.hot-update.json
+│   │       ├── c322130a31f27d3b.webpack.hot-update.json
+│   │       ├── ed94462e9da6f9cd.webpack.hot-update.json
+│   │       ├── webpack.041c63c08085183a.hot-update.js
+│   │       ├── webpack.0b0d9589f915e1e2.hot-update.js
+│   │       ├── webpack.4c8e45bda6818317.hot-update.js
+│   │       ├── webpack.64592b2f9170807d.hot-update.js
+│   │       ├── webpack.72d362dfde024334.hot-update.js
+│   │       ├── webpack.8a5de2b0e2e4d6ab.hot-update.js
+│   │       ├── webpack.9fed2a706668a4e4.hot-update.js
+│   │       ├── webpack.c322130a31f27d3b.hot-update.js
+│   │       └── webpack.ed94462e9da6f9cd.hot-update.js
+│   ├── trace
+│   └── types
+│       ├── app
+│       │   ├── layout.ts
+│       │   └── test
+│       │       └── page.ts
+│       ├── cache-life.d.ts
+│       └── package.json
 ├── README.md
-├── atual
-├── backup_20250413_155411
-│   └── src
-│       ├── components
-│       │   ├── booking
-│       │   │   ├── AdditionalOptions.tsx.bak
-│       │   │   ├── BookingSummary.tsx.bak
-│       │   │   ├── ClientForm.tsx.bak
-│       │   │   ├── DateSelector.tsx.bak
-│       │   │   ├── DateTimePicker.tsx.bak
-│       │   │   ├── PaymentForm.tsx.bak
-│       │   │   ├── PaymentMethod.jsx.bak
-│       │   │   ├── PaymentMethod.tsx.bak
-│       │   │   ├── RadioOption.jsx.bak
-│       │   │   ├── RadioOption.tsx.bak
-│       │   │   ├── ServiceCard.jsx.bak
-│       │   │   ├── ServiceCard.tsx.bak
-│       │   │   ├── ServiceSelector.tsx.bak
-│       │   │   ├── TimeSelector.tsx.bak
-│       │   │   ├── TimeSlot.jsx.bak
-│       │   │   ├── TimeSlot.tsx.bak
-│       │   │   ├── ToggleOption.jsx.bak
-│       │   │   └── ToggleOption.tsx.bak
-│       │   ├── filters
-│       │   │   ├── CategoryFilter.tsx.bak
-│       │   │   ├── FilterGroup.tsx.bak
-│       │   │   ├── FilterItem.tsx.bak
-│       │   │   ├── LocationFilter.tsx.bak
-│       │   │   ├── PriceFilter.tsx.bak
-│       │   │   └── ZoneFilter.tsx.bak
-│       │   ├── layout
-│       │   │   ├── BottomNav.tsx.bak
-│       │   │   ├── Footer.tsx.bak
-│       │   │   ├── Header.tsx.bak
-│       │   │   ├── Layout.tsx.bak
-│       │   │   ├── MainLayout.jsx.bak
-│       │   │   ├── MainLayout.tsx.bak
-│       │   │   └── Sidebar.tsx.bak
-│       │   ├── professionals
-│       │   │   ├── ProfessionalCard.tsx.bak
-│       │   │   ├── ProfessionalList.tsx.bak
-│       │   │   ├── ProfessionalService.jsx.bak
-│       │   │   ├── ProfessionalService.tsx.bak
-│       │   │   ├── ReviewCard.jsx.bak
-│       │   │   ├── ReviewCard.tsx.bak
-│       │   │   └── ServiceCard.tsx.bak
-│       │   └── ui
-│       │       ├── Toast.jsx.bak
-│       │       ├── Toast.tsx.bak
-│       │       ├── buttons
-│       │       │   ├── Button.tsx.bak
-│       │       │   ├── MainButton.jsx.bak
-│       │       │   └── MainButton.tsx.bak
-│       │       └── inputs
-│       │           ├── Input.tsx.bak
-│       │           └── Toggle.tsx.bak
-│       ├── contexts
-│       │   ├── AuthContext.tsx.bak
-│       │   ├── BookingContext.tsx.bak
-│       │   └── FilterContext.tsx.bak
-│       ├── hooks
-│       │   ├── useAuth.ts.bak
-│       │   ├── useBooking.ts.bak
-│       │   └── useFilters.ts.bak
-│       ├── pages
-│       │   ├── _app.tsx.bak
-│       │   ├── _document.tsx.bak
-│       │   ├── about.tsx.bak
-│       │   ├── api
-│       │   │   └── hello.ts.bak
-│       │   ├── auth
-│       │   │   ├── login.tsx.bak
-│       │   │   ├── password-reset.tsx.bak
-│       │   │   └── register.tsx.bak
-│       │   ├── booking
-│       │   │   └── [professionalId]
-│       │   │       ├── client.tsx.bak
-│       │   │       ├── confirmation.tsx.bak
-│       │   │       ├── datetime.tsx.bak
-│       │   │       ├── index.tsx.bak
-│       │   │       ├── options.tsx.bak
-│       │   │       ├── payment.tsx.bak
-│       │   │       └── service.tsx.bak
-│       │   ├── dashboard
-│       │   │   ├── client
-│       │   │   │   ├── appointments.tsx.bak
-│       │   │   │   ├── index.tsx.bak
-│       │   │   │   └── profile.tsx.bak
-│       │   │   └── professional
-│       │   │       ├── appointments.tsx.bak
-│       │   │       ├── index.tsx.bak
-│       │   │       ├── profile.tsx.bak
-│       │   │       ├── schedule.tsx.bak
-│       │   │       └── services.tsx.bak
-│       │   ├── index.tsx.bak
-│       │   ├── privacy.tsx.bak
-│       │   ├── professionals
-│       │   │   ├── [id].tsx.bak
-│       │   │   └── index.tsx.bak
-│       │   └── terms.tsx.bak
-│       ├── services
-│       │   ├── api.ts.bak
-│       │   ├── auth.ts.bak
-│       │   ├── booking.ts.bak
-│       │   ├── payment.ts.bak
-│       │   └── professionals.ts.bak
-│       ├── styles
-│       │   └── globals.css.bak
-│       ├── types
-│       │   ├── booking.ts.bak
-│       │   ├── professional.ts.bak
-│       │   ├── service.ts.bak
-│       │   └── user.ts.bak
-│       └── utils
-│           ├── dates.ts.bak
-│           ├── formatting.ts.bak
-│           ├── storage.ts.bak
-│           └── validation.ts.bak
 ├── components
 │   ├── auth
 │   │   └── ProtectedRoute.js
@@ -241,13 +206,21 @@
 │   ├── file.svg
 │   ├── globe.svg
 │   ├── next.svg
+│   ├── service-worker.js
 │   ├── vercel.svg
 │   └── window.svg
+├── senha teste(pessoal).txt
 ├── services
 │   └── api.js
 ├── setup-agenda-livre.sh
 ├── src
+│   ├── app
+│   │   ├── layout.tsx
+│   │   └── test
+│   │       └── page.tsx
 │   ├── components
+│   │   ├── analytics
+│   │   │   └── AnalyticsDashboard.tsx
 │   │   ├── booking
 │   │   │   ├── AdditionalOptions.tsx
 │   │   │   ├── BookingSummary.tsx
@@ -267,6 +240,9 @@
 │   │   │   ├── TimeSlot.tsx
 │   │   │   ├── ToggleOption.jsx
 │   │   │   └── ToggleOption.tsx
+│   │   ├── calendar
+│   │   │   ├── CalendarIntegrationCard.tsx
+│   │   │   └── CalendarIntegrationSection.tsx
 │   │   ├── filters
 │   │   │   ├── CategoryFilter.tsx
 │   │   │   ├── FilterGroup.tsx
@@ -276,12 +252,18 @@
 │   │   │   └── ZoneFilter.tsx
 │   │   ├── layout
 │   │   │   ├── BottomNav.tsx
+│   │   │   ├── ClientDashboardLayout.tsx
 │   │   │   ├── Footer.tsx
 │   │   │   ├── Header.tsx
 │   │   │   ├── Layout.tsx
 │   │   │   ├── MainLayout.jsx
 │   │   │   ├── MainLayout.tsx
+│   │   │   ├── ProfessionalDashboardLayout.tsx
 │   │   │   └── Sidebar.tsx
+│   │   ├── notifications
+│   │   │   ├── NotificationDropdown.tsx
+│   │   │   ├── NotificationIcon.tsx
+│   │   │   └── NotificationList.tsx
 │   │   ├── professionals
 │   │   │   ├── ProfessionalCard.tsx
 │   │   │   ├── ProfessionalList.tsx
@@ -290,6 +272,11 @@
 │   │   │   ├── ReviewCard.jsx
 │   │   │   ├── ReviewCard.tsx
 │   │   │   └── ServiceCard.tsx
+│   │   ├── reviews
+│   │   │   ├── RatingStars.tsx
+│   │   │   ├── ReviewCard.tsx
+│   │   │   ├── ReviewForm.tsx
+│   │   │   └── ReviewList.tsx
 │   │   └── ui
 │   │       ├── Toast.jsx
 │   │       ├── Toast.tsx
@@ -303,17 +290,20 @@
 │   ├── contexts
 │   │   ├── AuthContext.tsx
 │   │   ├── BookingContext.tsx
-│   │   └── FilterContext.tsx
+│   │   ├── FilterContext.tsx
+│   │   └── NotificationContext.tsx
 │   ├── hooks
 │   │   ├── useAuth.ts
 │   │   ├── useBooking.ts
-│   │   └── useFilters.ts
+│   │   ├── useFilters.ts
+│   │   └── useNotifications.ts
 │   ├── pages
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
 │   │   ├── about.tsx
 │   │   ├── api
-│   │   │   └── hello.ts
+│   │   │   ├── hello.ts
+│   │   │   └── notifications.ts
 │   │   ├── auth
 │   │   │   ├── login.tsx
 │   │   │   ├── password-reset.tsx
@@ -331,37 +321,49 @@
 │   │   ├── dashboard
 │   │   │   ├── client
 │   │   │   │   ├── appointments.tsx
+│   │   │   │   ├── history.tsx
 │   │   │   │   ├── index.tsx
 │   │   │   │   └── profile.tsx
 │   │   │   └── professional
+│   │   │       ├── analytics.tsx
 │   │   │       ├── appointments.tsx
 │   │   │       ├── index.tsx
 │   │   │       ├── profile.tsx
 │   │   │       ├── schedule.tsx
-│   │   │       └── services.tsx
+│   │   │       ├── services.tsx
+│   │   │       └── settings
+│   │   │           ├── calendar.tsx
+│   │   │           ├── index.tsx
+│   │   │           └── notifications.tsx
 │   │   ├── index.tsx
 │   │   ├── privacy.tsx
 │   │   ├── professionals
 │   │   │   ├── [id].tsx
 │   │   │   └── index.tsx
-│   │   └── terms.tsx
+│   │   ├── terms.tsx
+│   │   └── test.tsx
 │   ├── services
 │   │   ├── api.ts
 │   │   ├── auth.ts
 │   │   ├── booking.ts
+│   │   ├── calendar.ts
+│   │   ├── notification.ts
 │   │   ├── payment.ts
-│   │   └── professionals.ts
+│   │   ├── professionals.ts
+│   │   └── reviews.ts
 │   ├── styles
 │   │   ├── globals.css
 │   │   └── tailwind.css
 │   ├── types
 │   │   ├── booking.ts
+│   │   ├── notification.ts
 │   │   ├── professional.ts
 │   │   ├── service.ts
 │   │   └── user.ts
 │   └── utils
 │       ├── dates.ts
 │       ├── formatting.ts
+│       ├── pushNotification.ts
 │       ├── storage.ts
 │       └── validation.ts
 ├── styles

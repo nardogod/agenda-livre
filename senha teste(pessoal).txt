@@ -1,0 +1,2 @@
+Para cliente: email cliente@exemplo.com e senha senha123
+Para profissional: email profissional@exemplo.com e senha senha123

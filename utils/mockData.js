@@ -191,6 +191,174 @@ export const generateMockServices = (count = 5) => {
   return services.slice(0, count);
 };
 
+// Dados de notificações mockados
+export const mockNotifications = [
+  {
+    id: '1',
+    userId: 'user-123',
+    title: 'Novo agendamento',
+    message: 'Maria Silva agendou Box Braids para 14/04/2025',
+    type: 'appointment',
+    status: 'unread',
+    createdAt: '2025-04-13T14:30:00',
+    data: { appointmentId: '1' }
+  },
+  {
+    id: '2',
+    userId: 'user-123',
+    title: 'Pagamento confirmado',
+    message: 'Pagamento de R$ 290,00 confirmado para o agendamento de João Santos',
+    type: 'payment',
+    status: 'unread',
+    createdAt: '2025-04-13T12:15:00',
+    data: { appointmentId: '2', amount: 290.0 }
+  },
+  {
+    id: '3',
+    userId: 'user-123',
+    title: 'Nova avaliação',
+    message: 'Paula Oliveira deixou uma avaliação 5 estrelas para você',
+    type: 'review',
+    status: 'read',
+    createdAt: '2025-04-12T18:45:00',
+    data: { reviewId: '1', rating: 5 }
+  },
+  {
+    id: '4',
+    userId: 'user-123',
+    title: 'Lembrete de agendamento',
+    message: 'Você tem um agendamento amanhã às 14:30 com Maria Silva',
+    type: 'appointment',
+    status: 'read',
+    createdAt: '2025-04-12T10:00:00',
+    data: { appointmentId: '1' }
+  },
+  {
+    id: '5',
+    userId: 'user-123',
+    title: 'Dica da semana',
+    message: 'Otimize seu tempo oferecendo pacotes de serviços combinados',
+    type: 'system',
+    status: 'unread',
+    createdAt: '2025-04-11T09:30:00',
+    data: { articleId: '123' }
+  }
+];
+
+// Dados de integrações de calendário mockados
+export const mockCalendarIntegrations = [
+  {
+    id: '1',
+    provider: 'google',
+    isConnected: true,
+    lastSyncedAt: '2025-04-13T10:30:00'
+  },
+  {
+    id: '2',
+    provider: 'outlook',
+    isConnected: false,
+    lastSyncedAt: null
+  }
+];
+
+// Dados de analytics mockados
+export const mockAnalyticsData = {
+  totalAppointments: {
+    week: 12,
+    month: 48,
+    quarter: 142,
+    year: 567
+  },
+  revenue: {
+    week: 'R$ 2.950,00',
+    month: 'R$ 12.480,00',
+    quarter: 'R$ 36.750,00',
+    year: 'R$ 142.300,00'
+  },
+  newClients: {
+    week: 3,
+    month: 14,
+    quarter: 42,
+    year: 168
+  },
+  trends: {
+    week: {
+      appointments: 5,
+      revenue: 8,
+      clients: 12
+    },
+    month: {
+      appointments: 12,
+      revenue: 15,
+      clients: 7
+    },
+    quarter: {
+      appointments: 8,
+      revenue: 11,
+      clients: 3
+    },
+    year: {
+      appointments: 22,
+      revenue: 18,
+      clients: 15
+    }
+  }
+};
+
+// Dados de avaliações mockados
+export const mockReviews = [
+  {
+    id: '1',
+    clientId: 'client-1',
+    clientName: 'Maria Silva',
+    rating: 5,
+    comment: 'Trabalho incrível! Ana tem um talento especial para Box Braids. O acabamento ficou perfeito e as tranças estão durando muito mais do que eu esperava. Além de ser muito simpática e pontual. Recomendo!',
+    date: '2025-04-10T15:30:00',
+    serviceId: '1',
+    serviceName: 'Box Braids'
+  },
+  {
+    id: '2',
+    clientId: 'client-2',
+    clientName: 'Carla Souza',
+    rating: 4,
+    comment: 'Gostei bastante do resultado. As tranças ficaram ótimas, apenas o tempo de execução foi um pouco além do esperado. Mas o resultado final valeu a pena.',
+    date: '2025-04-05T17:45:00',
+    serviceId: '2',
+    serviceName: 'Twist Senegalês'
+  },
+  {
+    id: '3',
+    clientId: 'client-3',
+    clientName: 'Paula Santos',
+    rating: 5,
+    comment: 'Meu penteado para festa ficou exatamente como eu queria! Ana entendeu perfeitamente o que eu pedi e ainda deu dicas valiosas. Já marquei outro serviço.',
+    date: '2025-04-01T10:20:00',
+    serviceId: '3',
+    serviceName: 'Penteado para Festa'
+  },
+  {
+    id: '4',
+    clientId: 'client-4',
+    clientName: 'Juliana Oliveira',
+    rating: 5,
+    comment: 'Sensacional! Ana é muito cuidadosa e habilidosa. Fez minhas box braids exatamente como eu queria, respeitando o tamanho e espessura que pedi. Ambiente limpo e aconchegante.',
+    date: '2025-03-25T14:10:00',
+    serviceId: '1',
+    serviceName: 'Box Braids'
+  },
+  {
+    id: '5',
+    clientId: 'client-5',
+    clientName: 'Beatriz Lima',
+    rating: 3,
+    comment: 'O serviço ficou bom, mas poderia ser melhor. Algumas tranças estão um pouco mais folgadas que outras. Porém, a profissional foi muito simpática e o ambiente é agradável.',
+    date: '2025-03-20T11:30:00',
+    serviceId: '2',
+    serviceName: 'Twist Senegalês'
+  }
+];
+
 // Intercepta e simula chamadas à API para desenvolvimento
 export const mockApiResponse = (endpoint, params) => {
   // Simula um pequeno delay para imitar o tempo de resposta da API
@@ -233,7 +401,19 @@ export const mockApiResponse = (endpoint, params) => {
       }
       else if (endpoint.includes('/services')) {
         data = generateMockServices();
-      } 
+      }
+      else if (endpoint.includes('/notifications')) {
+        data = mockNotifications;
+      }
+      else if (endpoint.includes('/calendar/integrations')) {
+        data = mockCalendarIntegrations;
+      }
+      else if (endpoint.includes('/professionals/reviews')) {
+        data = mockReviews;
+      }
+      else if (endpoint.includes('/analytics')) {
+        data = mockAnalyticsData;
+      }
       else {
         data = { message: 'Endpoint not mocked' };
       }

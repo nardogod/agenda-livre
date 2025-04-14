@@ -1,141 +1,137 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { authService } from '../services/api';
-import { useToast } from './ToastContext';
+// src/contexts/AuthContext.tsx
 
-const AuthContext = createContext();
+import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import Router from 'next/router';
+import { signIn, signOut, getUser, signUp } from '../services/auth';
+import { User } from '../types/user';
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-  const { showToast } = useToast();
-
-  // Verificar se o usuário está autenticado ao carregar a página
-  useEffect(() => {
-    const loadUserFromToken = async () => {
-      try {
-        const token = localStorage.getItem('agenda_livre_token');
-        if (token) {
-          // Buscar perfil do usuário
-          const response = await authService.getProfile();
-          setUser(response.data);
-        }
-      } catch (error) {
-        console.error('Erro ao carregar usuário:', error);
-        localStorage.removeItem('agenda_livre_token');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUserFromToken();
-  }, []);
-
-  // Função de login
-  const login = async (credentials) => {
-    try {
-      setLoading(true);
-      const response = await authService.login(credentials);
-      const { token, user } = response.data;
-      
-      // Salvar token e informações do usuário
-      localStorage.setItem('agenda_livre_token', token);
-      setUser(user);
-      
-      showToast('Login realizado com sucesso!', 'success');
-      return true;
-    } catch (error) {
-      console.error('Erro no login:', error);
-      const message = error.response?.data?.message || 'Erro ao fazer login. Verifique suas credenciais.';
-      showToast(message, 'error');
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Função de registro
-  const register = async (userData) => {
-    try {
-      setLoading(true);
-      const response = await authService.register(userData);
-      const { token, user } = response.data;
-      
-      // Salvar token e informações do usuário
-      localStorage.setItem('agenda_livre_token', token);
-      setUser(user);
-      
-      showToast('Cadastro realizado com sucesso!', 'success');
-      return true;
-    } catch (error) {
-      console.error('Erro no registro:', error);
-      const message = error.response?.data?.message || 'Erro ao criar conta. Verifique os dados informados.';
-      showToast(message, 'error');
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Função de logout
-  const logout = () => {
-    localStorage.removeItem('agenda_livre_token');
-    setUser(null);
-    router.push('/login');
-    showToast('Você saiu da sua conta', 'info');
-  };
-
-  // Atualizar perfil do usuário
-  const updateProfile = async (profileData) => {
-    try {
-      setLoading(true);
-      const response = await authService.updateProfile(profileData);
-      setUser(response.data);
-      showToast('Perfil atualizado com sucesso!', 'success');
-      return true;
-    } catch (error) {
-      console.error('Erro ao atualizar perfil:', error);
-      const message = error.response?.data?.message || 'Erro ao atualizar perfil.';
-      showToast(message, 'error');
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Solicitar redefinição de senha
-  const requestPasswordReset = async (email) => {
-    try {
-      setLoading(true);
-      await authService.requestPasswordReset(email);
-      showToast('Instruções de redefinição de senha enviadas para seu email!', 'success');
-      return true;
-    } catch (error) {
-      console.error('Erro ao solicitar redefinição:', error);
-      const message = error.response?.data?.message || 'Erro ao solicitar redefinição de senha.';
-      showToast(message, 'error');
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const value = {
-    user,
-    loading,
-    login,
-    register,
-    logout,
-    updateProfile,
-    requestPasswordReset,
-    isAuthenticated: !!user,
-    isProfessional: user?.user_type === 'professional',
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+interface SignInCredentials {
+  email: string;
+  password: string;
 }
 
-export function useAuth() {
-  return useContext(AuthContext);
+interface SignUpData {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  user_type: 'client' | 'professional';
+}
+
+interface AuthContextData {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  signIn: (credentials: SignInCredentials) => Promise<void>;
+  signUp: (data: SignUpData) => Promise<void>;
+  signOut: () => void;
+  error: string | null;
+}
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthContext = createContext({} as AuthContextData);
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      try {
+        const savedUser = getUser();
+        
+        if (savedUser) {
+          setUser(savedUser);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar usuário dos cookies:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadUserFromCookies();
+  }, []);
+
+  async function handleSignIn({ email, password }: SignInCredentials) {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const user = await signIn({ email, password });
+      setUser(user);
+
+      // Redireciona baseado no tipo de usuário
+      if (user.user_type === 'professional') {
+        Router.push('/dashboard/professional');
+      } else {
+        Router.push('/dashboard/client');
+      }
+    } catch (error: any) {
+      if (error.response?.data?.detail) {
+        setError(error.response.data.detail);
+      } else {
+        setError('Erro ao fazer login. Verifique suas credenciais.');
+      }
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function handleSignUp(data: SignUpData) {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const user = await signUp(data);
+      setUser(user);
+
+      // Redireciona baseado no tipo de usuário
+      if (user.user_type === 'professional') {
+        Router.push('/dashboard/professional');
+      } else {
+        Router.push('/dashboard/client');
+      }
+    } catch (error: any) {
+      if (error.response?.data) {
+        // Formata erros do backend para exibição
+        const errorMessages = Object.values(error.response.data)
+          .map((messages: any) => Array.isArray(messages) ? messages.join(', ') : messages)
+          .join('. ');
+        
+        setError(errorMessages || 'Erro ao criar conta.');
+      } else {
+        setError('Erro ao criar conta. Tente novamente.');
+      }
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleSignOut() {
+    signOut();
+    setUser(null);
+    Router.push('/');
+  }
+
+  return (
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated: !!user,
+      isLoading,
+      signIn: handleSignIn,
+      signUp: handleSignUp,
+      signOut: handleSignOut,
+      error
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
