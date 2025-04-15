@@ -12,7 +12,8 @@ def generate_tree(directory, output_file='tree_structure.txt', ignore_dirs=None,
         ignore_files (list): Lista de arquivos para ignorar
     """
     if ignore_dirs is None:
-        ignore_dirs = ['.git', '__pycache__', 'venv', 'env', '.venv', 'node_modules', '.history', 'READ_CHAT']
+        ignore_dirs = ['.git', '__pycache__', 'venv', 'env', '.venv', 'node_modules', '.history', 'READ_CHAT',
+        "backup_20250414_181421","backup_20250414_181209","broken_state_20250414_183530"]
     
     if ignore_files is None:
         ignore_files = ['.gitignore', '.DS_Store']

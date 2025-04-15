@@ -1,5 +1,4 @@
 ├── .next
-│   ├── app-build-manifest.json
 │   ├── build-manifest.json
 │   ├── cache
 │   │   ├── swc
@@ -17,10 +16,7 @@
 │   │       │   ├── 15.pack.gz
 │   │       │   ├── 16.pack.gz
 │   │       │   ├── 17.pack.gz
-│   │       │   ├── 18.pack.gz
-│   │       │   ├── 19.pack.gz
 │   │       │   ├── 2.pack.gz
-│   │       │   ├── 20.pack.gz
 │   │       │   ├── 3.pack.gz
 │   │       │   ├── 4.pack.gz
 │   │       │   ├── 5.pack.gz
@@ -32,52 +28,29 @@
 │   │       │   └── index.pack.gz.old
 │   │       ├── client-development-fallback
 │   │       │   ├── 0.pack.gz
-│   │       │   ├── 1.pack.gz
-│   │       │   ├── 2.pack.gz
-│   │       │   ├── index.pack.gz
-│   │       │   └── index.pack.gz.old
-│   │       ├── server-development
-│   │       │   ├── 0.pack.gz
-│   │       │   ├── 1.pack.gz
-│   │       │   ├── 10.pack.gz
-│   │       │   ├── 11.pack.gz
-│   │       │   ├── 12.pack.gz
-│   │       │   ├── 13.pack.gz
-│   │       │   ├── 14.pack.gz
-│   │       │   ├── 15.pack.gz
-│   │       │   ├── 16.pack.gz
-│   │       │   ├── 17.pack.gz
-│   │       │   ├── 18.pack.gz
-│   │       │   ├── 19.pack.gz
-│   │       │   ├── 2.pack.gz
-│   │       │   ├── 20.pack.gz
-│   │       │   ├── 21.pack.gz
-│   │       │   ├── 22.pack.gz
-│   │       │   ├── 23.pack.gz
-│   │       │   ├── 24.pack.gz
-│   │       │   ├── 3.pack.gz
-│   │       │   ├── 4.pack.gz
-│   │       │   ├── 5.pack.gz
-│   │       │   ├── 6.pack.gz
-│   │       │   ├── 7.pack.gz
-│   │       │   ├── 8.pack.gz
-│   │       │   ├── 9.pack.gz
-│   │       │   ├── index.pack.gz
-│   │       │   └── index.pack.gz.old
-│   │       └── server-production
-│   │           ├── 0.pack
-│   │           └── index.pack
+│   │       │   └── index.pack.gz
+│   │       └── server-development
+│   │           ├── 0.pack.gz
+│   │           ├── 1.pack.gz
+│   │           ├── 10.pack.gz
+│   │           ├── 11.pack.gz
+│   │           ├── 12.pack.gz
+│   │           ├── 13.pack.gz
+│   │           ├── 14.pack.gz
+│   │           ├── 2.pack.gz
+│   │           ├── 3.pack.gz
+│   │           ├── 4.pack.gz
+│   │           ├── 5.pack.gz
+│   │           ├── 6.pack.gz
+│   │           ├── 7.pack.gz
+│   │           ├── 8.pack.gz
+│   │           ├── 9.pack.gz
+│   │           ├── index.pack.gz
+│   │           └── index.pack.gz.old
 │   ├── package.json
 │   ├── react-loadable-manifest.json
 │   ├── server
-│   │   ├── app
-│   │   │   ├── _not-found
-│   │   │   │   ├── page.js
-│   │   │   │   └── page_client-reference-manifest.js
-│   │   │   └── test
-│   │   │       ├── page.js
-│   │   │       └── page_client-reference-manifest.js
-│   │   ├── app-paths-manifest.json
+│   │   ├── _error.js
 │   │   ├── interception-route-rewrite-manifest.js
 │   │   ├── middleware-build-manifest.js
 │   │   ├── middleware-manifest.json
@@ -88,11 +61,8 @@
 │   │   │   ├── _app.js
 │   │   │   ├── _document.js
 │   │   │   ├── _error.js
-│   │   │   ├── index.js
-│   │   │   └── login.js
+│   │   │   └── index.js
 │   │   ├── pages-manifest.json
-│   │   ├── server-reference-manifest.js
-│   │   ├── server-reference-manifest.json
 │   │   ├── vendor-chunks
 │   │   │   ├── @swc.js
 │   │   │   ├── date-fns.js
@@ -101,23 +71,14 @@
 │   │   └── webpack-runtime.js
 │   ├── static
 │   │   ├── chunks
-│   │   │   ├── _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js
+│   │   │   ├── _error.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
-│   │   │   ├── app
-│   │   │   │   ├── _not-found
-│   │   │   │   │   └── page.js
-│   │   │   │   ├── layout.js
-│   │   │   │   └── test
-│   │   │   │       └── page.js
-│   │   │   ├── app-pages-internals.js
-│   │   │   ├── main-app.js
 │   │   │   ├── main.js
 │   │   │   ├── pages
 │   │   │   │   ├── _app.js
 │   │   │   │   ├── _error.js
-│   │   │   │   ├── index.js
-│   │   │   │   └── login.js
+│   │   │   │   └── index.js
 │   │   │   ├── polyfills.js
 │   │   │   ├── react-refresh.js
 │   │   │   └── webpack.js
@@ -125,34 +86,16 @@
 │   │   │   ├── _buildManifest.js
 │   │   │   └── _ssgManifest.js
 │   │   └── webpack
-│   │       ├── 041c63c08085183a.webpack.hot-update.json
-│   │       ├── 0b0d9589f915e1e2.webpack.hot-update.json
-│   │       ├── 4c8e45bda6818317.webpack.hot-update.json
 │   │       ├── 633457081244afec._.hot-update.json
-│   │       ├── 64592b2f9170807d.webpack.hot-update.json
-│   │       ├── 72d362dfde024334.webpack.hot-update.json
-│   │       ├── 8a5de2b0e2e4d6ab.webpack.hot-update.json
-│   │       ├── 9fed2a706668a4e4.webpack.hot-update.json
-│   │       ├── c322130a31f27d3b.webpack.hot-update.json
-│   │       ├── ed94462e9da6f9cd.webpack.hot-update.json
-│   │       ├── webpack.041c63c08085183a.hot-update.js
-│   │       ├── webpack.0b0d9589f915e1e2.hot-update.js
-│   │       ├── webpack.4c8e45bda6818317.hot-update.js
-│   │       ├── webpack.64592b2f9170807d.hot-update.js
-│   │       ├── webpack.72d362dfde024334.hot-update.js
-│   │       ├── webpack.8a5de2b0e2e4d6ab.hot-update.js
-│   │       ├── webpack.9fed2a706668a4e4.hot-update.js
-│   │       ├── webpack.c322130a31f27d3b.hot-update.js
-│   │       └── webpack.ed94462e9da6f9cd.hot-update.js
-│   ├── trace
-│   └── types
-│       ├── app
-│       │   ├── layout.ts
-│       │   └── test
-│       │       └── page.ts
-│       ├── cache-life.d.ts
-│       └── package.json
+│   │       ├── 78a61760f928d4ba.webpack.hot-update.json
+│   │       └── webpack.78a61760f928d4ba.hot-update.js
+│   └── trace
+├── .swc
+│   └── plugins
+│       └── v7_windows_x86_64_9.0.0
+├── PROJECT_STRUCTURE.md
 ├── README.md
+├── VERIFICATION_STEPS.md
 ├── components
 │   ├── auth
 │   │   └── ProtectedRoute.js
@@ -176,8 +119,44 @@
 ├── contexts
 │   ├── AuthContext.js
 │   └── ToastContext.js
+├── coverage
+│   ├── clover.xml
+│   ├── coverage-final.json
+│   ├── lcov-report
+│   │   ├── base.css
+│   │   ├── block-navigation.js
+│   │   ├── components
+│   │   │   ├── notifications
+│   │   │   │   ├── NotificationIcon.tsx.html
+│   │   │   │   └── index.html
+│   │   │   ├── professionals
+│   │   │   │   ├── ProfessionalCard.tsx.html
+│   │   │   │   └── index.html
+│   │   │   └── ui
+│   │   │       └── buttons
+│   │   │           ├── Button.tsx.html
+│   │   │           └── index.html
+│   │   ├── contexts
+│   │   │   ├── NotificationContext.tsx.html
+│   │   │   └── index.html
+│   │   ├── favicon.png
+│   │   ├── index.html
+│   │   ├── prettify.css
+│   │   ├── prettify.js
+│   │   ├── services
+│   │   │   ├── calendar.ts.html
+│   │   │   └── index.html
+│   │   ├── sort-arrow-sprite.png
+│   │   ├── sorter.js
+│   │   └── utils
+│   │       ├── index.html
+│   │       └── mockData.js.html
+│   └── lcov.info
 ├── eslint.config.mjs
+├── falhas_teste.txt
 ├── fix-project-structure.sh
+├── jest.config.js
+├── jest.setup.js
 ├── next-env.d.ts
 ├── next.config.js
 ├── next.config.ts
@@ -214,13 +193,30 @@
 │   └── api.js
 ├── setup-agenda-livre.sh
 ├── src
-│   ├── app
-│   │   ├── layout.tsx
-│   │   └── test
-│   │       └── page.tsx
+│   ├── __tests__
+│   │   ├── components
+│   │   │   ├── analytics
+│   │   │   │   └── AnalyticsDashboard.test.tsx
+│   │   │   ├── notifications
+│   │   │   │   └── NotificationIcon.test.tsx
+│   │   │   ├── professionals
+│   │   │   │   └── ProfessionalCard.test.tsx
+│   │   │   └── ui
+│   │   │       └── Button.test.tsx
+│   │   ├── contexts
+│   │   │   └── NotificationContext.test.tsx
+│   │   ├── services
+│   │   │   ├── calendar.test.ts
+│   │   │   └── notification.test.ts
+│   │   └── utils
+│   │       ├── mockData.test.js
+│   │       └── mockData.test.ts
 │   ├── components
 │   │   ├── analytics
-│   │   │   └── AnalyticsDashboard.tsx
+│   │   │   ├── AnalyticsDashboard.tsx
+│   │   │   └── AnalyticsDashboardSimple.tsx
+│   │   ├── auth
+│   │   │   └── ProtectedRoute.js
 │   │   ├── booking
 │   │   │   ├── AdditionalOptions.tsx
 │   │   │   ├── BookingSummary.tsx
@@ -243,6 +239,9 @@
 │   │   ├── calendar
 │   │   │   ├── CalendarIntegrationCard.tsx
 │   │   │   └── CalendarIntegrationSection.tsx
+│   │   ├── common
+│   │   │   ├── MainButton.jsx
+│   │   │   └── Toast.jsx
 │   │   ├── filters
 │   │   │   ├── CategoryFilter.tsx
 │   │   │   ├── FilterGroup.tsx
@@ -260,10 +259,16 @@
 │   │   │   ├── MainLayout.tsx
 │   │   │   ├── ProfessionalDashboardLayout.tsx
 │   │   │   └── Sidebar.tsx
+│   │   ├── layouts
+│   │   │   ├── ClientDashboardLayout.js
+│   │   │   └── ProfessionalDashboardLayout.js
 │   │   ├── notifications
 │   │   │   ├── NotificationDropdown.tsx
 │   │   │   ├── NotificationIcon.tsx
 │   │   │   └── NotificationList.tsx
+│   │   ├── professional
+│   │   │   ├── ProfessionalService.jsx
+│   │   │   └── ReviewCard.jsx
 │   │   ├── professionals
 │   │   │   ├── ProfessionalCard.tsx
 │   │   │   ├── ProfessionalList.tsx
@@ -275,8 +280,7 @@
 │   │   ├── reviews
 │   │   │   ├── RatingStars.tsx
 │   │   │   ├── ReviewCard.tsx
-│   │   │   ├── ReviewForm.tsx
-│   │   │   └── ReviewList.tsx
+│   │   │   └── ReviewForm.tsx
 │   │   └── ui
 │   │       ├── Toast.jsx
 │   │       ├── Toast.tsx
@@ -288,10 +292,12 @@
 │   │           ├── Input.tsx
 │   │           └── Toggle.tsx
 │   ├── contexts
+│   │   ├── AuthContext.js
 │   │   ├── AuthContext.tsx
 │   │   ├── BookingContext.tsx
 │   │   ├── FilterContext.tsx
-│   │   └── NotificationContext.tsx
+│   │   ├── NotificationContext.tsx
+│   │   └── ToastContext.js
 │   ├── hooks
 │   │   ├── useAuth.ts
 │   │   ├── useBooking.ts
@@ -318,6 +324,7 @@
 │   │   │       ├── options.tsx
 │   │   │       ├── payment.tsx
 │   │   │       └── service.tsx
+│   │   ├── client
 │   │   ├── dashboard
 │   │   │   ├── client
 │   │   │   │   ├── appointments.tsx
@@ -333,16 +340,17 @@
 │   │   │       ├── services.tsx
 │   │   │       └── settings
 │   │   │           ├── calendar.tsx
-│   │   │           ├── index.tsx
 │   │   │           └── notifications.tsx
 │   │   ├── index.tsx
 │   │   ├── privacy.tsx
+│   │   ├── professional
 │   │   ├── professionals
 │   │   │   ├── [id].tsx
 │   │   │   └── index.tsx
 │   │   ├── terms.tsx
 │   │   └── test.tsx
 │   ├── services
+│   │   ├── api.js
 │   │   ├── api.ts
 │   │   ├── auth.ts
 │   │   ├── booking.ts
@@ -351,6 +359,7 @@
 │   │   ├── payment.ts
 │   │   ├── professionals.ts
 │   │   └── reviews.ts
+│   ├── setupTests.js
 │   ├── styles
 │   │   ├── globals.css
 │   │   └── tailwind.css
@@ -363,12 +372,14 @@
 │   └── utils
 │       ├── dates.ts
 │       ├── formatting.ts
+│       ├── mockData.js
 │       ├── pushNotification.ts
 │       ├── storage.ts
 │       └── validation.ts
 ├── styles
 │   └── globals.css
 ├── tailwind.config.js
+├── teste_log.txt
 ├── tree_gerator.py
 ├── tsconfig.json
 └── utils
