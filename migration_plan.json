@@ -1,0 +1,53 @@
+{
+  "target_structure": "root",
+  "phases": [
+    {
+      "name": "Fase 1: Corre\u00e7\u00f5es Cr\u00edticas",
+      "description": "Resolver problemas cr\u00edticos que impedem a navega\u00e7\u00e3o b\u00e1sica",
+      "tasks": [
+        "Corrigir AuthContext e useAuth",
+        "Padronizar tipos de User",
+        "Corrigir ProtectedRoute e ClientDashboardLayout",
+        "Corrigir erros de tipagem na p\u00e1gina index"
+      ],
+      "status": "Conclu\u00eddo"
+    },
+    {
+      "name": "Fase 2: Redu\u00e7\u00e3o de Duplica\u00e7\u00f5es",
+      "description": "Eliminar duplica\u00e7\u00f5es cr\u00edticas e padronizar componentes",
+      "tasks": [
+        "Criar redirecionamentos para componentes duplicados",
+        "Padronizar estrutura de tipos",
+        "Consolidar servi\u00e7os de API"
+      ],
+      "status": "Em progresso"
+    },
+    {
+      "name": "Fase 3: Migra\u00e7\u00e3o para Estrutura raiz",
+      "description": "Migrar todos os componentes e p\u00e1ginas para raiz",
+      "tasks": [
+        "Mover componentes para components",
+        "Mover p\u00e1ginas para pages",
+        "Atualizar todas as importa\u00e7\u00f5es",
+        "Remover arquivos antigos"
+      ],
+      "status": "Pendente"
+    },
+    {
+      "name": "Fase 4: Backend e Integra\u00e7\u00e3o",
+      "description": "Implementar backend DRF e integrar com frontend",
+      "tasks": [
+        "Definir modelos e API endpoints no Django",
+        "Implementar autentica\u00e7\u00e3o JWT",
+        "Atualizar servi\u00e7os frontend para usar a API real",
+        "Assegurar consist\u00eancia entre tipos TS e modelos Django"
+      ],
+      "status": "Pendente"
+    }
+  ],
+  "recommended_next_steps": [
+    "Testar a navega\u00e7\u00e3o b\u00e1sica ap\u00f3s as corre\u00e7\u00f5es cr\u00edticas",
+    "Implementar o backend Django DRF b\u00e1sico",
+    "Continuar a migra\u00e7\u00e3o para a estrutura alvo"
+  ]
+}

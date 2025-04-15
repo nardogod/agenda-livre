@@ -1,24 +1,4 @@
-// components/booking/ServiceCard.jsx
-import React from 'react';
-import { Clock } from 'lucide-react';
-
-export default function ServiceCard({ service, onSelect }) {
-  return (
-    <button 
-      className="w-full bg-white p-4 rounded-xl mb-3 text-left hover:shadow-sm transition-all flex justify-between items-center"
-      onClick={() => onSelect(service)}
-    >
-      <div>
-        <h3 className="font-medium text-base">{service.name}</h3>
-        <div className="flex items-center mt-1 text-gray-500 text-xs">
-          <Clock size={12} className="mr-1" />
-          <span>{service.duration} min</span>
-        </div>
-      </div>
-      <div className="text-right">
-        <div className="font-medium">R$ {service.price.toFixed(2)}</div>
-        <div className="text-xs text-purple-600 mt-1">Selecionar</div>
-      </div>
-    </button>
-  );
-}
+// Redirecionamento automático para o componente canônico
+// Este arquivo foi gerado automaticamente para resolver duplicações
+export * from "../../'../src;
+export { default } from "../../'../src;

@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { User, Mail, Phone, MapPin, AlertCircle } from 'lucide-react';
 import ClientDashboardLayout from '../../components/layouts/ClientDashboardLayout';
 import ProtectedRoute from '../../components/auth/ProtectedRoute';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../'../src;
 import { useToast } from '../../contexts/ToastContext';
 
 // Schema de validação

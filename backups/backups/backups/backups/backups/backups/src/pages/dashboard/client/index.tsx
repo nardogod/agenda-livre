@@ -1,0 +1,202 @@
+// src/pages/dashboard/client/index.tsx
+import React, { useEffect, useState } from 'react';
+import { Calendar, Clock, User, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import { useAuth } from '../../../../../../../../../auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/src/contexts/AuthContext.tsx';
+import ProtectedRoute from '../../../components/auth/ProtectedRoute';
+import { ClientDashboardLayout } from '../../../components/layout/ClientDashboardLayout';
+
+// Mock data para agendamentos futuros
+const mockUpcomingAppointments = [
+  {
+    id: '1',
+    professional: {
+      id: '101',
+      name: 'Ana Oliveira',
+      image: '/api/placeholder/100/100'
+    },
+    serviceName: 'Box Braids',
+    date: '2025-04-20T14:00:00',
+    price: 250,
+    status: 'confirmed',
+    location: 'Salão Ana Oliveira, Pinheiros',
+    isHomeService: false
+  },
+  {
+    id: '2',
+    professional: {
+      id: '102',
+      name: 'Carolina Mendes',
+      image: '/api/placeholder/100/100'
+    },
+    serviceName: 'Twist Senegalês',
+    date: '2025-04-25T10:30:00',
+    price: 290,
+    status: 'confirmed',
+    location: 'Seu endereço',
+    isHomeService: true
+  }
+];
+
+const ClientDashboard: React.FC = () => {
+  const { user } = useAuth();
+  const [upcomingAppointments, setUpcomingAppointments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        setIsLoading(true);
+        // Em uma aplicação real, faríamos uma chamada à API
+        // const response = await api.get('/appointments/upcoming');
+        
+        // Simulando delay de carregamento
+        setTimeout(() => {
+          setUpcomingAppointments(mockUpcomingAppointments);
+          setIsLoading(false);
+        }, 800);
+      } catch (error) {
+        console.error('Erro ao carregar agendamentos:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
+
+  // Formatar data para exibição
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long',
+      year: 'numeric'
+    };
+    return new Date(dateString).toLocaleDateString('pt-BR', options);
+  };
+
+  // Formatar hora para exibição
+  const formatTime = (dateString: string) => {
+    return new Date(dateString).toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  return (
+    <ProtectedRoute allowedRoles={['client']}>
+      <ClientDashboardLayout title="Dashboard do Cliente - Agenda Livre">
+        <div className="p-4 lg:p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-medium">Olá, {user?.first_name || 'Cliente'}</h1>
+              <Link 
+                href="/dashboard/client/profile" 
+                className="flex items-center text-sm font-medium text-purple-600"
+              >
+                <User size={16} className="mr-1" />
+                Meu Perfil
+              </Link>
+            </div>
+
+            {/* Próximos Agendamentos */}
+            <section className="mb-8">
+              <h2 className="text-lg font-medium mb-4">Próximos Agendamentos</h2>
+              
+              {isLoading ? (
+                <div className="py-12 flex items-center justify-center">
+                  <div className="animate-pulse text-gray-500">Carregando...</div>
+                </div>
+              ) : upcomingAppointments.length === 0 ? (
+                <div className="bg-white rounded-xl p-6 text-center shadow-sm">
+                  <div className="text-gray-500 mb-3">Você não tem agendamentos futuros</div>
+                  <Link href="/" className="text-purple-600 font-medium">
+                    Agendar serviço agora
+                  </Link>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {upcomingAppointments.map((appointment: any) => (
+                    <div key={appointment.id} className="bg-white p-4 rounded-xl shadow-sm">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 rounded-lg overflow-hidden mr-3">
+                            <img 
+                              src={appointment.professional.image} 
+                              alt={appointment.professional.name} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-medium">{appointment.professional.name}</h3>
+                            <div className="text-gray-500 text-xs mt-0.5">
+                              Profissional
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-purple-600 font-medium">
+                          R$ {appointment.price.toFixed(2)}
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2 text-sm mb-4">
+                        <div className="flex items-center text-gray-600">
+                          <Calendar size={16} className="mr-2 text-gray-400" />
+                          {formatDate(appointment.date)}
+                        </div>
+                        <div className="flex items-center text-gray-600">
+                          <Clock size={16} className="mr-2 text-gray-400" />
+                          {formatTime(appointment.date)}
+                        </div>
+                        <div className="flex items-center text-gray-600">
+                          <MapPin size={16} className="mr-2 text-gray-400" />
+                          {appointment.location}
+                        </div>
+                      </div>
+                      
+                      <div className="bg-purple-50 p-3 rounded-lg mb-4">
+                        <div className="font-medium">{appointment.serviceName}</div>
+                        {appointment.isHomeService && (
+                          <div className="text-sm text-purple-600 mt-1">Serviço a domicílio</div>
+                        )}
+                      </div>
+                      
+                      <div className="flex space-x-3">
+                        <Link 
+                          href={`/dashboard/client/appointments/${appointment.id}`}
+                          className="flex-1 py-2 text-center border border-purple-200 text-purple-600 rounded-lg text-sm font-medium"
+                        >
+                          Ver detalhes
+                        </Link>
+                        <button
+                          className="flex-1 py-2 text-center bg-red-50 text-red-600 border border-red-100 rounded-lg text-sm font-medium"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* Links Rápidos */}
+            <section>
+              <h2 className="text-lg font-medium mb-4">Ações Rápidas</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <Link href="/" className="bg-white p-4 rounded-xl shadow-sm text-center">
+                  <Calendar size={24} className="text-purple-600 mx-auto mb-2" />
+                  <span className="text-sm font-medium">Agendar Serviço</span>
+                </Link>
+                <Link href="/dashboard/client/history" className="bg-white p-4 rounded-xl shadow-sm text-center">
+                  <Clock size={24} className="text-purple-600 mx-auto mb-2" />
+                  <span className="text-sm font-medium">Histórico</span>
+                </Link>
+              </div>
+            </section>
+        </div>
+      </ClientDashboardLayout>
+    </ProtectedRoute>
+  );
+};
+
+export default ClientDashboard;

@@ -1,0 +1,496 @@
+{
+  "summary": {
+    "total_files": 202,
+    "react_components": 152,
+    "duplications": 34,
+    "import_errors": 0,
+    "typescript_error_files": 9
+  },
+  "structure": {
+    "directories": {
+      ".": 10,
+      "components\\auth": 1,
+      "components\\booking": 5,
+      "components\\common": 2,
+      "components\\layout": 1,
+      "components\\layouts": 2,
+      "components\\professional": 2,
+      "contexts": 2,
+      "corrigir-programa": 4,
+      "C\uf03aUsersDesktopagenda-livrecorrigir-programa": 4,
+      "pages": 4,
+      "pages\\client": 3,
+      "pages\\professional": 2,
+      "public": 1,
+      "services": 3,
+      "src": 1,
+      "src\\components\\analytics": 2,
+      "src\\components\\auth": 2,
+      "src\\components\\booking": 18,
+      "src\\components\\calendar": 2,
+      "src\\components\\common": 2,
+      "src\\components\\filters": 6,
+      "src\\components\\layout": 8,
+      "src\\components\\layouts": 2,
+      "src\\components\\notifications": 3,
+      "src\\components\\professional": 2,
+      "src\\components\\professionals": 8,
+      "src\\components\\reviews": 3,
+      "src\\components\\schedule": 1,
+      "src\\components\\ui": 2,
+      "src\\components\\ui\\buttons": 3,
+      "src\\components\\ui\\inputs": 2,
+      "src\\contexts": 6,
+      "src\\hooks": 6,
+      "src\\pages": 7,
+      "src\\pages\\api": 2,
+      "src\\pages\\auth": 3,
+      "src\\pages\\booking": 6,
+      "src\\pages\\booking\\[professionalId]": 8,
+      "src\\pages\\dashboard\\client": 4,
+      "src\\pages\\dashboard\\professional": 6,
+      "src\\pages\\dashboard\\professional\\settings": 2,
+      "src\\pages\\home": 1,
+      "src\\pages\\professionals": 2,
+      "src\\services": 9,
+      "src\\styles": 2,
+      "src\\types": 6,
+      "src\\utils": 7,
+      "src\\__tests__\\components\\analytics": 1,
+      "src\\__tests__\\components\\notifications": 1,
+      "src\\__tests__\\components\\professionals": 1,
+      "src\\__tests__\\components\\ui": 1,
+      "src\\__tests__\\contexts": 1,
+      "src\\__tests__\\services": 2,
+      "src\\__tests__\\utils": 2,
+      "styles": 1,
+      "types": 1,
+      "utils": 1
+    },
+    "file_extensions": {
+      ".js": 34,
+      ".ts": 37,
+      ".tsx": 114,
+      ".jsx": 14,
+      ".css": 3
+    },
+    "react_components": {
+      "total": 152,
+      "locations": {
+        ".": 1,
+        "components\\auth": 1,
+        "components\\booking": 5,
+        "components\\common": 2,
+        "components\\layout": 1,
+        "components\\layouts": 2,
+        "components\\professional": 2,
+        "contexts": 2,
+        "corrigir-programa": 3,
+        "C\uf03aUsersDesktopagenda-livrecorrigir-programa": 3,
+        "pages": 4,
+        "pages\\client": 3,
+        "pages\\professional": 2,
+        "src\\components\\analytics": 2,
+        "src\\components\\auth": 2,
+        "src\\components\\booking": 18,
+        "src\\components\\calendar": 2,
+        "src\\components\\common": 2,
+        "src\\components\\filters": 6,
+        "src\\components\\layout": 8,
+        "src\\components\\layouts": 2,
+        "src\\components\\notifications": 3,
+        "src\\components\\professional": 2,
+        "src\\components\\professionals": 8,
+        "src\\components\\reviews": 3,
+        "src\\components\\schedule": 1,
+        "src\\components\\ui": 2,
+        "src\\components\\ui\\buttons": 3,
+        "src\\components\\ui\\inputs": 2,
+        "src\\contexts": 6,
+        "src\\hooks": 5,
+        "src\\pages": 7,
+        "src\\pages\\auth": 3,
+        "src\\pages\\booking": 6,
+        "src\\pages\\booking\\[professionalId]": 8,
+        "src\\pages\\dashboard\\client": 4,
+        "src\\pages\\dashboard\\professional": 6,
+        "src\\pages\\dashboard\\professional\\settings": 2,
+        "src\\pages\\home": 1,
+        "src\\pages\\professionals": 2,
+        "src\\__tests__\\components\\analytics": 1,
+        "src\\__tests__\\components\\notifications": 1,
+        "src\\__tests__\\components\\professionals": 1,
+        "src\\__tests__\\components\\ui": 1,
+        "src\\__tests__\\contexts": 1
+      }
+    }
+  },
+  "duplications": [
+    {
+      "filename": "ProtectedRoute.tsx",
+      "paths": [
+        "components\\auth\\ProtectedRoute.tsx",
+        "src\\components\\auth\\ProtectedRoute.tsx"
+      ]
+    },
+    {
+      "filename": "PaymentMethod.tsx",
+      "paths": [
+        "components\\booking\\PaymentMethod.tsx",
+        "src\\components\\booking\\PaymentMethod.tsx"
+      ]
+    },
+    {
+      "filename": "RadioOption.tsx",
+      "paths": [
+        "components\\booking\\RadioOption.tsx",
+        "src\\components\\booking\\RadioOption.tsx",
+        "src\\pages\\booking\\RadioOption.tsx"
+      ]
+    },
+    {
+      "filename": "ServiceCard.tsx",
+      "paths": [
+        "components\\booking\\ServiceCard.tsx",
+        "src\\components\\booking\\ServiceCard.tsx",
+        "src\\components\\professionals\\ServiceCard.tsx",
+        "src\\pages\\booking\\ServiceCard.tsx"
+      ]
+    },
+    {
+      "filename": "TimeSlot.tsx",
+      "paths": [
+        "components\\booking\\TimeSlot.tsx",
+        "src\\components\\booking\\TimeSlot.tsx",
+        "src\\pages\\booking\\TimeSlot.tsx"
+      ]
+    },
+    {
+      "filename": "ToggleOption.tsx",
+      "paths": [
+        "components\\booking\\ToggleOption.tsx",
+        "src\\components\\booking\\ToggleOption.tsx",
+        "src\\pages\\booking\\ToggleOption.tsx"
+      ]
+    },
+    {
+      "filename": "MainButton.tsx",
+      "paths": [
+        "components\\common\\MainButton.tsx",
+        "src\\components\\ui\\buttons\\MainButton.tsx"
+      ]
+    },
+    {
+      "filename": "Toast.tsx",
+      "paths": [
+        "components\\common\\Toast.tsx",
+        "src\\components\\ui\\Toast.tsx"
+      ]
+    },
+    {
+      "filename": "MainLayout.tsx",
+      "paths": [
+        "components\\layout\\MainLayout.tsx",
+        "src\\components\\layout\\MainLayout.tsx"
+      ]
+    },
+    {
+      "filename": "ClientDashboardLayout.tsx",
+      "paths": [
+        "components\\layouts\\ClientDashboardLayout.tsx",
+        "src\\components\\layout\\ClientDashboardLayout.tsx"
+      ]
+    },
+    {
+      "filename": "ProfessionalDashboardLayout.tsx",
+      "paths": [
+        "components\\layouts\\ProfessionalDashboardLayout.tsx",
+        "src\\components\\layout\\ProfessionalDashboardLayout.tsx"
+      ]
+    },
+    {
+      "filename": "ProfessionalService.tsx",
+      "paths": [
+        "components\\professional\\ProfessionalService.tsx",
+        "src\\components\\professionals\\ProfessionalService.tsx"
+      ]
+    },
+    {
+      "filename": "ReviewCard.tsx",
+      "paths": [
+        "components\\professional\\ReviewCard.tsx",
+        "src\\components\\professionals\\ReviewCard.tsx",
+        "src\\components\\reviews\\ReviewCard.tsx"
+      ]
+    },
+    {
+      "filename": "AuthContext.tsx",
+      "paths": [
+        "contexts\\AuthContext.tsx",
+        "src\\contexts\\AuthContext.tsx"
+      ]
+    },
+    {
+      "filename": "create-components.js",
+      "paths": [
+        "corrigir-programa\\create-components.js",
+        "C\uf03aUsersDesktopagenda-livrecorrigir-programa\\create-components.js"
+      ]
+    },
+    {
+      "filename": "create-structure.js",
+      "paths": [
+        "corrigir-programa\\create-structure.js",
+        "C\uf03aUsersDesktopagenda-livrecorrigir-programa\\create-structure.js"
+      ]
+    },
+    {
+      "filename": "fix-redirects.js",
+      "paths": [
+        "corrigir-programa\\fix-redirects.js",
+        "C\uf03aUsersDesktopagenda-livrecorrigir-programa\\fix-redirects.js"
+      ]
+    },
+    {
+      "filename": "templates.js",
+      "paths": [
+        "corrigir-programa\\templates.js",
+        "C\uf03aUsersDesktopagenda-livrecorrigir-programa\\templates.js"
+      ]
+    },
+    {
+      "filename": "api.js",
+      "paths": [
+        "services\\api.js",
+        "src\\services\\api.js"
+      ]
+    },
+    {
+      "filename": "auth.ts",
+      "paths": [
+        "services\\auth.ts",
+        "src\\services\\auth.ts"
+      ]
+    },
+    {
+      "filename": "professionals.ts",
+      "paths": [
+        "services\\professionals.ts",
+        "src\\services\\professionals.ts"
+      ]
+    },
+    {
+      "filename": "register.tsx",
+      "paths": [
+        "src\\components\\auth\\register.tsx",
+        "src\\pages\\auth\\register.tsx"
+      ]
+    },
+    {
+      "filename": "DateSelector.tsx",
+      "paths": [
+        "src\\components\\booking\\DateSelector.tsx",
+        "src\\pages\\booking\\DateSelector.tsx"
+      ]
+    },
+    {
+      "filename": "MainButton.jsx",
+      "paths": [
+        "src\\components\\common\\MainButton.jsx",
+        "src\\components\\ui\\buttons\\MainButton.jsx"
+      ]
+    },
+    {
+      "filename": "Toast.jsx",
+      "paths": [
+        "src\\components\\common\\Toast.jsx",
+        "src\\components\\ui\\Toast.jsx"
+      ]
+    },
+    {
+      "filename": "ProfessionalService.jsx",
+      "paths": [
+        "src\\components\\professional\\ProfessionalService.jsx",
+        "src\\components\\professionals\\ProfessionalService.jsx"
+      ]
+    },
+    {
+      "filename": "ReviewCard.jsx",
+      "paths": [
+        "src\\components\\professional\\ReviewCard.jsx",
+        "src\\components\\professionals\\ReviewCard.jsx"
+      ]
+    },
+    {
+      "filename": "appointments.tsx",
+      "paths": [
+        "src\\pages\\dashboard\\client\\appointments.tsx",
+        "src\\pages\\dashboard\\professional\\appointments.tsx"
+      ]
+    },
+    {
+      "filename": "profile.tsx",
+      "paths": [
+        "src\\pages\\dashboard\\client\\profile.tsx",
+        "src\\pages\\dashboard\\professional\\profile.tsx"
+      ]
+    },
+    {
+      "filename": "booking.ts",
+      "paths": [
+        "src\\services\\booking.ts",
+        "src\\types\\booking.ts"
+      ]
+    },
+    {
+      "filename": "notification.ts",
+      "paths": [
+        "src\\services\\notification.ts",
+        "src\\types\\notification.ts"
+      ]
+    },
+    {
+      "filename": "globals.css",
+      "paths": [
+        "src\\styles\\globals.css",
+        "styles\\globals.css"
+      ]
+    },
+    {
+      "filename": "user.ts",
+      "paths": [
+        "src\\types\\user.ts",
+        "types\\user.ts"
+      ]
+    },
+    {
+      "filename": "mockData.js",
+      "paths": [
+        "src\\utils\\mockData.js",
+        "utils\\mockData.js"
+      ]
+    }
+  ],
+  "import_errors": [],
+  "typescript_errors": [
+    {
+      "file": "contexts\\ToastContext.tsx",
+      "error": "Par\u00e2metros sem tipagem",
+      "details": [
+        "{ children }",
+        "{ id, message, type, onClose }"
+      ]
+    },
+    {
+      "file": "services\\auth.ts",
+      "error": "Par\u00e2metros sem tipagem",
+      "details": [
+        "MOCK_USERS.length + 1"
+      ]
+    },
+    {
+      "file": "services\\auth.ts",
+      "error": "Uso expl\u00edcito de any",
+      "count": 1
+    },
+    {
+      "file": "services\\professionals.ts",
+      "error": "Uso expl\u00edcito de any",
+      "count": 4
+    },
+    {
+      "file": "src\\components\\professionals\\ServiceModal.tsx",
+      "error": "Uso expl\u00edcito de any",
+      "count": 3
+    },
+    {
+      "file": "src\\services\\payment.ts",
+      "error": "Uso expl\u00edcito de any",
+      "count": 1
+    },
+    {
+      "file": "src\\types\\user.ts",
+      "error": "Uso expl\u00edcito de any",
+      "count": 1
+    },
+    {
+      "file": "src\\utils\\pushNotification.ts",
+      "error": "Par\u00e2metros sem tipagem",
+      "details": [
+        "base64String + padding"
+      ]
+    },
+    {
+      "file": "src\\__tests__\\components\\professionals\\ProfessionalCard.test.tsx",
+      "error": "Uso expl\u00edcito de any",
+      "count": 1
+    }
+  ],
+  "files_by_directory": {
+    ".": 10,
+    "components\\auth": 1,
+    "components\\booking": 5,
+    "components\\common": 2,
+    "components\\layout": 1,
+    "components\\layouts": 2,
+    "components\\professional": 2,
+    "contexts": 2,
+    "corrigir-programa": 4,
+    "C\uf03aUsersDesktopagenda-livrecorrigir-programa": 4,
+    "pages": 4,
+    "pages\\client": 3,
+    "pages\\professional": 2,
+    "public": 1,
+    "services": 3,
+    "src": 1,
+    "src\\components\\analytics": 2,
+    "src\\components\\auth": 2,
+    "src\\components\\booking": 18,
+    "src\\components\\calendar": 2,
+    "src\\components\\common": 2,
+    "src\\components\\filters": 6,
+    "src\\components\\layout": 8,
+    "src\\components\\layouts": 2,
+    "src\\components\\notifications": 3,
+    "src\\components\\professional": 2,
+    "src\\components\\professionals": 8,
+    "src\\components\\reviews": 3,
+    "src\\components\\schedule": 1,
+    "src\\components\\ui": 2,
+    "src\\components\\ui\\buttons": 3,
+    "src\\components\\ui\\inputs": 2,
+    "src\\contexts": 6,
+    "src\\hooks": 6,
+    "src\\pages": 7,
+    "src\\pages\\api": 2,
+    "src\\pages\\auth": 3,
+    "src\\pages\\booking": 6,
+    "src\\pages\\booking\\[professionalId]": 8,
+    "src\\pages\\dashboard\\client": 4,
+    "src\\pages\\dashboard\\professional": 6,
+    "src\\pages\\dashboard\\professional\\settings": 2,
+    "src\\pages\\home": 1,
+    "src\\pages\\professionals": 2,
+    "src\\services": 9,
+    "src\\styles": 2,
+    "src\\types": 6,
+    "src\\utils": 7,
+    "src\\__tests__\\components\\analytics": 1,
+    "src\\__tests__\\components\\notifications": 1,
+    "src\\__tests__\\components\\professionals": 1,
+    "src\\__tests__\\components\\ui": 1,
+    "src\\__tests__\\contexts": 1,
+    "src\\__tests__\\services": 2,
+    "src\\__tests__\\utils": 2,
+    "styles": 1,
+    "types": 1,
+    "utils": 1
+  },
+  "file_extensions": {
+    ".js": 34,
+    ".ts": 37,
+    ".tsx": 114,
+    ".jsx": 14,
+    ".css": 3
+  }
+}

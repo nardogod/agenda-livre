@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from ''../src;
 import { Eye, EyeOff, Mail, Lock, User, Phone } from 'lucide-react';
 
 // Schema de validação

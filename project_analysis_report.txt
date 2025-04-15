@@ -1,0 +1,253 @@
+=== RELATÓRIO DE ANÁLISE DO PROJETO ===
+
+== RESUMO ==
+Total de arquivos: 202
+Componentes React: 152
+Duplicações: 34
+Erros de importação: 0
+Arquivos com potenciais erros TypeScript: 9
+
+== ESTRUTURA DO PROJETO ==
+Top 10 diretórios por número de arquivos:
+  src\components\booking: 18 arquivos
+  .: 10 arquivos
+  src\services: 9 arquivos
+  src\components\layout: 8 arquivos
+  src\components\professionals: 8 arquivos
+  src\pages\booking\[professionalId]: 8 arquivos
+  src\pages: 7 arquivos
+  src\utils: 7 arquivos
+  src\components\filters: 6 arquivos
+  src\contexts: 6 arquivos
+
+Arquivos por extensão:
+  .js: 34
+  .ts: 37
+  .tsx: 114
+  .jsx: 14
+  .css: 3
+
+== COMPONENTES REACT ==
+Localizações de componentes React:
+  src\components\booking: 18 componentes
+  src\components\layout: 8 componentes
+  src\components\professionals: 8 componentes
+  src\pages\booking\[professionalId]: 8 componentes
+  src\pages: 7 componentes
+  src\components\filters: 6 componentes
+  src\contexts: 6 componentes
+  src\pages\booking: 6 componentes
+  src\pages\dashboard\professional: 6 componentes
+  components\booking: 5 componentes
+  src\hooks: 5 componentes
+  pages: 4 componentes
+  src\pages\dashboard\client: 4 componentes
+  corrigir-programa: 3 componentes
+  CUsersDesktopagenda-livrecorrigir-programa: 3 componentes
+  pages\client: 3 componentes
+  src\components\notifications: 3 componentes
+  src\components\reviews: 3 componentes
+  src\components\ui\buttons: 3 componentes
+  src\pages\auth: 3 componentes
+  components\common: 2 componentes
+  components\layouts: 2 componentes
+  components\professional: 2 componentes
+  contexts: 2 componentes
+  pages\professional: 2 componentes
+  src\components\analytics: 2 componentes
+  src\components\auth: 2 componentes
+  src\components\calendar: 2 componentes
+  src\components\common: 2 componentes
+  src\components\layouts: 2 componentes
+  src\components\professional: 2 componentes
+  src\components\ui: 2 componentes
+  src\components\ui\inputs: 2 componentes
+  src\pages\dashboard\professional\settings: 2 componentes
+  src\pages\professionals: 2 componentes
+  .: 1 componentes
+  components\auth: 1 componentes
+  components\layout: 1 componentes
+  src\components\schedule: 1 componentes
+  src\pages\home: 1 componentes
+  src\__tests__\components\analytics: 1 componentes
+  src\__tests__\components\notifications: 1 componentes
+  src\__tests__\components\professionals: 1 componentes
+  src\__tests__\components\ui: 1 componentes
+  src\__tests__\contexts: 1 componentes
+
+== DUPLICAÇÕES ==
+Arquivo: ProtectedRoute.tsx
+  Encontrado em:
+    - components\auth\ProtectedRoute.tsx
+    - src\components\auth\ProtectedRoute.tsx
+Arquivo: PaymentMethod.tsx
+  Encontrado em:
+    - components\booking\PaymentMethod.tsx
+    - src\components\booking\PaymentMethod.tsx
+Arquivo: RadioOption.tsx
+  Encontrado em:
+    - components\booking\RadioOption.tsx
+    - src\components\booking\RadioOption.tsx
+    - src\pages\booking\RadioOption.tsx
+Arquivo: ServiceCard.tsx
+  Encontrado em:
+    - components\booking\ServiceCard.tsx
+    - src\components\booking\ServiceCard.tsx
+    - src\components\professionals\ServiceCard.tsx
+    - src\pages\booking\ServiceCard.tsx
+Arquivo: TimeSlot.tsx
+  Encontrado em:
+    - components\booking\TimeSlot.tsx
+    - src\components\booking\TimeSlot.tsx
+    - src\pages\booking\TimeSlot.tsx
+Arquivo: ToggleOption.tsx
+  Encontrado em:
+    - components\booking\ToggleOption.tsx
+    - src\components\booking\ToggleOption.tsx
+    - src\pages\booking\ToggleOption.tsx
+Arquivo: MainButton.tsx
+  Encontrado em:
+    - components\common\MainButton.tsx
+    - src\components\ui\buttons\MainButton.tsx
+Arquivo: Toast.tsx
+  Encontrado em:
+    - components\common\Toast.tsx
+    - src\components\ui\Toast.tsx
+Arquivo: MainLayout.tsx
+  Encontrado em:
+    - components\layout\MainLayout.tsx
+    - src\components\layout\MainLayout.tsx
+Arquivo: ClientDashboardLayout.tsx
+  Encontrado em:
+    - components\layouts\ClientDashboardLayout.tsx
+    - src\components\layout\ClientDashboardLayout.tsx
+Arquivo: ProfessionalDashboardLayout.tsx
+  Encontrado em:
+    - components\layouts\ProfessionalDashboardLayout.tsx
+    - src\components\layout\ProfessionalDashboardLayout.tsx
+Arquivo: ProfessionalService.tsx
+  Encontrado em:
+    - components\professional\ProfessionalService.tsx
+    - src\components\professionals\ProfessionalService.tsx
+Arquivo: ReviewCard.tsx
+  Encontrado em:
+    - components\professional\ReviewCard.tsx
+    - src\components\professionals\ReviewCard.tsx
+    - src\components\reviews\ReviewCard.tsx
+Arquivo: AuthContext.tsx
+  Encontrado em:
+    - contexts\AuthContext.tsx
+    - src\contexts\AuthContext.tsx
+Arquivo: create-components.js
+  Encontrado em:
+    - corrigir-programa\create-components.js
+    - CUsersDesktopagenda-livrecorrigir-programa\create-components.js
+Arquivo: create-structure.js
+  Encontrado em:
+    - corrigir-programa\create-structure.js
+    - CUsersDesktopagenda-livrecorrigir-programa\create-structure.js
+Arquivo: fix-redirects.js
+  Encontrado em:
+    - corrigir-programa\fix-redirects.js
+    - CUsersDesktopagenda-livrecorrigir-programa\fix-redirects.js
+Arquivo: templates.js
+  Encontrado em:
+    - corrigir-programa\templates.js
+    - CUsersDesktopagenda-livrecorrigir-programa\templates.js
+Arquivo: api.js
+  Encontrado em:
+    - services\api.js
+    - src\services\api.js
+Arquivo: auth.ts
+  Encontrado em:
+    - services\auth.ts
+    - src\services\auth.ts
+Arquivo: professionals.ts
+  Encontrado em:
+    - services\professionals.ts
+    - src\services\professionals.ts
+Arquivo: register.tsx
+  Encontrado em:
+    - src\components\auth\register.tsx
+    - src\pages\auth\register.tsx
+Arquivo: DateSelector.tsx
+  Encontrado em:
+    - src\components\booking\DateSelector.tsx
+    - src\pages\booking\DateSelector.tsx
+Arquivo: MainButton.jsx
+  Encontrado em:
+    - src\components\common\MainButton.jsx
+    - src\components\ui\buttons\MainButton.jsx
+Arquivo: Toast.jsx
+  Encontrado em:
+    - src\components\common\Toast.jsx
+    - src\components\ui\Toast.jsx
+Arquivo: ProfessionalService.jsx
+  Encontrado em:
+    - src\components\professional\ProfessionalService.jsx
+    - src\components\professionals\ProfessionalService.jsx
+Arquivo: ReviewCard.jsx
+  Encontrado em:
+    - src\components\professional\ReviewCard.jsx
+    - src\components\professionals\ReviewCard.jsx
+Arquivo: appointments.tsx
+  Encontrado em:
+    - src\pages\dashboard\client\appointments.tsx
+    - src\pages\dashboard\professional\appointments.tsx
+Arquivo: profile.tsx
+  Encontrado em:
+    - src\pages\dashboard\client\profile.tsx
+    - src\pages\dashboard\professional\profile.tsx
+Arquivo: booking.ts
+  Encontrado em:
+    - src\services\booking.ts
+    - src\types\booking.ts
+Arquivo: notification.ts
+  Encontrado em:
+    - src\services\notification.ts
+    - src\types\notification.ts
+Arquivo: globals.css
+  Encontrado em:
+    - src\styles\globals.css
+    - styles\globals.css
+Arquivo: user.ts
+  Encontrado em:
+    - src\types\user.ts
+    - types\user.ts
+Arquivo: mockData.js
+  Encontrado em:
+    - src\utils\mockData.js
+    - utils\mockData.js
+
+== ERROS DE IMPORTAÇÃO ==
+
+== POTENCIAIS ERROS TYPESCRIPT ==
+Arquivo: contexts\ToastContext.tsx
+  Erro: Parâmetros sem tipagem
+  Detalhes: ['{ children }', '{ id, message, type, onClose }']
+Arquivo: services\auth.ts
+  Erro: Parâmetros sem tipagem
+  Detalhes: ['MOCK_USERS.length + 1']
+Arquivo: services\auth.ts
+  Erro: Uso explícito de any
+  Ocorrências: 1
+Arquivo: services\professionals.ts
+  Erro: Uso explícito de any
+  Ocorrências: 4
+Arquivo: src\components\professionals\ServiceModal.tsx
+  Erro: Uso explícito de any
+  Ocorrências: 3
+Arquivo: src\services\payment.ts
+  Erro: Uso explícito de any
+  Ocorrências: 1
+Arquivo: src\types\user.ts
+  Erro: Uso explícito de any
+  Ocorrências: 1
+Arquivo: src\utils\pushNotification.ts
+  Erro: Parâmetros sem tipagem
+  Detalhes: ['base64String + padding']
+Arquivo: src\__tests__\components\professionals\ProfessionalCard.test.tsx
+  Erro: Uso explícito de any
+  Ocorrências: 1
+
+=== FIM DO RELATÓRIO ===

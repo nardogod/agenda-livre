@@ -1,0 +1,150 @@
+// src/components/layout/ClientDashboardLayout.tsx
+
+import React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Calendar, User, ClipboardList, LogOut, Home } from 'lucide-react';
+import { useAuth } from '../../../../../../../../../auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/src/contexts/AuthContext.tsx';
+
+interface ClientDashboardLayoutProps {
+  children: React.ReactNode;
+  title: string;
+}
+
+export default function ClientDashboardLayout({ children, title }: ClientDashboardLayoutProps) {
+  const { user, signOut } = useAuth();
+  const router = useRouter();
+
+  if (!user) {
+    return <div>Carregando...</div>;
+  }
+
+  const navItems = [
+    {
+      label: 'Agendamentos',
+      href: '/dashboard/client',
+      icon: <Calendar size={24} />,
+      active: router.pathname === '/dashboard/client'
+    },
+    {
+      label: 'Histórico',
+      href: '/dashboard/client/history',
+      icon: <ClipboardList size={24} />,
+      active: router.pathname === '/dashboard/client/history'
+    },
+    {
+      label: 'Perfil',
+      href: '/dashboard/client/profile',
+      icon: <User size={24} />,
+      active: router.pathname === '/dashboard/client/profile'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center flex-shrink-0">
+                <span className="text-xl font-medium text-purple-600">Agenda Livre</span>
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <button 
+                onClick={signOut}
+                className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 rounded-md hover:text-gray-700"
+              >
+                <LogOut size={18} className="mr-1.5" />
+                <span>Sair</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
+        {/* Desktop sidebar */}
+        <div className="hidden md:flex md:flex-shrink-0">
+          <div className="flex flex-col w-64 border-r border-gray-200 bg-white">
+            <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
+              <div className="px-4 mb-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                      <span className="text-lg font-medium text-purple-600">
+                        {user.first_name || user.first_name || user.first_name || user.first_name || user.first_name || user.first_name.charAt(0)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-gray-700">{user.first_name || user.first_name || user.first_name || user.first_name || user.first_name || user.first_name} {user.lastName || user.lastName || user.lastName || user.last_name}</p>
+                    <p className="text-xs font-medium text-gray-500">{user.email}</p>
+                  </div>
+                </div>
+              </div>
+              <nav className="flex-1 space-y-1 px-2">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`group flex items-center px-2 py-3 text-sm font-medium rounded-md ${
+                      item.active
+                        ? 'bg-purple-50 text-purple-600'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    }`}
+                  >
+                    <div className={`mr-3 ${item.active ? 'text-purple-600' : 'text-gray-400 group-hover:text-gray-500'}`}>
+                      {item.icon}
+                    </div>
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            <div className="flex-shrink-0 p-4 border-t border-gray-200">
+              <Link href="/" className="flex items-center">
+                <Home size={20} className="mr-2 text-gray-500" />
+                <span className="text-sm font-medium text-gray-500">Voltar para a Home</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Main content */}
+        <main className="flex-1 relative overflow-y-auto focus:outline-none">
+          <div className="py-6">
+            <div className="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
+              <h1 className="text-2xl font-medium text-gray-900">{title}</h1>
+            </div>
+            <div className="px-4 mx-auto max-w-7xl mt-6 sm:px-6 md:px-8">
+              {children}
+            </div>
+          </div>
+        </main>
+      </div>
+
+      {/* Mobile bottom nav */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden">
+        <div className="flex justify-around">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex flex-col items-center py-3 w-full"
+            >
+              <div className={item.active ? 'text-purple-600' : 'text-gray-400'}>
+                {item.icon}
+              </div>
+              <span className={`text-xs mt-1 ${item.active ? 'text-purple-600' : 'text-gray-500'}`}>
+                {item.label}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

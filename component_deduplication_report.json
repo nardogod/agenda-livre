@@ -1,0 +1,23 @@
+{
+  "summary": {
+    "component_files": 34,
+    "duplicated_components": 1,
+    "redirects_created": 1,
+    "dry_run": false
+  },
+  "canonical_components": {
+    "AuthContext.tsx": "contexts\\AuthContext.tsx"
+  },
+  "changes": [
+    {
+      "file": "src\\contexts\\AuthContext.tsx",
+      "change": "Criado redirecionamento para contexts\\AuthContext.tsx"
+    }
+  ],
+  "duplicated_components": {
+    "AuthContext.tsx": [
+      "contexts\\AuthContext.tsx",
+      "src\\contexts\\AuthContext.tsx"
+    ]
+  }
+}

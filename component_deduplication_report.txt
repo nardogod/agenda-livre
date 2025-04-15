@@ -1,0 +1,19 @@
+=== RELATÓRIO DE DEDUPLIMAÇÃO DE COMPONENTES ===
+
+== RESUMO ==
+Componentes React encontrados: 34
+Componentes duplicados: 1
+Redirecionamentos criados: 1
+
+== COMPONENTES CANÔNICOS ==
+  AuthContext.tsx => contexts\AuthContext.tsx
+
+== COMPONENTES DUPLICADOS ==
+  AuthContext.tsx:
+    - contexts\AuthContext.tsx (CANÔNICO)
+    - src\contexts\AuthContext.tsx
+
+== REDIRECIONAMENTOS CRIADOS ==
+  src\contexts\AuthContext.tsx => Criado redirecionamento para contexts\AuthContext.tsx
+
+=== FIM DO RELATÓRIO ===

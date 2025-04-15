@@ -1,0 +1,562 @@
+// src/pages/dashboard/client/profile.tsx
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useQuery, useMutation } from 'react-query';
+import { User, Phone, Mail, Home, Plus, Trash } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import ClientDashboardLayout from '../../../components/layout/ClientDashboardLayout';
+import { useAuth } from '\.\./\.\./\.\./\.\./\.\./\.\./\.\./\.\./\.\./auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/backups/auth_context_fix/src/contexts/AuthContext\.tsx';
+import api from '../../../services/api';
+
+// Schema de validação
+const schema = yup.object({
+  first_name: yup.string().required('Nome é obrigatório'),
+  last_name: yup.string().required('Sobrenome é obrigatório'),
+  phone: yup.string().required('Telefone é obrigatório'),
+  email: yup.string().email('Email inválido').required('Email é obrigatório'),
+  current_password: yup.string().when('new_password', {
+    is: (val) => val && val.length > 0,
+    then: yup.string().required('Senha atual é obrigatória para alterar a senha')
+  }),
+  new_password: yup.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
+  confirm_password: yup.string().oneOf([yup.ref('new_password')], 'As senhas não conferem')
+});
+
+// Schema para endereço
+const addressSchema = yup.object({
+  street: yup.string().required('Rua é obrigatória'),
+  number: yup.string().required('Número é obrigatório'),
+  complement: yup.string(),
+  district: yup.string().required('Bairro é obrigatório'),
+  city: yup.string().required('Cidade é obrigatória'),
+  state: yup.string().required('Estado é obrigatório'),
+  zip_code: yup.string().required('CEP é obrigatório')
+});
+
+export default function ClientProfile() {
+  const { user, isAuthenticated } = useAuth();
+  const router = useRouter();
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [addressForm, setAddressForm] = useState({
+    street: '',
+    number: '',
+    complement: '',
+    district: '',
+    city: '',
+    state: '',
+    zip_code: ''
+  });
+  const [addressErrors, setAddressErrors] = useState({});
+  
+  // React Hook Form
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      first_name: user?.first_name || '',
+      last_name: user?.last_name || '',
+      phone: user?.phone || '',
+      email: user?.email || '',
+      current_password: '',
+      new_password: '',
+      confirm_password: ''
+    }
+  });
+
+  // Buscar dados do usuário e endereços
+  const { data: userData, isLoading } = useQuery(
+    'user-profile',
+    async () => {
+      const response = await api.get('/profile/');
+      return response.data;
+    },
+    {
+      enabled: !!user,
+      onSuccess: (data) => {
+        reset({
+          first_name: data.first_name,
+          last_name: data.last_name,
+          phone: data.phone,
+          email: data.email,
+          current_password: '',
+          new_password: '',
+          confirm_password: ''
+        });
+      }
+    }
+  );
+
+  const { data: addressesData, isLoading: addressesLoading, refetch: refetchAddresses } = useQuery(
+    'user-addresses',
+    async () => {
+      const response = await api.get('/profile/addresses/');
+      return response.data;
+    },
+    {
+      enabled: !!user
+    }
+  );
+
+  // Mutações
+  const updateProfileMutation = useMutation(
+    async (data) => {
+      const payload = { ...data };
+      
+      // Remover campos de senha se não estiver alterando
+      if (!data.new_password) {
+        delete payload.current_password;
+        delete payload.new_password;
+        delete payload.confirm_password;
+      }
+      
+      const response = await api.patch('/profile/', payload);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        alert('Perfil atualizado com sucesso!');
+      }
+    }
+  );
+
+  const addAddressMutation = useMutation(
+    async (data) => {
+      const response = await api.post('/profile/addresses/', data);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        setShowAddressModal(false);
+        refetchAddresses();
+        setAddressForm({
+          street: '',
+          number: '',
+          complement: '',
+          district: '',
+          city: '',
+          state: '',
+          zip_code: ''
+        });
+      }
+    }
+  );
+
+  const deleteAddressMutation = useMutation(
+    async (addressId) => {
+      await api.delete(`/profile/addresses/${addressId}/`);
+      return addressId;
+    },
+    {
+      onSuccess: () => {
+        refetchAddresses();
+      }
+    }
+  );
+
+  // Handlers
+  const onSubmit = (data) => {
+    updateProfileMutation.mutate(data);
+  };
+
+  const handleAddressSubmit = () => {
+    try {
+      addressSchema.validateSync(addressForm, { abortEarly: false });
+      addAddressMutation.mutate(addressForm);
+    } catch (validationError) {
+      const errors = {};
+      validationError.inner.forEach((error) => {
+        errors[error.path] = error.message;
+      });
+      setAddressErrors(errors);
+    }
+  };
+
+  const handleDeleteAddress = (addressId) => {
+    if (window.confirm('Tem certeza que deseja excluir este endereço?')) {
+      deleteAddressMutation.mutate(addressId);
+    }
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setAddressForm((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Limpar erro do campo específico
+    if (addressErrors[name]) {
+      setAddressErrors((prev) => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+
+  // Redirecionar se não estiver autenticado
+  React.useEffect(() => {
+    if (!isAuthenticated && !user) {
+      router.push('/auth/login');
+    }
+  }, [isAuthenticated, user, router]);
+
+  if (isLoading || addressesLoading) {
+    return (
+      <ClientDashboardLayout title="Meu Perfil">
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        </div>
+      </ClientDashboardLayout>
+    );
+  }
+
+  const addresses = addressesData?.results || [];
+
+  return (
+    <ClientDashboardLayout title="Meu Perfil">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Dados pessoais */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h2 className="text-lg font-medium mb-4">Dados Pessoais</h2>
+          
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  {...register('first_name')}
+                  className={`w-full p-3 border ${
+                    errors.first_name ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {errors.first_name && (
+                  <p className="mt-1 text-sm text-red-600">{errors.first_name.message}</p>
+                )}
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Telefone
+                </label>
+                <input
+                  type="text"
+                  {...register('phone')}
+                  className={`w-full p-3 border ${
+                    errors.phone ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {errors.phone && (
+                  <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                )}
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  {...register('email')}
+                  className={`w-full p-3 border ${
+                    errors.email ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                )}
+              </div>
+              
+              <div className="pt-4">
+                <h3 className="text-md font-medium mb-3">Alterar senha</h3>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Senha atual
+                  </label>
+                  <input
+                    type="password"
+                    {...register('current_password')}
+                    className={`w-full p-3 border ${
+                      errors.current_password ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {errors.current_password && (
+                    <p className="mt-1 text-sm text-red-600">{errors.current_password.message}</p>
+                  )}
+                </div>
+                
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nova senha
+                  </label>
+                  <input
+                    type="password"
+                    {...register('new_password')}
+                    className={`w-full p-3 border ${
+                      errors.new_password ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {errors.new_password && (
+                    <p className="mt-1 text-sm text-red-600">{errors.new_password.message}</p>
+                  )}
+                </div>
+                
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Confirmar nova senha
+                  </label>
+                  <input
+                    type="password"
+                    {...register('confirm_password')}
+                    className={`w-full p-3 border ${
+                      errors.confirm_password ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {errors.confirm_password && (
+                    <p className="mt-1 text-sm text-red-600">{errors.confirm_password.message}</p>
+                  )}
+                </div>
+              </div>
+              
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-700"
+                  disabled={updateProfileMutation.isLoading}
+                >
+                  {updateProfileMutation.isLoading ? 'Salvando...' : 'Salvar alterações'}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        {/* Endereços */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-medium">Meus Endereços</h2>
+            <button
+              onClick={() => setShowAddressModal(true)}
+              className="flex items-center text-purple-600 text-sm font-medium"
+            >
+              <Plus size={16} className="mr-1" />
+              Adicionar
+            </button>
+          </div>
+          
+          {addresses.length === 0 ? (
+            <div className="text-center py-8">
+              <Home size={48} className="mx-auto text-gray-300 mb-3" />
+              <p className="text-gray-500">Você não tem endereços cadastrados</p>
+              <button
+                onClick={() => setShowAddressModal(true)}
+                className="mt-3 px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium"
+              >
+                Adicionar endereço
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {addresses.map((address) => (
+                <div key={address.id} className="border border-gray-200 rounded-xl p-4">
+                  <div className="flex justify-between">
+                    <div>
+                      <p className="font-medium">
+                        {address.street}, {address.number}
+                        {address.complement && ` - ${address.complement}`}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {address.district}, {address.city} - {address.state}
+                      </p>
+                      <p className="text-sm text-gray-600">CEP: {address.zip_code}</p>
+                    </div>
+                    <button
+                      onClick={() => handleDeleteAddress(address.id)}
+                      className="text-red-500 p-1 hover:bg-red-50 rounded-full"
+                    >
+                      <Trash size={18} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Modal de adicionar endereço */}
+      {showAddressModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-xl max-w-lg w-full p-5">
+            <h3 className="text-lg font-medium mb-4">Adicionar novo endereço</h3>
+            
+            <div className="space-y-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  CEP
+                </label>
+                <input
+                  type="text"
+                  name="zip_code"
+                  value={addressForm.zip_code}
+                  onChange={handleAddressChange}
+                  className={`w-full p-3 border ${
+                    addressErrors.zip_code ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {addressErrors.zip_code && (
+                  <p className="mt-1 text-sm text-red-600">{addressErrors.zip_code}</p>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-3 gap-3">
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Rua
+                  </label>
+                  <input
+                    type="text"
+                    name="street"
+                    value={addressForm.street}
+                    onChange={handleAddressChange}
+                    className={`w-full p-3 border ${
+                      addressErrors.street ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {addressErrors.street && (
+                    <p className="mt-1 text-sm text-red-600">{addressErrors.street}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Número
+                  </label>
+                  <input
+                    type="text"
+                    name="number"
+                    value={addressForm.number}
+                    onChange={handleAddressChange}
+                    className={`w-full p-3 border ${
+                      addressErrors.number ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {addressErrors.number && (
+                    <p className="mt-1 text-sm text-red-600">{addressErrors.number}</p>
+                  )}
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Complemento (opcional)
+                </label>
+                <input
+                  type="text"
+                  name="complement"
+                  value={addressForm.complement}
+                  onChange={handleAddressChange}
+                  className="w-full p-3 border border-gray-300 rounded-xl"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Bairro
+                </label>
+                <input
+                  type="text"
+                  name="district"
+                  value={addressForm.district}
+                  onChange={handleAddressChange}
+                  className={`w-full p-3 border ${
+                    addressErrors.district ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {addressErrors.district && (
+                  <p className="mt-1 text-sm text-red-600">{addressErrors.district}</p>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Cidade
+                  </label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={addressForm.city}
+                    onChange={handleAddressChange}
+                    className={`w-full p-3 border ${
+                      addressErrors.city ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {addressErrors.city && (
+                    <p className="mt-1 text-sm text-red-600">{addressErrors.city}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Estado
+                  </label>
+                  <input
+                    type="text"
+                    name="state"
+                    value={addressForm.state}
+                    onChange={handleAddressChange}
+                    className={`w-full p-3 border ${
+                      addressErrors.state ? 'border-red-300' : 'border-gray-300'
+                    } rounded-xl`}
+                  />
+                  {addressErrors.state && (
+                    <p className="mt-1 text-sm text-red-600">{addressErrors.state}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-3 mt-5">
+              <button
+                onClick={() => setShowAddressModal(false)}
+                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleAddressSubmit}
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg"
+                disabled={addAddressMutation.isLoading}
+              >
+                {addAddressMutation.isLoading ? 'Salvando...' : 'Salvar endereço'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </ClientDashboardLayout>
+  );
+}
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Sobrenome
+                </label>
+                <input
+                  type="text"
+                  {...register('last_name')}
+                  className={`w-full p-3 border ${
+                    errors.last_name ? 'border-red-300' : 'border-gray-300'
+                  } rounded-xl`}
+                />
+                {errors.last_name && (
+                  <p className="mt-1 text-sm text-red-600">{errors.last_name.message}</p>
+                )}
+              </div>

@@ -16,7 +16,16 @@
 │   │       │   ├── 15.pack.gz
 │   │       │   ├── 16.pack.gz
 │   │       │   ├── 17.pack.gz
+│   │       │   ├── 18.pack.gz
+│   │       │   ├── 19.pack.gz
 │   │       │   ├── 2.pack.gz
+│   │       │   ├── 20.pack.gz
+│   │       │   ├── 21.pack.gz
+│   │       │   ├── 22.pack.gz
+│   │       │   ├── 23.pack.gz
+│   │       │   ├── 24.pack.gz
+│   │       │   ├── 25.pack.gz
+│   │       │   ├── 26.pack.gz
 │   │       │   ├── 3.pack.gz
 │   │       │   ├── 4.pack.gz
 │   │       │   ├── 5.pack.gz
@@ -28,6 +37,12 @@
 │   │       │   └── index.pack.gz.old
 │   │       ├── client-development-fallback
 │   │       │   ├── 0.pack.gz
+│   │       │   ├── 1.pack.gz
+│   │       │   ├── 2.pack.gz
+│   │       │   ├── index.pack.gz
+│   │       │   └── index.pack.gz.old
+│   │       ├── edge-server-development
+│   │       │   ├── 0.pack.gz
 │   │       │   └── index.pack.gz
 │   │       └── server-development
 │   │           ├── 0.pack.gz
@@ -37,7 +52,17 @@
 │   │           ├── 12.pack.gz
 │   │           ├── 13.pack.gz
 │   │           ├── 14.pack.gz
+│   │           ├── 15.pack.gz
+│   │           ├── 16.pack.gz
+│   │           ├── 17.pack.gz
+│   │           ├── 18.pack.gz
+│   │           ├── 19.pack.gz
 │   │           ├── 2.pack.gz
+│   │           ├── 20.pack.gz
+│   │           ├── 21.pack.gz
+│   │           ├── 22.pack.gz
+│   │           ├── 23.pack.gz
+│   │           ├── 24.pack.gz
 │   │           ├── 3.pack.gz
 │   │           ├── 4.pack.gz
 │   │           ├── 5.pack.gz
@@ -47,14 +72,17 @@
 │   │           ├── 9.pack.gz
 │   │           ├── index.pack.gz
 │   │           └── index.pack.gz.old
+│   ├── fallback-build-manifest.json
 │   ├── package.json
 │   ├── react-loadable-manifest.json
 │   ├── server
 │   │   ├── _error.js
+│   │   ├── edge-runtime-webpack.js
 │   │   ├── interception-route-rewrite-manifest.js
 │   │   ├── middleware-build-manifest.js
 │   │   ├── middleware-manifest.json
 │   │   ├── middleware-react-loadable-manifest.js
+│   │   ├── middleware.js
 │   │   ├── next-font-manifest.js
 │   │   ├── next-font-manifest.json
 │   │   ├── pages
@@ -63,9 +91,11 @@
 │   │   │   ├── _error.js
 │   │   │   └── index.js
 │   │   ├── pages-manifest.json
+│   │   ├── static
+│   │   │   └── webpack
+│   │   │       └── 633457081244afec._.hot-update.json
 │   │   ├── vendor-chunks
 │   │   │   ├── @swc.js
-│   │   │   ├── date-fns.js
 │   │   │   ├── lucide-react.js
 │   │   │   └── next.js
 │   │   └── webpack-runtime.js
@@ -74,6 +104,16 @@
 │   │   │   ├── _error.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
 │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
+│   │   │   ├── fallback
+│   │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
+│   │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
+│   │   │   │   ├── amp.js
+│   │   │   │   ├── main.js
+│   │   │   │   ├── pages
+│   │   │   │   │   ├── _app.js
+│   │   │   │   │   └── _error.js
+│   │   │   │   ├── react-refresh.js
+│   │   │   │   └── webpack.js
 │   │   │   ├── main.js
 │   │   │   ├── pages
 │   │   │   │   ├── _app.js
@@ -86,9 +126,9 @@
 │   │   │   ├── _buildManifest.js
 │   │   │   └── _ssgManifest.js
 │   │   └── webpack
+│   │       ├── 37fd064ebee5ed7e.webpack.hot-update.json
 │   │       ├── 633457081244afec._.hot-update.json
-│   │       ├── 78a61760f928d4ba.webpack.hot-update.json
-│   │       └── webpack.78a61760f928d4ba.hot-update.js
+│   │       └── webpack.37fd064ebee5ed7e.hot-update.js
 │   └── trace
 ├── .swc
 │   └── plugins
@@ -96,29 +136,1198 @@
 ├── PROJECT_STRUCTURE.md
 ├── README.md
 ├── VERIFICATION_STEPS.md
+├── auth_context_fixer.py
+├── backups
+│   ├── auth_context_fix
+│   │   ├── backups
+│   │   │   ├── auth_context_fix
+│   │   │   │   ├── backups
+│   │   │   │   │   ├── auth_context_fix
+│   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   ├── auth_context_fix
+│   │   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   │   ├── auth_context_fix
+│   │   │   │   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   │   │   │   ├── auth_context_fix
+│   │   │   │   │   │   │   │   │   │   │   │   └── backups
+│   │   │   │   │   │   │   │   │   │   │   │       └── backups
+│   │   │   │   │   │   │   │   │   │   │   │           └── backups
+│   │   │   │   │   │   │   │   │   │   │   │               └── backups
+│   │   │   │   │   │   │   │   │   │   │   └── backups
+│   │   │   │   │   │   │   │   │   │   │       ├── backups
+│   │   │   │   │   │   │   │   │   │   │       │   └── backups
+│   │   │   │   │   │   │   │   │   │   │       │       ├── backups
+│   │   │   │   │   │   │   │   │   │   │       │       │   └── backups
+│   │   │   │   │   │   │   │   │   │   │       │       │       ├── contexts
+│   │   │   │   │   │   │   │   │   │   │       │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   │       │       │       └── src
+│   │   │   │   │   │   │   │   │   │   │       │       │           └── contexts
+│   │   │   │   │   │   │   │   │   │   │       │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   │       │       ├── contexts
+│   │   │   │   │   │   │   │   │   │   │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   │       │       └── src
+│   │   │   │   │   │   │   │   │   │   │       │           └── contexts
+│   │   │   │   │   │   │   │   │   │   │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   │       ├── contexts
+│   │   │   │   │   │   │   │   │   │   │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   │       └── src
+│   │   │   │   │   │   │   │   │   │   │           └── contexts
+│   │   │   │   │   │   │   │   │   │   │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │   │   │       └── contexts
+│   │   │   │   │   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   └── backups
+│   │   │   │   │   │   │   │   │       ├── backups
+│   │   │   │   │   │   │   │   │       │   └── backups
+│   │   │   │   │   │   │   │   │       │       ├── backups
+│   │   │   │   │   │   │   │   │       │       │   └── backups
+│   │   │   │   │   │   │   │   │       │       │       ├── contexts
+│   │   │   │   │   │   │   │   │       │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │       │       │       └── src
+│   │   │   │   │   │   │   │   │       │       │           └── contexts
+│   │   │   │   │   │   │   │   │       │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │       │       ├── contexts
+│   │   │   │   │   │   │   │   │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │       │       └── src
+│   │   │   │   │   │   │   │   │       │           └── contexts
+│   │   │   │   │   │   │   │   │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │       ├── contexts
+│   │   │   │   │   │   │   │   │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │       └── src
+│   │   │   │   │   │   │   │   │           └── contexts
+│   │   │   │   │   │   │   │   │               └── AuthContext.tsx
+│   │   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │       └── contexts
+│   │   │   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   │   │   └── backups
+│   │   │   │   │   │   │       ├── backups
+│   │   │   │   │   │   │       │   └── backups
+│   │   │   │   │   │   │       │       ├── backups
+│   │   │   │   │   │   │       │       │   └── backups
+│   │   │   │   │   │   │       │       │       ├── contexts
+│   │   │   │   │   │   │       │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │       │       │       └── src
+│   │   │   │   │   │   │       │       │           └── contexts
+│   │   │   │   │   │   │       │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │       │       ├── contexts
+│   │   │   │   │   │   │       │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │       │       └── src
+│   │   │   │   │   │   │       │           └── contexts
+│   │   │   │   │   │   │       │               └── AuthContext.tsx
+│   │   │   │   │   │   │       ├── contexts
+│   │   │   │   │   │   │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │       └── src
+│   │   │   │   │   │   │           └── contexts
+│   │   │   │   │   │   │               └── AuthContext.tsx
+│   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   └── src
+│   │   │   │   │   │       └── contexts
+│   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   ├── backups
+│   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   │   │   ├── components
+│   │   │   │   │   │   │   │   │   │   │   └── auth
+│   │   │   │   │   │   │   │   │   │   │       ├── ProtectedRoute.tsx
+│   │   │   │   │   │   │   │   │   │   │       └── ProtectedRoute.tsx.bak
+│   │   │   │   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │   │   │       ├── components
+│   │   │   │   │   │   │   │   │   │       │   └── layouts
+│   │   │   │   │   │   │   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   │   │   │       ├── contexts
+│   │   │   │   │   │   │   │   │   │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   │   │       └── pages
+│   │   │   │   │   │   │   │   │   │           └── dashboard
+│   │   │   │   │   │   │   │   │   │               ├── client
+│   │   │   │   │   │   │   │   │   │               │   ├── index.tsx
+│   │   │   │   │   │   │   │   │   │               │   ├── index.tsx.bak
+│   │   │   │   │   │   │   │   │   │               │   ├── profile.tsx
+│   │   │   │   │   │   │   │   │   │               │   └── profile.tsx.bak
+│   │   │   │   │   │   │   │   │   │               └── professional
+│   │   │   │   │   │   │   │   │   │                   ├── index.tsx
+│   │   │   │   │   │   │   │   │   │                   └── index.tsx.bak
+│   │   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │   │       └── components
+│   │   │   │   │   │   │   │   │           └── layouts
+│   │   │   │   │   │   │   │   │               ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │   │               └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │       ├── components
+│   │   │   │   │   │   │   │       │   └── layouts
+│   │   │   │   │   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   │       └── contexts
+│   │   │   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   │   │   ├── src
+│   │   │   │   │   │   │   │   └── components
+│   │   │   │   │   │   │   │       └── layouts
+│   │   │   │   │   │   │   │           ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │           └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   └── user_type_fix
+│   │   │   │   │   │   │       └── backups
+│   │   │   │   │   │   │           └── backups
+│   │   │   │   │   │   │               └── backups
+│   │   │   │   │   │   │                   └── backups
+│   │   │   │   │   │   │                       └── src
+│   │   │   │   │   │   │                           └── pages
+│   │   │   │   │   │   │                               └── dashboard
+│   │   │   │   │   │   │                                   └── client
+│   │   │   │   │   │   │                                       ├── profile.tsx
+│   │   │   │   │   │   │                                       └── profile.tsx.bak
+│   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   └── src
+│   │   │   │   │   │       ├── components
+│   │   │   │   │   │       │   └── layouts
+│   │   │   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │       └── contexts
+│   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   └── src
+│   │   │   │   │       └── components
+│   │   │   │   │           └── layouts
+│   │   │   │   │               ├── ClientDashboardLayout.js
+│   │   │   │   │               └── ClientDashboardLayout.js.bak
+│   │   │   │   ├── contexts
+│   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   ├── pages
+│   │   │   │   │   ├── client
+│   │   │   │   │   │   ├── profile.js
+│   │   │   │   │   │   └── profile.js.bak
+│   │   │   │   │   ├── login.js
+│   │   │   │   │   ├── login.js.bak
+│   │   │   │   │   ├── professional
+│   │   │   │   │   │   ├── services.js
+│   │   │   │   │   │   └── services.js.bak
+│   │   │   │   │   ├── register.js
+│   │   │   │   │   └── register.js.bak
+│   │   │   │   └── src
+│   │   │   │       ├── components
+│   │   │   │       │   └── layouts
+│   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │       │       ├── ClientDashboardLayout.js.bak
+│   │   │   │       │       ├── ProfessionalDashboardLayout.js
+│   │   │   │       │       └── ProfessionalDashboardLayout.js.bak
+│   │   │   │       └── contexts
+│   │   │   │           └── AuthContext.tsx
+│   │   │   ├── backups
+│   │   │   │   ├── backups
+│   │   │   │   │   ├── backups
+│   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   ├── backups
+│   │   │   │   │   │   │   │   ├── components
+│   │   │   │   │   │   │   │   │   └── auth
+│   │   │   │   │   │   │   │   │       ├── ProtectedRoute.tsx
+│   │   │   │   │   │   │   │   │       └── ProtectedRoute.tsx.bak
+│   │   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │   │       ├── components
+│   │   │   │   │   │   │   │       │   └── layouts
+│   │   │   │   │   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   │       ├── contexts
+│   │   │   │   │   │   │   │       │   └── AuthContext.tsx
+│   │   │   │   │   │   │   │       └── pages
+│   │   │   │   │   │   │   │           └── dashboard
+│   │   │   │   │   │   │   │               ├── client
+│   │   │   │   │   │   │   │               │   ├── index.tsx
+│   │   │   │   │   │   │   │               │   ├── index.tsx.bak
+│   │   │   │   │   │   │   │               │   ├── profile.tsx
+│   │   │   │   │   │   │   │               │   └── profile.tsx.bak
+│   │   │   │   │   │   │   │               └── professional
+│   │   │   │   │   │   │   │                   ├── index.tsx
+│   │   │   │   │   │   │   │                   └── index.tsx.bak
+│   │   │   │   │   │   │   └── src
+│   │   │   │   │   │   │       └── components
+│   │   │   │   │   │   │           └── layouts
+│   │   │   │   │   │   │               ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │               └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   └── src
+│   │   │   │   │   │       ├── components
+│   │   │   │   │   │       │   └── layouts
+│   │   │   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │       └── contexts
+│   │   │   │   │   │           └── AuthContext.tsx
+│   │   │   │   │   ├── src
+│   │   │   │   │   │   └── components
+│   │   │   │   │   │       └── layouts
+│   │   │   │   │   │           ├── ClientDashboardLayout.js
+│   │   │   │   │   │           └── ClientDashboardLayout.js.bak
+│   │   │   │   │   └── user_type_fix
+│   │   │   │   │       └── backups
+│   │   │   │   │           └── backups
+│   │   │   │   │               └── backups
+│   │   │   │   │                   └── backups
+│   │   │   │   │                       └── src
+│   │   │   │   │                           └── pages
+│   │   │   │   │                               └── dashboard
+│   │   │   │   │                                   └── client
+│   │   │   │   │                                       ├── profile.tsx
+│   │   │   │   │                                       └── profile.tsx.bak
+│   │   │   │   ├── contexts
+│   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   └── src
+│   │   │   │       ├── components
+│   │   │   │       │   └── layouts
+│   │   │   │       │       ├── ClientDashboardLayout.js
+│   │   │   │       │       └── ClientDashboardLayout.js.bak
+│   │   │   │       └── contexts
+│   │   │   │           └── AuthContext.tsx
+│   │   │   └── src
+│   │   │       └── components
+│   │   │           └── layouts
+│   │   │               ├── ClientDashboardLayout.js
+│   │   │               └── ClientDashboardLayout.js.bak
+│   │   ├── contexts
+│   │   │   └── AuthContext.tsx
+│   │   ├── pages
+│   │   │   ├── client
+│   │   │   │   ├── profile.js
+│   │   │   │   └── profile.js.bak
+│   │   │   ├── login.js
+│   │   │   ├── login.js.bak
+│   │   │   ├── professional
+│   │   │   │   ├── services.js
+│   │   │   │   └── services.js.bak
+│   │   │   ├── register.js
+│   │   │   └── register.js.bak
+│   │   └── src
+│   │       ├── components
+│   │       │   └── layouts
+│   │       │       ├── ClientDashboardLayout.js
+│   │       │       ├── ClientDashboardLayout.js.bak
+│   │       │       ├── ProfessionalDashboardLayout.js
+│   │       │       └── ProfessionalDashboardLayout.js.bak
+│   │       └── contexts
+│   │           └── AuthContext.tsx
+│   ├── backups
+│   │   ├── backups
+│   │   │   ├── backups
+│   │   │   │   ├── backups
+│   │   │   │   │   ├── backups
+│   │   │   │   │   │   ├── components
+│   │   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   │   │   │   │   └── ProtectedRoute.tsx.bak
+│   │   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   │   │   │   ├── common
+│   │   │   │   │   │   │   │   ├── MainButton.tsx
+│   │   │   │   │   │   │   │   └── Toast.tsx
+│   │   │   │   │   │   │   ├── layouts
+│   │   │   │   │   │   │   │   └── ClientDashboardLayout.tsx
+│   │   │   │   │   │   │   └── professional
+│   │   │   │   │   │   │       ├── ProfessionalService.tsx
+│   │   │   │   │   │   │       └── ReviewCard.tsx
+│   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   ├── pages
+│   │   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   │   ├── src
+│   │   │   │   │   │   │   ├── components
+│   │   │   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   │   │   └── ProtectedRoute.tsx
+│   │   │   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   │   │   │   ├── RadioOption.jsx
+│   │   │   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   │   │   │   ├── common
+│   │   │   │   │   │   │   │   │   ├── MainButton.jsx
+│   │   │   │   │   │   │   │   │   └── Toast.jsx
+│   │   │   │   │   │   │   │   ├── layout
+│   │   │   │   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   │   │   │   └── MainLayout.tsx
+│   │   │   │   │   │   │   │   ├── layouts
+│   │   │   │   │   │   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   │   ├── professional
+│   │   │   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   │   │   └── ReviewCard.jsx
+│   │   │   │   │   │   │   │   ├── professionals
+│   │   │   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   │   │   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   │   │   │   │   ├── reviews
+│   │   │   │   │   │   │   │   │   └── ReviewCard.tsx
+│   │   │   │   │   │   │   │   └── ui
+│   │   │   │   │   │   │   │       ├── Toast.jsx
+│   │   │   │   │   │   │   │       ├── Toast.tsx
+│   │   │   │   │   │   │   │       └── buttons
+│   │   │   │   │   │   │   │           ├── MainButton.jsx
+│   │   │   │   │   │   │   │           └── MainButton.tsx
+│   │   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   │   ├── pages
+│   │   │   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   │   │   │   │   │   └── [professionalId]
+│   │   │   │   │   │   │   │   │       └── index.tsx
+│   │   │   │   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   │   │   │   ├── client
+│   │   │   │   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   │   │   │   ├── index.tsx.bak
+│   │   │   │   │   │   │   │   │   │   ├── profile.tsx
+│   │   │   │   │   │   │   │   │   │   └── profile.tsx.bak
+│   │   │   │   │   │   │   │   │   └── professional
+│   │   │   │   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │   │   │   │       ├── index.tsx.bak
+│   │   │   │   │   │   │   │   │       └── profile.tsx
+│   │   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   │   └── professionals
+│   │   │   │   │   │   │   │       └── index.tsx
+│   │   │   │   │   │   │   └── types
+│   │   │   │   │   │   │       └── user.ts
+│   │   │   │   │   │   └── types
+│   │   │   │   │   │       └── user.ts
+│   │   │   │   │   ├── components
+│   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   └── ProtectedRoute.tsx
+│   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   │   ├── common
+│   │   │   │   │   │   │   ├── MainButton.tsx
+│   │   │   │   │   │   │   └── Toast.tsx
+│   │   │   │   │   │   ├── layout
+│   │   │   │   │   │   │   └── MainLayout.tsx
+│   │   │   │   │   │   ├── layouts
+│   │   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   │   └── professional
+│   │   │   │   │   │       ├── ProfessionalService.tsx
+│   │   │   │   │   │       └── ReviewCard.tsx
+│   │   │   │   │   ├── contexts
+│   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   ├── pages
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── src
+│   │   │   │   │   │   ├── components
+│   │   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   │   │   ├── RadioOption.jsx
+│   │   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   │   │   ├── common
+│   │   │   │   │   │   │   │   ├── MainButton.jsx
+│   │   │   │   │   │   │   │   └── Toast.jsx
+│   │   │   │   │   │   │   ├── layout
+│   │   │   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   │   │   ├── MainLayout.tsx
+│   │   │   │   │   │   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   │   │   ├── layouts
+│   │   │   │   │   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   │   ├── professional
+│   │   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   │   └── ReviewCard.jsx
+│   │   │   │   │   │   │   ├── professionals
+│   │   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   │   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   │   │   │   ├── reviews
+│   │   │   │   │   │   │   │   └── ReviewCard.tsx
+│   │   │   │   │   │   │   └── ui
+│   │   │   │   │   │   │       ├── Toast.jsx
+│   │   │   │   │   │   │       ├── Toast.tsx
+│   │   │   │   │   │   │       └── buttons
+│   │   │   │   │   │   │           ├── MainButton.jsx
+│   │   │   │   │   │   │           └── MainButton.tsx
+│   │   │   │   │   │   ├── contexts
+│   │   │   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   │   │   ├── pages
+│   │   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   │   │   │   │   └── [professionalId]
+│   │   │   │   │   │   │   │       ├── [id].jsx
+│   │   │   │   │   │   │   │       └── index.tsx
+│   │   │   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   │   │   ├── client
+│   │   │   │   │   │   │   │   │   ├── appointments.tsx
+│   │   │   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   │   │   └── profile.tsx
+│   │   │   │   │   │   │   │   └── professional
+│   │   │   │   │   │   │   │       ├── appointments.tsx
+│   │   │   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │   │   │       └── profile.tsx
+│   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   └── professionals
+│   │   │   │   │   │   │       ├── [id].tsx
+│   │   │   │   │   │   │       └── index.tsx
+│   │   │   │   │   │   └── types
+│   │   │   │   │   │       └── user.ts
+│   │   │   │   │   └── types
+│   │   │   │   │       └── user.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── auth
+│   │   │   │   │   │   └── ProtectedRoute.tsx
+│   │   │   │   │   ├── booking
+│   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   ├── common
+│   │   │   │   │   │   ├── MainButton.tsx
+│   │   │   │   │   │   └── Toast.tsx
+│   │   │   │   │   ├── layout
+│   │   │   │   │   │   └── MainLayout.tsx
+│   │   │   │   │   ├── layouts
+│   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   └── professional
+│   │   │   │   │       ├── ProfessionalService.tsx
+│   │   │   │   │       └── ReviewCard.tsx
+│   │   │   │   ├── contexts
+│   │   │   │   │   └── AuthContext.tsx
+│   │   │   │   ├── pages
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── src
+│   │   │   │   │   ├── components
+│   │   │   │   │   │   ├── analytics
+│   │   │   │   │   │   │   └── AnalyticsDashboard.tsx
+│   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   ├── AdditionalOptions.tsx
+│   │   │   │   │   │   │   ├── BookingSummary.tsx
+│   │   │   │   │   │   │   ├── ClientForm.tsx
+│   │   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   │   ├── DateTimePicker.tsx
+│   │   │   │   │   │   │   ├── PaymentForm.tsx
+│   │   │   │   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   │   ├── RadioOption.jsx
+│   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   ├── ServiceSelector.tsx
+│   │   │   │   │   │   │   ├── TimeSelector.tsx
+│   │   │   │   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   │   ├── calendar
+│   │   │   │   │   │   │   ├── CalendarIntegrationCard.tsx
+│   │   │   │   │   │   │   └── CalendarIntegrationSection.tsx
+│   │   │   │   │   │   ├── common
+│   │   │   │   │   │   │   ├── MainButton.jsx
+│   │   │   │   │   │   │   └── Toast.jsx
+│   │   │   │   │   │   ├── filters
+│   │   │   │   │   │   │   ├── CategoryFilter.tsx
+│   │   │   │   │   │   │   ├── FilterGroup.tsx
+│   │   │   │   │   │   │   ├── FilterItem.tsx
+│   │   │   │   │   │   │   ├── LocationFilter.tsx
+│   │   │   │   │   │   │   ├── PriceFilter.tsx
+│   │   │   │   │   │   │   └── ZoneFilter.tsx
+│   │   │   │   │   │   ├── layout
+│   │   │   │   │   │   │   ├── BottomNav.tsx
+│   │   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   │   │   ├── Header.tsx
+│   │   │   │   │   │   │   ├── Layout.tsx
+│   │   │   │   │   │   │   ├── MainLayout.tsx
+│   │   │   │   │   │   │   ├── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   │   │   └── Sidebar.tsx
+│   │   │   │   │   │   ├── layouts
+│   │   │   │   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   │   │   │   ├── notifications
+│   │   │   │   │   │   │   ├── NotificationDropdown.tsx
+│   │   │   │   │   │   │   ├── NotificationIcon.tsx
+│   │   │   │   │   │   │   └── NotificationList.tsx
+│   │   │   │   │   │   ├── professional
+│   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   └── ReviewCard.jsx
+│   │   │   │   │   │   ├── professionals
+│   │   │   │   │   │   │   ├── ProfessionalCard.tsx
+│   │   │   │   │   │   │   ├── ProfessionalList.tsx
+│   │   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   │   │   ├── reviews
+│   │   │   │   │   │   │   ├── RatingStars.tsx
+│   │   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   │   └── ReviewForm.tsx
+│   │   │   │   │   │   └── ui
+│   │   │   │   │   │       ├── Toast.jsx
+│   │   │   │   │   │       ├── Toast.tsx
+│   │   │   │   │   │       ├── buttons
+│   │   │   │   │   │       │   ├── Button.tsx
+│   │   │   │   │   │       │   ├── MainButton.jsx
+│   │   │   │   │   │       │   └── MainButton.tsx
+│   │   │   │   │   │       └── inputs
+│   │   │   │   │   │           ├── Input.tsx
+│   │   │   │   │   │           └── Toggle.tsx
+│   │   │   │   │   ├── contexts
+│   │   │   │   │   │   ├── AuthContext.tsx
+│   │   │   │   │   │   ├── BookingContext.tsx
+│   │   │   │   │   │   ├── FilterContext.tsx
+│   │   │   │   │   │   └── NotificationContext.tsx
+│   │   │   │   │   ├── pages
+│   │   │   │   │   │   ├── _app.tsx
+│   │   │   │   │   │   ├── _document.tsx
+│   │   │   │   │   │   ├── about.tsx
+│   │   │   │   │   │   ├── auth
+│   │   │   │   │   │   │   ├── login.tsx
+│   │   │   │   │   │   │   ├── password-reset.tsx
+│   │   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   │   ├── booking
+│   │   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   │   │   │   └── [professionalId]
+│   │   │   │   │   │   │       ├── [id].jsx
+│   │   │   │   │   │   │       ├── client.tsx
+│   │   │   │   │   │   │       ├── confirmation.tsx
+│   │   │   │   │   │   │       ├── datetime.tsx
+│   │   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │   │       ├── options.tsx
+│   │   │   │   │   │   │       ├── payment.tsx
+│   │   │   │   │   │   │       └── service.tsx
+│   │   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   │   ├── client
+│   │   │   │   │   │   │   │   ├── appointments.tsx
+│   │   │   │   │   │   │   │   ├── history.tsx
+│   │   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   │   └── profile.tsx
+│   │   │   │   │   │   │   └── professional
+│   │   │   │   │   │   │       ├── analytics.tsx
+│   │   │   │   │   │   │       ├── appointments.tsx
+│   │   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │   │       ├── profile.tsx
+│   │   │   │   │   │   │       ├── schedule.tsx
+│   │   │   │   │   │   │       ├── services.tsx
+│   │   │   │   │   │   │       └── settings
+│   │   │   │   │   │   │           ├── calendar.tsx
+│   │   │   │   │   │   │           └── notifications.tsx
+│   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   ├── privacy.tsx
+│   │   │   │   │   │   ├── professionals
+│   │   │   │   │   │   │   ├── [id].tsx
+│   │   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   │   ├── terms.tsx
+│   │   │   │   │   │   └── test.tsx
+│   │   │   │   │   └── types
+│   │   │   │   │       └── user.ts
+│   │   │   │   └── types
+│   │   │   │       └── user.ts
+│   │   │   ├── components
+│   │   │   │   ├── auth
+│   │   │   │   │   └── ProtectedRoute.tsx
+│   │   │   │   ├── booking
+│   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   ├── common
+│   │   │   │   │   ├── MainButton.tsx
+│   │   │   │   │   └── Toast.tsx
+│   │   │   │   ├── layout
+│   │   │   │   │   └── MainLayout.tsx
+│   │   │   │   ├── layouts
+│   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   │   │   └── professional
+│   │   │   │       ├── ProfessionalService.tsx
+│   │   │   │       └── ReviewCard.tsx
+│   │   │   ├── contexts
+│   │   │   │   └── AuthContext.tsx
+│   │   │   ├── pages
+│   │   │   │   └── index.tsx
+│   │   │   ├── src
+│   │   │   │   ├── components
+│   │   │   │   │   ├── analytics
+│   │   │   │   │   │   └── AnalyticsDashboard.tsx
+│   │   │   │   │   ├── auth
+│   │   │   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   ├── booking
+│   │   │   │   │   │   ├── AdditionalOptions.tsx
+│   │   │   │   │   │   ├── BookingSummary.tsx
+│   │   │   │   │   │   ├── ClientForm.tsx
+│   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   ├── DateTimePicker.tsx
+│   │   │   │   │   │   ├── PaymentForm.tsx
+│   │   │   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   │   ├── RadioOption.jsx
+│   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   ├── ServiceSelector.tsx
+│   │   │   │   │   │   ├── TimeSelector.tsx
+│   │   │   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   │   ├── calendar
+│   │   │   │   │   │   ├── CalendarIntegrationCard.tsx
+│   │   │   │   │   │   └── CalendarIntegrationSection.tsx
+│   │   │   │   │   ├── common
+│   │   │   │   │   │   ├── MainButton.jsx
+│   │   │   │   │   │   └── Toast.jsx
+│   │   │   │   │   ├── filters
+│   │   │   │   │   │   ├── CategoryFilter.tsx
+│   │   │   │   │   │   ├── FilterGroup.tsx
+│   │   │   │   │   │   ├── FilterItem.tsx
+│   │   │   │   │   │   ├── LocationFilter.tsx
+│   │   │   │   │   │   ├── PriceFilter.tsx
+│   │   │   │   │   │   └── ZoneFilter.tsx
+│   │   │   │   │   ├── layout
+│   │   │   │   │   │   ├── BottomNav.tsx
+│   │   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   │   ├── Header.tsx
+│   │   │   │   │   │   ├── Layout.tsx
+│   │   │   │   │   │   ├── MainLayout.tsx
+│   │   │   │   │   │   ├── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   │   └── Sidebar.tsx
+│   │   │   │   │   ├── layouts
+│   │   │   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   │   │   ├── notifications
+│   │   │   │   │   │   ├── NotificationDropdown.tsx
+│   │   │   │   │   │   ├── NotificationIcon.tsx
+│   │   │   │   │   │   └── NotificationList.tsx
+│   │   │   │   │   ├── professional
+│   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   └── ReviewCard.jsx
+│   │   │   │   │   ├── professionals
+│   │   │   │   │   │   ├── ProfessionalCard.tsx
+│   │   │   │   │   │   ├── ProfessionalList.tsx
+│   │   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   │   ├── reviews
+│   │   │   │   │   │   ├── RatingStars.tsx
+│   │   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   │   └── ReviewForm.tsx
+│   │   │   │   │   └── ui
+│   │   │   │   │       ├── Toast.jsx
+│   │   │   │   │       ├── Toast.tsx
+│   │   │   │   │       ├── buttons
+│   │   │   │   │       │   ├── Button.tsx
+│   │   │   │   │       │   ├── MainButton.jsx
+│   │   │   │   │       │   └── MainButton.tsx
+│   │   │   │   │       └── inputs
+│   │   │   │   │           ├── Input.tsx
+│   │   │   │   │           └── Toggle.tsx
+│   │   │   │   ├── contexts
+│   │   │   │   │   ├── AuthContext.tsx
+│   │   │   │   │   ├── BookingContext.tsx
+│   │   │   │   │   ├── FilterContext.tsx
+│   │   │   │   │   └── NotificationContext.tsx
+│   │   │   │   ├── pages
+│   │   │   │   │   ├── _app.tsx
+│   │   │   │   │   ├── _document.tsx
+│   │   │   │   │   ├── about.tsx
+│   │   │   │   │   ├── auth
+│   │   │   │   │   │   ├── login.tsx
+│   │   │   │   │   │   ├── password-reset.tsx
+│   │   │   │   │   │   └── register.tsx
+│   │   │   │   │   ├── booking
+│   │   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   │   │   └── [professionalId]
+│   │   │   │   │   │       ├── [id].jsx
+│   │   │   │   │   │       ├── client.tsx
+│   │   │   │   │   │       ├── confirmation.tsx
+│   │   │   │   │   │       ├── datetime.tsx
+│   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │       ├── options.tsx
+│   │   │   │   │   │       ├── payment.tsx
+│   │   │   │   │   │       └── service.tsx
+│   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   ├── client
+│   │   │   │   │   │   │   ├── appointments.tsx
+│   │   │   │   │   │   │   ├── history.tsx
+│   │   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   │   └── profile.tsx
+│   │   │   │   │   │   └── professional
+│   │   │   │   │   │       ├── analytics.tsx
+│   │   │   │   │   │       ├── appointments.tsx
+│   │   │   │   │   │       ├── index.tsx
+│   │   │   │   │   │       ├── profile.tsx
+│   │   │   │   │   │       ├── schedule.tsx
+│   │   │   │   │   │       ├── services.tsx
+│   │   │   │   │   │       └── settings
+│   │   │   │   │   │           ├── calendar.tsx
+│   │   │   │   │   │           └── notifications.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   ├── privacy.tsx
+│   │   │   │   │   ├── professionals
+│   │   │   │   │   │   ├── [id].tsx
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── terms.tsx
+│   │   │   │   │   └── test.tsx
+│   │   │   │   └── types
+│   │   │   │       └── user.ts
+│   │   │   ├── types
+│   │   │   │   └── user.ts
+│   │   │   └── user_type_fix
+│   │   │       └── backups
+│   │   │           └── backups
+│   │   │               └── backups
+│   │   │                   └── backups
+│   │   │                       └── src
+│   │   │                           └── pages
+│   │   │                               └── dashboard
+│   │   │                                   └── client
+│   │   │                                       ├── profile.tsx
+│   │   │                                       └── profile.tsx.bak
+│   │   ├── components
+│   │   │   ├── auth
+│   │   │   │   └── ProtectedRoute.tsx
+│   │   │   ├── booking
+│   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   ├── RadioOption.tsx
+│   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   └── ToggleOption.tsx
+│   │   │   ├── common
+│   │   │   │   ├── MainButton.tsx
+│   │   │   │   └── Toast.tsx
+│   │   │   ├── layout
+│   │   │   │   └── MainLayout.tsx
+│   │   │   ├── layouts
+│   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   │   └── professional
+│   │   │       ├── ProfessionalService.tsx
+│   │   │       └── ReviewCard.tsx
+│   │   ├── contexts
+│   │   │   └── AuthContext.tsx
+│   │   ├── pages
+│   │   │   ├── client
+│   │   │   │   ├── appointments.js
+│   │   │   │   └── history.js
+│   │   │   └── index.tsx
+│   │   ├── src
+│   │   │   ├── components
+│   │   │   │   ├── analytics
+│   │   │   │   │   └── AnalyticsDashboard.tsx
+│   │   │   │   ├── auth
+│   │   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   │   └── register.tsx
+│   │   │   │   ├── booking
+│   │   │   │   │   ├── AdditionalOptions.tsx
+│   │   │   │   │   ├── BookingSummary.tsx
+│   │   │   │   │   ├── ClientForm.tsx
+│   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   ├── DateTimePicker.tsx
+│   │   │   │   │   ├── PaymentForm.tsx
+│   │   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   │   ├── RadioOption.jsx
+│   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── ServiceSelector.tsx
+│   │   │   │   │   ├── TimeSelector.tsx
+│   │   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   │   └── ToggleOption.tsx
+│   │   │   │   ├── calendar
+│   │   │   │   │   ├── CalendarIntegrationCard.tsx
+│   │   │   │   │   └── CalendarIntegrationSection.tsx
+│   │   │   │   ├── common
+│   │   │   │   │   ├── MainButton.jsx
+│   │   │   │   │   └── Toast.jsx
+│   │   │   │   ├── filters
+│   │   │   │   │   ├── CategoryFilter.tsx
+│   │   │   │   │   ├── FilterGroup.tsx
+│   │   │   │   │   ├── FilterItem.tsx
+│   │   │   │   │   ├── LocationFilter.tsx
+│   │   │   │   │   ├── PriceFilter.tsx
+│   │   │   │   │   └── ZoneFilter.tsx
+│   │   │   │   ├── layout
+│   │   │   │   │   ├── BottomNav.tsx
+│   │   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   ├── Header.tsx
+│   │   │   │   │   ├── Layout.tsx
+│   │   │   │   │   ├── MainLayout.tsx
+│   │   │   │   │   ├── ProfessionalDashboardLayout.tsx
+│   │   │   │   │   └── Sidebar.tsx
+│   │   │   │   ├── layouts
+│   │   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   │   ├── notifications
+│   │   │   │   │   ├── NotificationDropdown.tsx
+│   │   │   │   │   ├── NotificationIcon.tsx
+│   │   │   │   │   └── NotificationList.tsx
+│   │   │   │   ├── professional
+│   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   └── ReviewCard.jsx
+│   │   │   │   ├── professionals
+│   │   │   │   │   ├── ProfessionalCard.tsx
+│   │   │   │   │   ├── ProfessionalList.tsx
+│   │   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   └── ServiceCard.tsx
+│   │   │   │   ├── reviews
+│   │   │   │   │   ├── RatingStars.tsx
+│   │   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   │   └── ReviewForm.tsx
+│   │   │   │   └── ui
+│   │   │   │       ├── Toast.jsx
+│   │   │   │       ├── Toast.tsx
+│   │   │   │       ├── buttons
+│   │   │   │       │   ├── Button.tsx
+│   │   │   │       │   ├── MainButton.jsx
+│   │   │   │       │   └── MainButton.tsx
+│   │   │   │       └── inputs
+│   │   │   │           ├── Input.tsx
+│   │   │   │           └── Toggle.tsx
+│   │   │   ├── contexts
+│   │   │   │   ├── AuthContext.tsx
+│   │   │   │   ├── BookingContext.tsx
+│   │   │   │   ├── FilterContext.tsx
+│   │   │   │   └── NotificationContext.tsx
+│   │   │   ├── pages
+│   │   │   │   ├── _app.tsx
+│   │   │   │   ├── _document.tsx
+│   │   │   │   ├── about.tsx
+│   │   │   │   ├── auth
+│   │   │   │   │   ├── login.tsx
+│   │   │   │   │   ├── password-reset.tsx
+│   │   │   │   │   └── register.tsx
+│   │   │   │   ├── booking
+│   │   │   │   │   ├── DateSelector.tsx
+│   │   │   │   │   ├── RadioOption.tsx
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   │   └── [professionalId]
+│   │   │   │   │       ├── [id].jsx
+│   │   │   │   │       ├── client.tsx
+│   │   │   │   │       ├── confirmation.tsx
+│   │   │   │   │       ├── datetime.tsx
+│   │   │   │   │       ├── index.tsx
+│   │   │   │   │       ├── options.tsx
+│   │   │   │   │       ├── payment.tsx
+│   │   │   │   │       └── service.tsx
+│   │   │   │   ├── dashboard
+│   │   │   │   │   ├── client
+│   │   │   │   │   │   ├── appointments.tsx
+│   │   │   │   │   │   ├── history.tsx
+│   │   │   │   │   │   ├── index.tsx
+│   │   │   │   │   │   └── profile.tsx
+│   │   │   │   │   └── professional
+│   │   │   │   │       ├── analytics.tsx
+│   │   │   │   │       ├── appointments.tsx
+│   │   │   │   │       ├── index.tsx
+│   │   │   │   │       ├── profile.tsx
+│   │   │   │   │       ├── schedule.tsx
+│   │   │   │   │       ├── services.tsx
+│   │   │   │   │       └── settings
+│   │   │   │   │           ├── calendar.tsx
+│   │   │   │   │           └── notifications.tsx
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── privacy.tsx
+│   │   │   │   ├── professionals
+│   │   │   │   │   ├── [id].tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── terms.tsx
+│   │   │   │   └── test.tsx
+│   │   │   └── types
+│   │   │       └── user.ts
+│   │   ├── types
+│   │   │   └── user.ts
+│   │   └── user_type_fix
+│   │       └── backups
+│   │           └── backups
+│   │               └── backups
+│   │                   └── backups
+│   │                       └── src
+│   │                           └── pages
+│   │                               └── dashboard
+│   │                                   └── client
+│   │                                       └── profile.tsx
+│   ├── component_deduplication
+│   │   └── src
+│   │       └── contexts
+│   │           └── AuthContext.tsx
+│   ├── components
+│   │   ├── auth
+│   │   │   └── ProtectedRoute.tsx
+│   │   ├── booking
+│   │   │   ├── PaymentMethod.tsx
+│   │   │   ├── RadioOption.tsx
+│   │   │   ├── ServiceCard.tsx
+│   │   │   ├── TimeSlot.tsx
+│   │   │   └── ToggleOption.tsx
+│   │   ├── common
+│   │   │   ├── MainButton.tsx
+│   │   │   └── Toast.tsx
+│   │   ├── layout
+│   │   │   └── MainLayout.tsx
+│   │   ├── layouts
+│   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   └── ProfessionalDashboardLayout.tsx
+│   │   └── professional
+│   │       ├── ProfessionalService.tsx
+│   │       └── ReviewCard.tsx
+│   ├── contexts
+│   │   └── AuthContext.tsx
+│   ├── pages
+│   │   ├── client
+│   │   │   ├── appointments.js
+│   │   │   └── history.js
+│   │   └── index.tsx
+│   ├── src
+│   │   ├── components
+│   │   │   ├── analytics
+│   │   │   │   └── AnalyticsDashboard.tsx
+│   │   │   ├── auth
+│   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   └── register.tsx
+│   │   │   ├── booking
+│   │   │   │   ├── AdditionalOptions.tsx
+│   │   │   │   ├── BookingSummary.tsx
+│   │   │   │   ├── ClientForm.tsx
+│   │   │   │   ├── DateSelector.tsx
+│   │   │   │   ├── DateTimePicker.tsx
+│   │   │   │   ├── PaymentForm.tsx
+│   │   │   │   ├── PaymentMethod.jsx
+│   │   │   │   ├── PaymentMethod.tsx
+│   │   │   │   ├── RadioOption.jsx
+│   │   │   │   ├── RadioOption.tsx
+│   │   │   │   ├── ServiceCard.jsx
+│   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   ├── ServiceSelector.tsx
+│   │   │   │   ├── TimeSelector.tsx
+│   │   │   │   ├── TimeSlot.jsx
+│   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   ├── ToggleOption.jsx
+│   │   │   │   └── ToggleOption.tsx
+│   │   │   ├── calendar
+│   │   │   │   ├── CalendarIntegrationCard.tsx
+│   │   │   │   └── CalendarIntegrationSection.tsx
+│   │   │   ├── common
+│   │   │   │   ├── MainButton.jsx
+│   │   │   │   └── Toast.jsx
+│   │   │   ├── filters
+│   │   │   │   ├── CategoryFilter.tsx
+│   │   │   │   ├── FilterGroup.tsx
+│   │   │   │   ├── FilterItem.tsx
+│   │   │   │   ├── LocationFilter.tsx
+│   │   │   │   ├── PriceFilter.tsx
+│   │   │   │   └── ZoneFilter.tsx
+│   │   │   ├── layout
+│   │   │   │   ├── BottomNav.tsx
+│   │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   │   ├── Footer.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Layout.tsx
+│   │   │   │   ├── MainLayout.tsx
+│   │   │   │   ├── ProfessionalDashboardLayout.tsx
+│   │   │   │   └── Sidebar.tsx
+│   │   │   ├── layouts
+│   │   │   │   ├── ClientDashboardLayout.js
+│   │   │   │   └── ClientDashboardLayout.js.bak
+│   │   │   ├── notifications
+│   │   │   │   ├── NotificationDropdown.tsx
+│   │   │   │   ├── NotificationIcon.tsx
+│   │   │   │   └── NotificationList.tsx
+│   │   │   ├── professional
+│   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   └── ReviewCard.jsx
+│   │   │   ├── professionals
+│   │   │   │   ├── ProfessionalCard.tsx
+│   │   │   │   ├── ProfessionalList.tsx
+│   │   │   │   ├── ProfessionalService.jsx
+│   │   │   │   ├── ProfessionalService.tsx
+│   │   │   │   ├── ReviewCard.jsx
+│   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   └── ServiceCard.tsx
+│   │   │   ├── reviews
+│   │   │   │   ├── RatingStars.tsx
+│   │   │   │   ├── ReviewCard.tsx
+│   │   │   │   └── ReviewForm.tsx
+│   │   │   └── ui
+│   │   │       ├── Toast.jsx
+│   │   │       ├── Toast.tsx
+│   │   │       ├── buttons
+│   │   │       │   ├── Button.tsx
+│   │   │       │   ├── MainButton.jsx
+│   │   │       │   └── MainButton.tsx
+│   │   │       └── inputs
+│   │   │           ├── Input.tsx
+│   │   │           └── Toggle.tsx
+│   │   ├── contexts
+│   │   │   ├── AuthContext.tsx
+│   │   │   ├── BookingContext.tsx
+│   │   │   ├── FilterContext.tsx
+│   │   │   └── NotificationContext.tsx
+│   │   ├── pages
+│   │   │   ├── _app.tsx
+│   │   │   ├── _document.tsx
+│   │   │   ├── about.tsx
+│   │   │   ├── auth
+│   │   │   │   ├── login.tsx
+│   │   │   │   ├── password-reset.tsx
+│   │   │   │   └── register.tsx
+│   │   │   ├── booking
+│   │   │   │   ├── DateSelector.tsx
+│   │   │   │   ├── RadioOption.tsx
+│   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   ├── TimeSlot.tsx
+│   │   │   │   ├── ToggleOption.tsx
+│   │   │   │   └── [professionalId]
+│   │   │   │       ├── [id].jsx
+│   │   │   │       ├── client.tsx
+│   │   │   │       ├── confirmation.tsx
+│   │   │   │       ├── datetime.tsx
+│   │   │   │       ├── index.tsx
+│   │   │   │       ├── options.tsx
+│   │   │   │       ├── payment.tsx
+│   │   │   │       └── service.tsx
+│   │   │   ├── dashboard
+│   │   │   │   ├── client
+│   │   │   │   │   ├── appointments.tsx
+│   │   │   │   │   ├── history.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── profile.tsx
+│   │   │   │   └── professional
+│   │   │   │       ├── analytics.tsx
+│   │   │   │       ├── appointments.tsx
+│   │   │   │       ├── index.tsx
+│   │   │   │       ├── profile.tsx
+│   │   │   │       ├── schedule.tsx
+│   │   │   │       ├── services.tsx
+│   │   │   │       └── settings
+│   │   │   │           ├── calendar.tsx
+│   │   │   │           └── notifications.tsx
+│   │   │   ├── index.tsx
+│   │   │   ├── privacy.tsx
+│   │   │   ├── professionals
+│   │   │   │   ├── [id].tsx
+│   │   │   │   └── index.tsx
+│   │   │   ├── terms.tsx
+│   │   │   └── test.tsx
+│   │   └── types
+│   │       └── user.ts
+│   ├── types
+│   │   └── user.ts
+│   └── user_type_fix
+│       ├── backups
+│       │   └── backups
+│       │       └── backups
+│       │           └── backups
+│       │               └── src
+│       │                   └── pages
+│       │                       └── dashboard
+│       │                           └── client
+│       │                               └── profile.tsx
+│       └── pages
+│           └── client
+│               ├── appointments.js
+│               └── history.js
+├── component_deduplication_report.json
+├── component_deduplication_report.txt
+├── component_deduplicator.py
 ├── components
 │   ├── auth
-│   │   └── ProtectedRoute.js
+│   │   ├── ProtectedRoute.tsx
+│   │   └── ProtectedRoute.tsx.bak
 │   ├── booking
-│   │   ├── PaymentMethod.jsx
-│   │   ├── RadioOption.jsx
-│   │   ├── ServiceCard.jsx
-│   │   ├── TimeSlot.jsx
-│   │   └── ToggleOption.jsx
+│   │   ├── PaymentMethod.tsx
+│   │   ├── PaymentMethod.tsx.bak
+│   │   ├── RadioOption.tsx
+│   │   ├── RadioOption.tsx.bak
+│   │   ├── ServiceCard.tsx
+│   │   ├── ServiceCard.tsx.bak
+│   │   ├── TimeSlot.tsx
+│   │   ├── TimeSlot.tsx.bak
+│   │   ├── ToggleOption.tsx
+│   │   └── ToggleOption.tsx.bak
 │   ├── common
-│   │   ├── MainButton.jsx
-│   │   └── Toast.jsx
+│   │   ├── MainButton.tsx
+│   │   ├── MainButton.tsx.bak
+│   │   ├── Toast.tsx
+│   │   └── Toast.tsx.bak
 │   ├── layout
-│   │   └── MainLayout.jsx
+│   │   ├── MainLayout.tsx
+│   │   └── MainLayout.tsx.bak
 │   ├── layouts
-│   │   ├── ClientDashboardLayout.js
-│   │   └── ProfessionalDashboardLayout.js
+│   │   ├── ClientDashboardLayout.tsx
+│   │   ├── ClientDashboardLayout.tsx.bak
+│   │   ├── ProfessionalDashboardLayout.tsx
+│   │   └── ProfessionalDashboardLayout.tsx.bak
 │   └── professional
-│       ├── ProfessionalService.jsx
-│       └── ReviewCard.jsx
+│       ├── ProfessionalService.tsx
+│       ├── ProfessionalService.tsx.bak
+│       ├── ReviewCard.tsx
+│       └── ReviewCard.tsx.bak
+├── consolidar_authcontext.py
 ├── contexts
-│   ├── AuthContext.js
-│   └── ToastContext.js
+│   ├── AuthContext.tsx
+│   └── ToastContext.tsx
+├── corrigir_imports_backups.py
 ├── coverage
 │   ├── clover.xml
 │   ├── coverage-final.json
@@ -152,11 +1361,17 @@
 │   │       ├── index.html
 │   │       └── mockData.js.html
 │   └── lcov.info
+├── critical_fixes_report.json
+├── critical_fixes_report.txt
 ├── eslint.config.mjs
 ├── falhas_teste.txt
+├── fix-index.js
 ├── fix-project-structure.sh
 ├── jest.config.js
 ├── jest.setup.js
+├── middleware.ts
+├── migration_plan.json
+├── migration_plan.txt
 ├── next-env.d.ts
 ├── next.config.js
 ├── next.config.ts
@@ -167,15 +1382,23 @@
 │   ├── client
 │   │   ├── appointments.js
 │   │   ├── history.js
-│   │   └── profile.js
-│   ├── index.jsx
+│   │   ├── profile.js
+│   │   └── profile.js.bak
+│   ├── index.tsx
+│   ├── index.tsx.bak
 │   ├── login.js
+│   ├── login.js.bak
 │   ├── professional
 │   │   ├── dashboard.js
-│   │   └── services.js
-│   └── register.js
+│   │   ├── services.js
+│   │   └── services.js.bak
+│   ├── register.js
+│   └── register.js.bak
 ├── postcss.config.js
 ├── postcss.config.mjs
+├── project_analysis_report.json
+├── project_analysis_report.txt
+├── project_analyzer.py
 ├── public
 │   ├── assets
 │   │   ├── icons
@@ -190,7 +1413,9 @@
 │   └── window.svg
 ├── senha teste(pessoal).txt
 ├── services
-│   └── api.js
+│   ├── api.js
+│   ├── auth.ts
+│   └── professionals.ts
 ├── setup-agenda-livre.sh
 ├── src
 │   ├── __tests__
@@ -214,141 +1439,258 @@
 │   ├── components
 │   │   ├── analytics
 │   │   │   ├── AnalyticsDashboard.tsx
+│   │   │   ├── AnalyticsDashboard.tsx.bak
 │   │   │   └── AnalyticsDashboardSimple.tsx
 │   │   ├── auth
-│   │   │   └── ProtectedRoute.js
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   ├── ProtectedRoute.tsx.bak
+│   │   │   ├── register.tsx
+│   │   │   └── register.tsx.bak
 │   │   ├── booking
 │   │   │   ├── AdditionalOptions.tsx
+│   │   │   ├── AdditionalOptions.tsx.bak
 │   │   │   ├── BookingSummary.tsx
+│   │   │   ├── BookingSummary.tsx.bak
 │   │   │   ├── ClientForm.tsx
+│   │   │   ├── ClientForm.tsx.bak
 │   │   │   ├── DateSelector.tsx
+│   │   │   ├── DateSelector.tsx.bak
 │   │   │   ├── DateTimePicker.tsx
+│   │   │   ├── DateTimePicker.tsx.bak
 │   │   │   ├── PaymentForm.tsx
+│   │   │   ├── PaymentForm.tsx.bak
 │   │   │   ├── PaymentMethod.jsx
+│   │   │   ├── PaymentMethod.jsx.bak
 │   │   │   ├── PaymentMethod.tsx
+│   │   │   ├── PaymentMethod.tsx.bak
 │   │   │   ├── RadioOption.jsx
+│   │   │   ├── RadioOption.jsx.bak
 │   │   │   ├── RadioOption.tsx
+│   │   │   ├── RadioOption.tsx.bak
 │   │   │   ├── ServiceCard.jsx
+│   │   │   ├── ServiceCard.jsx.bak
 │   │   │   ├── ServiceCard.tsx
+│   │   │   ├── ServiceCard.tsx.bak
 │   │   │   ├── ServiceSelector.tsx
+│   │   │   ├── ServiceSelector.tsx.bak
 │   │   │   ├── TimeSelector.tsx
+│   │   │   ├── TimeSelector.tsx.bak
 │   │   │   ├── TimeSlot.jsx
+│   │   │   ├── TimeSlot.jsx.bak
 │   │   │   ├── TimeSlot.tsx
+│   │   │   ├── TimeSlot.tsx.bak
 │   │   │   ├── ToggleOption.jsx
-│   │   │   └── ToggleOption.tsx
+│   │   │   ├── ToggleOption.jsx.bak
+│   │   │   ├── ToggleOption.tsx
+│   │   │   └── ToggleOption.tsx.bak
 │   │   ├── calendar
 │   │   │   ├── CalendarIntegrationCard.tsx
-│   │   │   └── CalendarIntegrationSection.tsx
+│   │   │   ├── CalendarIntegrationCard.tsx.bak
+│   │   │   ├── CalendarIntegrationSection.tsx
+│   │   │   └── CalendarIntegrationSection.tsx.bak
 │   │   ├── common
 │   │   │   ├── MainButton.jsx
-│   │   │   └── Toast.jsx
+│   │   │   ├── MainButton.jsx.bak
+│   │   │   ├── Toast.jsx
+│   │   │   └── Toast.jsx.bak
 │   │   ├── filters
 │   │   │   ├── CategoryFilter.tsx
+│   │   │   ├── CategoryFilter.tsx.bak
 │   │   │   ├── FilterGroup.tsx
+│   │   │   ├── FilterGroup.tsx.bak
 │   │   │   ├── FilterItem.tsx
+│   │   │   ├── FilterItem.tsx.bak
 │   │   │   ├── LocationFilter.tsx
+│   │   │   ├── LocationFilter.tsx.bak
 │   │   │   ├── PriceFilter.tsx
-│   │   │   └── ZoneFilter.tsx
+│   │   │   ├── PriceFilter.tsx.bak
+│   │   │   ├── ZoneFilter.tsx
+│   │   │   └── ZoneFilter.tsx.bak
 │   │   ├── layout
 │   │   │   ├── BottomNav.tsx
+│   │   │   ├── BottomNav.tsx.bak
 │   │   │   ├── ClientDashboardLayout.tsx
+│   │   │   ├── ClientDashboardLayout.tsx.bak
 │   │   │   ├── Footer.tsx
+│   │   │   ├── Footer.tsx.bak
 │   │   │   ├── Header.tsx
+│   │   │   ├── Header.tsx.bak
 │   │   │   ├── Layout.tsx
-│   │   │   ├── MainLayout.jsx
+│   │   │   ├── Layout.tsx.bak
 │   │   │   ├── MainLayout.tsx
+│   │   │   ├── MainLayout.tsx.bak
 │   │   │   ├── ProfessionalDashboardLayout.tsx
-│   │   │   └── Sidebar.tsx
+│   │   │   ├── ProfessionalDashboardLayout.tsx.bak
+│   │   │   ├── Sidebar.tsx
+│   │   │   └── Sidebar.tsx.bak
 │   │   ├── layouts
 │   │   │   ├── ClientDashboardLayout.js
-│   │   │   └── ProfessionalDashboardLayout.js
+│   │   │   ├── ClientDashboardLayout.js.bak
+│   │   │   ├── ProfessionalDashboardLayout.js
+│   │   │   └── ProfessionalDashboardLayout.js.bak
 │   │   ├── notifications
 │   │   │   ├── NotificationDropdown.tsx
+│   │   │   ├── NotificationDropdown.tsx.bak
 │   │   │   ├── NotificationIcon.tsx
-│   │   │   └── NotificationList.tsx
+│   │   │   ├── NotificationIcon.tsx.bak
+│   │   │   ├── NotificationList.tsx
+│   │   │   └── NotificationList.tsx.bak
 │   │   ├── professional
 │   │   │   ├── ProfessionalService.jsx
-│   │   │   └── ReviewCard.jsx
+│   │   │   ├── ProfessionalService.jsx.bak
+│   │   │   ├── ReviewCard.jsx
+│   │   │   └── ReviewCard.jsx.bak
 │   │   ├── professionals
 │   │   │   ├── ProfessionalCard.tsx
+│   │   │   ├── ProfessionalCard.tsx.bak
 │   │   │   ├── ProfessionalList.tsx
+│   │   │   ├── ProfessionalList.tsx.bak
 │   │   │   ├── ProfessionalService.jsx
+│   │   │   ├── ProfessionalService.jsx.bak
 │   │   │   ├── ProfessionalService.tsx
+│   │   │   ├── ProfessionalService.tsx.bak
 │   │   │   ├── ReviewCard.jsx
+│   │   │   ├── ReviewCard.jsx.bak
 │   │   │   ├── ReviewCard.tsx
-│   │   │   └── ServiceCard.tsx
+│   │   │   ├── ReviewCard.tsx.bak
+│   │   │   ├── ServiceCard.tsx
+│   │   │   ├── ServiceCard.tsx.bak
+│   │   │   └── ServiceModal.tsx
 │   │   ├── reviews
 │   │   │   ├── RatingStars.tsx
+│   │   │   ├── RatingStars.tsx.bak
 │   │   │   ├── ReviewCard.tsx
-│   │   │   └── ReviewForm.tsx
+│   │   │   ├── ReviewCard.tsx.bak
+│   │   │   ├── ReviewForm.tsx
+│   │   │   └── ReviewForm.tsx.bak
+│   │   ├── schedule
+│   │   │   └── Calendar.tsx
 │   │   └── ui
 │   │       ├── Toast.jsx
+│   │       ├── Toast.jsx.bak
 │   │       ├── Toast.tsx
+│   │       ├── Toast.tsx.bak
 │   │       ├── buttons
 │   │       │   ├── Button.tsx
+│   │       │   ├── Button.tsx.bak
 │   │       │   ├── MainButton.jsx
-│   │       │   └── MainButton.tsx
+│   │       │   ├── MainButton.jsx.bak
+│   │       │   ├── MainButton.tsx
+│   │       │   └── MainButton.tsx.bak
 │   │       └── inputs
 │   │           ├── Input.tsx
-│   │           └── Toggle.tsx
+│   │           ├── Input.tsx.bak
+│   │           ├── Toggle.tsx
+│   │           └── Toggle.tsx.bak
 │   ├── contexts
 │   │   ├── AuthContext.js
 │   │   ├── AuthContext.tsx
+│   │   ├── AuthContext.tsx.bak
 │   │   ├── BookingContext.tsx
+│   │   ├── BookingContext.tsx.bak
 │   │   ├── FilterContext.tsx
+│   │   ├── FilterContext.tsx.bak
 │   │   ├── NotificationContext.tsx
+│   │   ├── NotificationContext.tsx.bak
 │   │   └── ToastContext.js
 │   ├── hooks
 │   │   ├── useAuth.ts
 │   │   ├── useBooking.ts
 │   │   ├── useFilters.ts
-│   │   └── useNotifications.ts
+│   │   ├── useNotifications.ts
+│   │   ├── useProfessional.ts
+│   │   └── useProfessionals.ts
 │   ├── pages
 │   │   ├── _app.tsx
+│   │   ├── _app.tsx.bak
 │   │   ├── _document.tsx
+│   │   ├── _document.tsx.bak
 │   │   ├── about.tsx
+│   │   ├── about.tsx.bak
 │   │   ├── api
 │   │   │   ├── hello.ts
 │   │   │   └── notifications.ts
 │   │   ├── auth
 │   │   │   ├── login.tsx
+│   │   │   ├── login.tsx.bak
 │   │   │   ├── password-reset.tsx
-│   │   │   └── register.tsx
+│   │   │   ├── password-reset.tsx.bak
+│   │   │   ├── register.tsx
+│   │   │   └── register.tsx.bak
 │   │   ├── booking
+│   │   │   ├── DateSelector.tsx
+│   │   │   ├── DateSelector.tsx.bak
+│   │   │   ├── PaymentMethodItem.tsx
+│   │   │   ├── RadioOption.tsx
+│   │   │   ├── RadioOption.tsx.bak
+│   │   │   ├── ServiceCard.tsx
+│   │   │   ├── ServiceCard.tsx.bak
+│   │   │   ├── TimeSlot.tsx
+│   │   │   ├── TimeSlot.tsx.bak
+│   │   │   ├── ToggleOption.tsx
+│   │   │   ├── ToggleOption.tsx.bak
 │   │   │   └── [professionalId]
 │   │   │       ├── [id].jsx
+│   │   │       ├── [id].jsx.bak
 │   │   │       ├── client.tsx
+│   │   │       ├── client.tsx.bak
 │   │   │       ├── confirmation.tsx
+│   │   │       ├── confirmation.tsx.bak
 │   │   │       ├── datetime.tsx
+│   │   │       ├── datetime.tsx.bak
 │   │   │       ├── index.tsx
+│   │   │       ├── index.tsx.bak
 │   │   │       ├── options.tsx
+│   │   │       ├── options.tsx.bak
 │   │   │       ├── payment.tsx
-│   │   │       └── service.tsx
+│   │   │       ├── payment.tsx.bak
+│   │   │       ├── service.tsx
+│   │   │       └── service.tsx.bak
 │   │   ├── client
 │   │   ├── dashboard
 │   │   │   ├── client
 │   │   │   │   ├── appointments.tsx
+│   │   │   │   ├── appointments.tsx.bak
 │   │   │   │   ├── history.tsx
+│   │   │   │   ├── history.tsx.bak
 │   │   │   │   ├── index.tsx
-│   │   │   │   └── profile.tsx
+│   │   │   │   ├── index.tsx.bak
+│   │   │   │   ├── profile.tsx
+│   │   │   │   └── profile.tsx.bak
 │   │   │   └── professional
 │   │   │       ├── analytics.tsx
+│   │   │       ├── analytics.tsx.bak
 │   │   │       ├── appointments.tsx
+│   │   │       ├── appointments.tsx.bak
 │   │   │       ├── index.tsx
+│   │   │       ├── index.tsx.bak
 │   │   │       ├── profile.tsx
+│   │   │       ├── profile.tsx.bak
 │   │   │       ├── schedule.tsx
+│   │   │       ├── schedule.tsx.bak
 │   │   │       ├── services.tsx
+│   │   │       ├── services.tsx.bak
 │   │   │       └── settings
 │   │   │           ├── calendar.tsx
-│   │   │           └── notifications.tsx
+│   │   │           ├── calendar.tsx.bak
+│   │   │           ├── notifications.tsx
+│   │   │           └── notifications.tsx.bak
+│   │   ├── home
+│   │   │   └── index.tsx
 │   │   ├── index.tsx
+│   │   ├── index.tsx.bak
 │   │   ├── privacy.tsx
+│   │   ├── privacy.tsx.bak
 │   │   ├── professional
 │   │   ├── professionals
 │   │   │   ├── [id].tsx
-│   │   │   └── index.tsx
+│   │   │   ├── [id].tsx.bak
+│   │   │   ├── index.tsx
+│   │   │   └── index.tsx.bak
 │   │   ├── terms.tsx
-│   │   └── test.tsx
+│   │   ├── terms.tsx.bak
+│   │   ├── test.tsx
+│   │   └── test.tsx.bak
 │   ├── services
 │   │   ├── api.js
 │   │   ├── api.ts
@@ -367,6 +1709,7 @@
 │   │   ├── booking.ts
 │   │   ├── notification.ts
 │   │   ├── professional.ts
+│   │   ├── review.ts
 │   │   ├── service.ts
 │   │   └── user.ts
 │   └── utils
@@ -382,5 +1725,10 @@
 ├── teste_log.txt
 ├── tree_gerator.py
 ├── tsconfig.json
+├── types
+│   └── user.ts
+├── user_type_fixer.py
+├── user_type_fixes_report.json
+├── user_type_fixes_report.txt
 └── utils
     └── mockData.js

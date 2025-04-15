@@ -1,13 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document";
-
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
+// Redirecionamento automático para o componente canônico
+// Este arquivo foi gerado automaticamente para resolver duplicações
+export * from "../'../src;
+export { default } from "../'../src;

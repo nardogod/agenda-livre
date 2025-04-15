@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Calendar, User, Clock, LogOut, Menu, X } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../'../src;
 
 export default function ClientDashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);

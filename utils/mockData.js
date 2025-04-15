@@ -422,3 +422,387 @@ export const mockApiResponse = (endpoint, params) => {
     }, 800); // Atraso de 800ms para simular tempo de resposta
   });
 };
+
+export const MOCK_PROFESSIONALS = [
+  {
+    id: '1',
+    name: 'Ana Oliveira',
+    email: 'ana@example.com',
+    phone: '11999999999',
+    userType: 'professional',
+    profileImage: '/api/placeholder/200/200',
+    coverImage: '/api/placeholder/600/300',
+    bio: 'Especialista em tranças e penteados com mais de 8 anos de experiência. Atendimento personalizado e resultados que valorizam sua beleza natural.',
+    instagram: '@anaoliveira.beauty',
+    location: 'Pinheiros, São Paulo - SP',
+    district: 'Pinheiros',
+    zone: 'Zona Oeste',
+    offers_home_service: true,
+    home_service_fee: 50,
+    rating: 4.8,
+    reviewCount: 25,
+    isVerified: true,
+    specialties: ['Tranças', 'Box Braids', 'Penteados'],
+    services: [
+      {
+        id: '101',
+        name: 'Box Braids',
+        description: 'Tranças box braids com diversas opções de espessura e comprimento.',
+        price: 250,
+        duration: 180,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: true,
+        hair_price_small: 60,
+        hair_price_medium: 80,
+        hair_price_large: 120,
+        category: 'Tranças'
+      },
+      {
+        id: '102',
+        name: 'Twist Senegalês',
+        description: 'Twist senegalês com cabelo sintético ou natural, acabamento perfeito.',
+        price: 290,
+        duration: 240,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: true,
+        hair_price_small: 70,
+        hair_price_medium: 90,
+        hair_price_large: 130,
+        category: 'Tranças'
+      },
+      {
+        id: '103',
+        name: 'Penteado para Festa',
+        description: 'Penteado elegante para eventos e festas.',
+        price: 150,
+        duration: 90,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Penteados'
+      }
+    ],
+    reviews: [
+      {
+        id: '201',
+        clientId: '301',
+        clientName: 'Mariana Silva',
+        clientImage: '/api/placeholder/100/100',
+        rating: 5,
+        comment: 'Trabalho incrível! Ana é super profissional e cuidadosa. Amei o resultado das minhas box braids!',
+        date: '2025-03-15T14:30:00'
+      },
+      {
+        id: '202',
+        clientId: '302',
+        clientName: 'Carolina Santos',
+        clientImage: '/api/placeholder/100/100',
+        rating: 4,
+        comment: 'Ótimo atendimento, pontual e atenciosa. O único ponto foi que demorou um pouco mais do que o previsto, mas valeu a pena!',
+        date: '2025-02-28T10:15:00'
+      },
+      {
+        id: '203',
+        clientId: '303',
+        clientName: 'Juliana Costa',
+        clientImage: '/api/placeholder/100/100',
+        rating: 5,
+        comment: 'Perfeito! Já é a terceira vez que faço tranças com a Ana e sempre saio satisfeita. Super recomendo!',
+        date: '2025-02-10T16:45:00'
+      }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Carla Santos',
+    email: 'carla@example.com',
+    phone: '11988888888',
+    userType: 'professional',
+    profileImage: '/api/placeholder/200/200',
+    coverImage: '/api/placeholder/600/300',
+    bio: 'Cabeleireira especializada em cortes e coloração. Transforme seu visual com quem entende do assunto.',
+    instagram: '@carlasantos.hair',
+    location: 'Vila Mariana, São Paulo - SP',
+    district: 'Vila Mariana',
+    zone: 'Zona Sul',
+    offers_home_service: false,
+    rating: 4.6,
+    reviewCount: 18,
+    isVerified: true,
+    specialties: ['Cortes', 'Coloração', 'Tratamentos'],
+    services: [
+      {
+        id: '201',
+        name: 'Corte Feminino',
+        description: 'Corte personalizado de acordo com seu formato de rosto e estilo.',
+        price: 120,
+        duration: 60,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Cortes'
+      },
+      {
+        id: '202',
+        name: 'Coloração Completa',
+        description: 'Coloração completa com produtos de qualidade profissional.',
+        price: 180,
+        duration: 120,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Coloração'
+      },
+      {
+        id: '203',
+        name: 'Hidratação Profunda',
+        description: 'Tratamento de hidratação intensiva para recuperar cabelos danificados.',
+        price: 90,
+        duration: 45,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Tratamentos'
+      }
+    ],
+    reviews: [
+      {
+        id: '301',
+        clientId: '401',
+        clientName: 'Fernanda Lima',
+        clientImage: '/api/placeholder/100/100',
+        rating: 5,
+        comment: 'Adorei o corte! Carla entendeu exatamente o que eu queria e deu dicas valiosas para o meu tipo de cabelo.',
+        date: '2025-03-20T11:30:00'
+      },
+      {
+        id: '302',
+        clientId: '402',
+        clientName: 'Patricia Mendes',
+        clientImage: '/api/placeholder/100/100',
+        rating: 4,
+        comment: 'Coloração ficou ótima, mas achei o valor um pouco alto. De qualquer forma, o resultado valeu a pena!',
+        date: '2025-03-05T14:00:00'
+      }
+    ]
+  },
+  {
+    id: '3',
+    name: 'Tiago Almeida',
+    email: 'tiago@example.com',
+    phone: '11977777777',
+    userType: 'professional',
+    profileImage: '/api/placeholder/200/200',
+    coverImage: '/api/placeholder/600/300',
+    bio: 'Especialista em cortes masculinos e barbearia. Atendimento exclusivo com horário marcado.',
+    instagram: '@tiago.barber',
+    location: 'Moema, São Paulo - SP',
+    district: 'Moema',
+    zone: 'Zona Sul',
+    offers_home_service: true,
+    home_service_fee: 40,
+    rating: 4.9,
+    reviewCount: 32,
+    isVerified: true,
+    specialties: ['Barba', 'Corte Masculino', 'Degradê'],
+    services: [
+      {
+        id: '301',
+        name: 'Corte Masculino',
+        description: 'Corte masculino personalizado com acabamento perfeito.',
+        price: 80,
+        duration: 45,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Cortes'
+      },
+      {
+        id: '302',
+        name: 'Barba Completa',
+        description: 'Modelagem e acabamento perfeito da barba com toalha quente e produtos especiais.',
+        price: 60,
+        duration: 30,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Barba'
+      },
+      {
+        id: '303',
+        name: 'Combo Corte + Barba',
+        description: 'Pacote completo com corte masculino e barba.',
+        price: 130,
+        duration: 75,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Combos'
+      }
+    ]
+  },
+  {
+    id: '4',
+    name: 'Juliana Ferreira',
+    email: 'juliana@example.com',
+    phone: '11966666666',
+    userType: 'professional',
+    profileImage: '/api/placeholder/200/200',
+    coverImage: '/api/placeholder/600/300',
+    bio: 'Manicure e pedicure com mais de 10 anos de experiência. Especialista em nail art e unhas em gel.',
+    instagram: '@juliana.nails',
+    location: 'Santana, São Paulo - SP',
+    district: 'Santana',
+    zone: 'Zona Norte',
+    offers_home_service: true,
+    home_service_fee: 30,
+    rating: 4.7,
+    reviewCount: 45,
+    isVerified: true,
+    specialties: ['Unhas em Gel', 'Manicure', 'Nail Art'],
+    services: [
+      {
+        id: '401',
+        name: 'Manicure Simples',
+        description: 'Corte, lixamento e esmaltação tradicional.',
+        price: 50,
+        duration: 45,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Manicure'
+      },
+      {
+        id: '402',
+        name: 'Pedicure Completa',
+        description: 'Tratamento completo dos pés com esfoliação e hidratação.',
+        price: 70,
+        duration: 60,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Pedicure'
+      },
+      {
+        id: '403',
+        name: 'Unhas em Gel',
+        description: 'Aplicação de unhas em gel com alongamento.',
+        price: 150,
+        duration: 90,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Unhas em Gel'
+      }
+    ]
+  },
+  {
+    id: '5',
+    name: 'Mariana Costa',
+    email: 'mariana@example.com',
+    phone: '11955555555',
+    userType: 'professional',
+    profileImage: '/api/placeholder/200/200',
+    coverImage: '/api/placeholder/600/300',
+    bio: 'Especialista em maquiagem para todos os tipos de eventos. Realço sua beleza natural com técnicas modernas.',
+    instagram: '@mariana.makeup',
+    location: 'Tatuapé, São Paulo - SP',
+    district: 'Tatuapé',
+    zone: 'Zona Leste',
+    offers_home_service: true,
+    home_service_fee: 45,
+    rating: 4.8,
+    reviewCount: 28,
+    isVerified: true,
+    specialties: ['Maquiagem para Noivas', 'Maquiagem para Festas', 'Cursos'],
+    services: [
+      {
+        id: '501',
+        name: 'Maquiagem Social',
+        description: 'Maquiagem para eventos sociais como festas e formaturas.',
+        price: 180,
+        duration: 60,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Maquiagem'
+      },
+      {
+        id: '502',
+        name: 'Maquiagem para Noivas',
+        description: 'Maquiagem completa para noivas, inclui teste prévio.',
+        price: 350,
+        duration: 90,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Maquiagem'
+      },
+      {
+        id: '503',
+        name: 'Curso de Automaquiagem',
+        description: 'Aprenda a se maquiar com técnicas profissionais adaptadas ao seu tipo de rosto.',
+        price: 250,
+        duration: 120,
+        image: '/api/placeholder/300/200',
+        active: true,
+        has_hair_option: false,
+        category: 'Cursos'
+      }
+    ]
+  }
+];
+
+// Categories for filters
+export const CATEGORIES = [
+  'Tranças',
+  'Penteados',
+  'Cortes',
+  'Coloração',
+  'Barba',
+  'Manicure',
+  'Pedicure',
+  'Unhas em Gel',
+  'Maquiagem',
+  'Tratamentos',
+  'Outros'
+];
+
+// Zonas for filters
+export const ZONES = [
+  'Zona Norte',
+  'Zona Sul',
+  'Zona Leste',
+  'Zona Oeste',
+  'Centro'
+];
+
+// Districts for filters
+export const DISTRICTS = [
+  'Pinheiros',
+  'Vila Mariana',
+  'Moema',
+  'Santana',
+  'Tatuapé',
+  'Itaim Bibi',
+  'Jardins',
+  'Consolação',
+  'Perdizes',
+  'Lapa',
+  'Ipiranga',
+  'Butantã',
+  'Liberdade',
+  'Vila Madalena',
+  'Campo Belo'
+];
+
+// Price ranges for filters
+export const PRICE_RANGES = [
+  { min: 0, max: 50, label: 'Até R$ 50' },
+  { min: 50, max: 100, label: 'R$ 50 - R$ 100' },
+  { min: 100, max: 200, label: 'R$ 100 - R$ 200' },
+  { min: 200, max: 300, label: 'R$ 200 - R$ 300' },
+  { min: 300, max: null, label: 'Acima de R$ 300' }
+];

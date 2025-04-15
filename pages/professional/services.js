@@ -7,7 +7,7 @@ import { Plus, Edit, Trash, Clock, DollarSign, X, Camera, Info } from 'lucide-re
 import ProfessionalDashboardLayout from '../../components/layouts/ProfessionalDashboardLayout';
 import ProtectedRoute from '../../components/auth/ProtectedRoute';
 import { professionalService } from '../../services/api';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../'../src;
 import { useToast } from '../../contexts/ToastContext';
 
 // Schema de validação para o formulário de serviço

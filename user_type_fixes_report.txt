@@ -1,0 +1,154 @@
+=== RELATÓRIO DE CORREÇÕES DO TIPO USER ===
+
+== RESUMO ==
+Estilo escolhido: camel
+Ocorrências de camelCase (firstName): 8
+Ocorrências de snake_case (first_name): 375
+Total de mudanças: 34
+
+== ARQUIVOS COM DEFINIÇÃO DE USER ==
+  - .history\src\types\user_20250413153457.ts
+  - .history\src\types\user_20250414135421.ts
+  - .history\src\types\user_20250415092614.ts
+  - .history\types\user_20250415095156.ts
+  - backups\.history\src\types\user_20250413153457.ts
+  - backups\.history\src\types\user_20250414135421.ts
+  - backups\.history\src\types\user_20250415092614.ts
+  - backups\.history\types\user_20250415095156.ts
+  - backups\backups\.history\src\types\user_20250413153457.ts
+  - backups\backups\.history\src\types\user_20250414135421.ts
+  - backups\backups\.history\src\types\user_20250415092614.ts
+  - backups\backups\.history\types\user_20250415095156.ts
+  - backups\backups\backups\.history\src\types\user_20250413153457.ts
+  - backups\backups\backups\.history\src\types\user_20250414135421.ts
+  - backups\backups\backups\.history\src\types\user_20250415092614.ts
+  - backups\backups\backups\.history\types\user_20250415095156.ts
+  - backups\backups\backups\backups\.history\src\types\user_20250413153457.ts
+  - backups\backups\backups\backups\.history\src\types\user_20250414135421.ts
+  - backups\backups\backups\backups\.history\src\types\user_20250415092614.ts
+  - backups\backups\backups\backups\.history\types\user_20250415095156.ts
+  - backups\backups\backups\backups\backup_20250414_181209\src\types\user.ts
+  - backups\backups\backups\backups\backup_20250414_181421\src\types\user.ts
+  - backups\backups\backups\backups\src\types\user.ts
+  - backups\backups\backups\backups\types\user.ts
+  - backups\backups\backups\backup_20250414_181209\src\types\user.ts
+  - backups\backups\backups\backup_20250414_181421\src\types\user.ts
+  - backups\backups\backups\src\types\user.ts
+  - backups\backups\backups\types\user.ts
+  - backups\backups\backup_20250414_181209\src\types\user.ts
+  - backups\backups\backup_20250414_181421\src\types\user.ts
+  - backups\backups\src\types\user.ts
+  - backups\backups\types\user.ts
+  - backups\backup_20250414_181209\src\types\user.ts
+  - backups\backup_20250414_181421\src\types\user.ts
+  - backups\src\types\user.ts
+  - backups\types\user.ts
+  - backup_20250414_181209\src\types\user.ts
+  - backup_20250414_181421\src\types\user.ts
+  - src\types\user.ts
+  - types\user.ts
+
+== MUDANÇAS REALIZADAS ==
+Arquivo: .history\src\types\user_20250414135421.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\.history\src\types\user_20250414135421.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\.history\src\types\user_20250414135421.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\.history\src\types\user_20250414135421.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\backups\.history\src\types\user_20250414135421.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\backups\backup_20250414_181209\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\backups\backup_20250414_181421\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\backup_20250414_181209\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backups\backup_20250414_181421\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backup_20250414_181209\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backups\backup_20250414_181421\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backup_20250414_181209\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backups\backup_20250414_181421\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backup_20250414_181209\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: backup_20250414_181421\src\types\user.ts
+  Atualizada definição do tipo User para usar camel
+
+Arquivo: .history\pages\client\appointments_20250413223646.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\pages\client\history_20250413223646.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\pages\client\history_20250413223729.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\src\components\layout\ClientDashboardLayout_20250414135421.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\src\components\layout\ProfessionalDashboardLayout_20250414135744.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\src\pages\dashboard\client\history_20250414135421.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\src\pages\dashboard\client\index_20250414135421.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: .history\src\pages\dashboard\client\profile_20250415133931.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backups\backups\backups\backups\.history\src\components\layout\ClientDashboardLayout_20250414135421.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backups\backups\backups\backups\backup_20250414_181209\src\components\layout\ClientDashboardLayout.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backups\backups\backups\backups\backup_20250414_181421\src\pages\dashboard\client\index.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backups\backups\backups\backups\src\pages\dashboard\client\profile.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backups\backups\backups\backup_20250414_181209\src\components\layout\ProfessionalDashboardLayout.tsx
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backup_20250414_181209\pages\client\appointments.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backup_20250414_181209\pages\client\history.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backup_20250414_181421\src\pages\client\appointments.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: backup_20250414_181421\src\pages\client\history.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: pages\client\appointments.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+Arquivo: pages\client\history.js
+  Atualizadas referências ao User para usar camel com fallbacks
+
+=== FIM DO RELATÓRIO ===

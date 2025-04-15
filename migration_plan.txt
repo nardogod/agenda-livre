@@ -1,0 +1,53 @@
+=== PLANO DE MIGRAÇÃO GRADUAL ===
+
+Estrutura alvo: raiz
+
+== Fase 1: Correções Críticas ==
+Resolver problemas críticos que impedem a navegação básica
+
+Tarefas:
+  - Corrigir AuthContext e useAuth
+  - Padronizar tipos de User
+  - Corrigir ProtectedRoute e ClientDashboardLayout
+  - Corrigir erros de tipagem na página index
+
+Status: Concluído
+
+== Fase 2: Redução de Duplicações ==
+Eliminar duplicações críticas e padronizar componentes
+
+Tarefas:
+  - Criar redirecionamentos para componentes duplicados
+  - Padronizar estrutura de tipos
+  - Consolidar serviços de API
+
+Status: Em progresso
+
+== Fase 3: Migração para Estrutura raiz ==
+Migrar todos os componentes e páginas para raiz
+
+Tarefas:
+  - Mover componentes para components
+  - Mover páginas para pages
+  - Atualizar todas as importações
+  - Remover arquivos antigos
+
+Status: Pendente
+
+== Fase 4: Backend e Integração ==
+Implementar backend DRF e integrar com frontend
+
+Tarefas:
+  - Definir modelos e API endpoints no Django
+  - Implementar autenticação JWT
+  - Atualizar serviços frontend para usar a API real
+  - Assegurar consistência entre tipos TS e modelos Django
+
+Status: Pendente
+
+== PRÓXIMOS PASSOS RECOMENDADOS ==
+  - Testar a navegação básica após as correções críticas
+  - Implementar o backend Django DRF básico
+  - Continuar a migração para a estrutura alvo
+
+=== FIM DO PLANO ===
