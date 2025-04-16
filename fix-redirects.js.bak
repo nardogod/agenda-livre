@@ -1,0 +1,148 @@
+/**
+ * Script para identificar e corrigir arquivos com erros de redirecionamento.
+ * Execute com: node fix-redirects.js
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
+
+const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
+const readdir = promisify(fs.readdir);
+const stat = promisify(fs.stat);
+
+// Padrão de texto inválido
+const invalidPattern = /export \* from ".*?'.*?;|export { default } from ".*?'.*?;/;
+
+// Funções para travessia do diretório
+async function traverseDirectory(dir) {
+  const files = await readdir(dir);
+  
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    const fileStat = await stat(fullPath);
+    
+    if (fileStat.isDirectory()) {
+      // Ignorar node_modules e .next
+      if (file !== 'node_modules' && file !== '.next') {
+        await traverseDirectory(fullPath);
+      }
+    } else if (
+      file.endsWith('.js') || 
+      file.endsWith('.jsx') || 
+      file.endsWith('.ts') || 
+      file.endsWith('.tsx')
+    ) {
+      await checkAndFixFile(fullPath);
+    }
+  }
+}
+
+async function checkAndFixFile(filePath) {
+  try {
+    const content = await readFile(filePath, 'utf-8');
+    
+    // Verifica se o arquivo tem a string inválida
+    if (invalidPattern.test(content)) {
+      console.log(`\nArquivo com problema: ${filePath}`);
+      console.log('Conteúdo original:');
+      console.log(content);
+      
+      // Verifica se é um arquivo de redirecionamento automático
+      if (content.includes('Redirecionamento automático para o componente canônico')) {
+        // Determinar o caminho correto para o componente-fonte
+        let sourceComponent = findSourceComponentPath(filePath);
+        
+        if (sourceComponent) {
+          // Criar conteúdo de redirecionamento válido
+          const fixedContent = createRedirectFile(sourceComponent);
+          
+          // Backup do arquivo original
+          await writeFile(`${filePath}.bak`, content);
+          
+          // Escrever o conteúdo corrigido
+          await writeFile(filePath, fixedContent);
+          
+          console.log('Conteúdo corrigido:');
+          console.log(fixedContent);
+          console.log(`Arquivo corrigido: ${filePath}`);
+        } else {
+          console.log(`Não foi possível determinar o caminho fonte para: ${filePath}`);
+        }
+      } else {
+        console.log('Arquivo contém sintaxe inválida, mas não é um redirecionamento automático.');
+      }
+    }
+  } catch (error) {
+    console.error(`Erro ao processar o arquivo ${filePath}:`, error);
+  }
+}
+
+function findSourceComponentPath(filePath) {
+  // Obter o nome do componente atual
+  const fileName = path.basename(filePath);
+  const componentName = fileName.split('.')[0];
+  
+  // Determinar se estamos em src ou components
+  const isInSrc = filePath.includes('/src/') || filePath.includes('\\src\\');
+  const basePath = isInSrc ? 'src' : '';
+  
+  // Caminhos comuns onde procurar o componente original
+  let possibleSourcePaths = [
+    path.join(basePath, 'components', componentName, `${componentName}.tsx`),
+    path.join(basePath, 'components', `${componentName}.tsx`),
+    path.join(basePath, 'components', 'booking', `${componentName}.tsx`),
+    path.join(basePath, 'components', 'layout', `${componentName}.tsx`),
+    path.join(basePath, 'components', 'ui', `${componentName}.tsx`)
+  ];
+  
+  // Se o arquivo estiver em booking/[id]/algo.tsx, fonte pode estar em components/booking/algo.tsx
+  if (filePath.includes('booking/[professionalId]') || filePath.includes('booking\\[professionalId]')) {
+    possibleSourcePaths.push(path.join('src', 'components', 'booking', `${componentName}.tsx`));
+    possibleSourcePaths.push(path.join('src', 'components', 'booking', `${componentName}.jsx`));
+  }
+  
+  // Tentar algumas variações (tsx ou jsx)
+  possibleSourcePaths = [
+    ...possibleSourcePaths,
+    ...possibleSourcePaths.map(p => p.replace('.tsx', '.jsx'))
+  ];
+  
+  // Para debugging
+  console.log('Possíveis caminhos fonte:');
+  possibleSourcePaths.forEach(p => console.log(`- ${p}`));
+  
+  // Verificar se algum dos caminhos existe
+  for (const sourcePath of possibleSourcePaths) {
+    if (fs.existsSync(sourcePath)) {
+      console.log(`Componente fonte encontrado: ${sourcePath}`);
+      return sourcePath;
+    }
+  }
+  
+  // Se não encontrarmos, retornar um caminho para o componente que geralmente é usado
+  return `src/components/booking/${componentName}.tsx`;
+}
+
+function createRedirectFile(sourcePath) {
+  // Criar o caminho relativo apropriado
+  // Simplificado para esta demo, pode precisar de ajustes baseados na estrutura de diretórios
+  const relativePath = sourcePath.startsWith('src/') 
+    ? `../../${sourcePath}` 
+    : sourcePath;
+  
+  return `// Redirecionamento automático para o componente original
+// Este arquivo foi gerado automaticamente para resolver duplicações
+
+import Component from '${relativePath.replace(/\\/g, '/')}';
+
+export default Component;
+`;
+}
+
+// Executar o script
+console.log('Iniciando verificação de arquivos com problemas de redirecionamento...');
+traverseDirectory('.')
+  .then(() => console.log('\nVerificação concluída!'))
+  .catch(err => console.error('Erro:', err));

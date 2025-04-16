@@ -1,4 +1,4 @@
 // Redirecionamento automático para o componente canônico
 // Este arquivo foi gerado automaticamente para resolver duplicações
-export * from "..\..\..\backups\backups\backups\backups\src\components\filters\CategoryFilter";
-export { default } from "..\..\..\backups\backups\backups\backups\src\components\filters\CategoryFilter";
+export * from "../../'../src;
+export { default } from "../../'../src;

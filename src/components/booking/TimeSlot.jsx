@@ -1,4 +1,27 @@
-// Redirecionamento automático para o componente canônico
-// Este arquivo foi gerado automaticamente para resolver duplicações
-export * from "../../'../src;
-export { default } from "../../'../src;
+// src/components/booking/TimeSlot.tsx
+import React from 'react';
+
+interface TimeSlotProps {
+  time: string;
+  selected: boolean;
+  onSelect: () => void;
+}
+
+const TimeSlot: React.FC<TimeSlotProps> = ({ time, selected, onSelect }) => {
+  return (
+    <button
+      className={`px-5 py-2.5 rounded-xl text-sm mr-2 mb-2 ${
+        selected 
+          ? "bg-purple-600 text-white" 
+          : "bg-white border border-gray-200 text-gray-700 hover:border-purple-300"
+      }`}
+      onClick={onSelect}
+      aria-label={`Selecionar horário ${time}`}
+      aria-pressed={selected}
+    >
+      {time}
+    </button>
+  );
+};
+
+export default TimeSlot;

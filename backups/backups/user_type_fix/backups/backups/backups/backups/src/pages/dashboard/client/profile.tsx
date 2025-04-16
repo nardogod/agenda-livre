@@ -1,4 +1,0 @@
-// Redirecionamento automático para o componente canônico
-// Este arquivo foi gerado automaticamente para resolver duplicações
-export * from "..\..\..\..\..\..\..\..\..\backups\backups\backups\src\pages\dashboard\client\profile";
-export { default } from "..\..\..\..\..\..\..\..\..\backups\backups\backups\src\pages\dashboard\client\profile";

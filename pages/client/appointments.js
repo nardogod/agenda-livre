@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { format, parseISO } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, AlertCircle, Check, X } from 'lucide-react';
+import { useRouter } from 'next/router';
 import ClientDashboardLayout from '../../components/layouts/ClientDashboardLayout';
 import ProtectedRoute from '../../components/auth/ProtectedRoute';
-import { appointmentService } from '../../services/api';
 import { useToast } from '../../contexts/ToastContext';
 
 // Componente de card de agendamento
@@ -14,9 +11,22 @@ const AppointmentCard = ({ appointment, onCancel }) => {
   const [isCancelling, setIsCancelling] = useState(false);
   
   // Formatação de data e hora
-  const formattedDate = format(parseISO(appointment.start_datetime), "d 'de' MMMM", { locale: ptBR });
-  const formattedTime = format(parseISO(appointment.start_datetime), "HH:mm");
-  const formattedEndTime = format(parseISO(appointment.end_datetime), "HH:mm");
+  const formattedDate = new Date(appointment.start_datetime).toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'long'
+  });
+  
+  const formattedTime = new Date(appointment.start_datetime).toLocaleTimeString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+  
+  const formattedEndTime = new Date(appointment.end_datetime).toLocaleTimeString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
   
   // Função para cancelar agendamento
   const handleCancel = async () => {
@@ -68,7 +78,7 @@ const AppointmentCard = ({ appointment, onCancel }) => {
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-medium text-gray-900">{appointment.service.name}</h3>
-            <p className="text-gray-500 text-sm">com {appointment.professional.user.first_name || user.first_name} {appointment.professional.user.lastName || user.last_name}</p>
+            <p className="text-gray-500 text-sm">com {appointment.professional.user.first_name} {appointment.professional.user.last_name}</p>
           </div>
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor()}`}>
             {getStatusText()}
@@ -157,39 +167,96 @@ const AppointmentCard = ({ appointment, onCancel }) => {
 
 // Componente principal de agendamentos
 function ClientAppointments() {
-  const queryClient = useQueryClient();
   const { showToast } = useToast();
+  const router = useRouter();
+  const [appointments, setAppointments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  // Buscar os agendamentos do cliente
-  const { data: appointments, isLoading, error } = useQuery(
-    'clientAppointments', 
-    () => appointmentService.getAll()
-      .then(res => res.data)
-      .catch(err => {
-        showToast('Erro ao carregar agendamentos', 'error');
-        throw err;
-      }),
-    {
-      staleTime: 1000 * 60 * 5, // 5 minutos
-    }
-  );
+  // Carregar agendamentos - usando useEffect em vez de useQuery
+  useEffect(() => {
+    // Simulação de dados para testes
+    const loadAppointments = () => {
+      setTimeout(() => {
+        try {
+          // Dados mockados para teste
+          const mockAppointments = [
+            {
+              id: 1,
+              service: {
+                name: 'Box Braids',
+                price: 250
+              },
+              professional: {
+                user: {
+                  first_name: 'Ana',
+                  last_name: 'Oliveira'
+                }
+              },
+              start_datetime: '2025-04-15T14:00:00',
+              end_datetime: '2025-04-15T17:00:00',
+              status: 'confirmed',
+              is_home_service: false,
+              use_own_hair: true,
+              total_price: 250,
+              notes: 'Cliente pediu para fazer tranças mais finas.'
+            },
+            {
+              id: 2,
+              service: {
+                name: 'Twist Senegalês',
+                price: 290
+              },
+              professional: {
+                user: {
+                  first_name: 'Carla',
+                  last_name: 'Santos'
+                }
+              },
+              start_datetime: '2025-04-20T10:00:00',
+              end_datetime: '2025-04-20T14:00:00',
+              status: 'pending_payment',
+              is_home_service: true,
+              use_own_hair: false,
+              hair_length: 'medium',
+              total_price: 370,
+              notes: ''
+            }
+          ];
+          
+          setAppointments(mockAppointments);
+          setIsLoading(false);
+        } catch (err) {
+          showToast('Erro ao carregar agendamentos', 'error');
+          setError(err);
+          setIsLoading(false);
+        }
+      }, 1000);
+    };
+    
+    loadAppointments();
+  }, [showToast]);
   
-  // Mutation para cancelar agendamento
-  const cancelMutation = useMutation(
-    (appointmentId) => appointmentService.cancel(appointmentId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('clientAppointments');
-        showToast('Agendamento cancelado com sucesso', 'success');
-      },
-      onError: () => {
-        showToast('Erro ao cancelar agendamento', 'error');
-      }
+  // Função para cancelar agendamento
+  const handleCancelAppointment = async (appointmentId) => {
+    try {
+      // Simulação de chamada de API
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Atualizar estado local com o agendamento cancelado
+      setAppointments(appointments.map(app => 
+        app.id === appointmentId ? { ...app, status: 'cancelled' } : app
+      ));
+      
+      showToast('Agendamento cancelado com sucesso', 'success');
+    } catch (err) {
+      showToast('Erro ao cancelar agendamento', 'error');
+      throw err;
     }
-  );
+  };
   
   // Filtrar os agendamentos ativos (sem cancelados ou concluídos)
-  const activeAppointments = appointments?.filter(
+  const activeAppointments = appointments.filter(
     app => !['cancelled', 'completed', 'no_show'].includes(app.status)
   ) || [];
   
@@ -264,7 +331,7 @@ function ClientAppointments() {
             <AppointmentCard
               key={appointment.id}
               appointment={appointment}
-              onCancel={(id) => cancelMutation.mutate(id)}
+              onCancel={handleCancelAppointment}
             />
           ))}
         </div>

@@ -1,28 +1,18 @@
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { AuthProvider } from '../contexts/AuthContext';
-import { ToastProvider } from '../contexts/ToastContext';
+// pages/_app.js
 import '../styles/globals.css';
+import { BookingProvider } from '../src/contexts/BookingContext';
+import { AuthProvider } from '../src/contexts/AuthContext';
+import { ToastProvider } from '../contexts/ToastContext';
 
 function MyApp({ Component, pageProps }) {
-  // Criar um cliente React Query para cada sessão de usuário
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: 1,
-        refetchOnWindowFocus: false,
-      },
-    },
-  }));
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <ToastProvider>
-        <AuthProvider>
+    <AuthProvider>
+      <BookingProvider>
+        <ToastProvider>
           <Component {...pageProps} />
-        </AuthProvider>
-      </ToastProvider>
-    </QueryClientProvider>
+        </ToastProvider>
+      </BookingProvider>
+    </AuthProvider>
   );
 }
 

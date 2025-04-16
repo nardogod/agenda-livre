@@ -1,315 +1,260 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, MapPin, AlertCircle } from 'lucide-react';
 import ClientDashboardLayout from '../../components/layouts/ClientDashboardLayout';
 import ProtectedRoute from '../../components/auth/ProtectedRoute';
-import { useAuth } from '../'../src;
+import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../contexts/ToastContext';
 
 // Schema de validação
-const schema = yup.object({
-  first_name: yup.string().required('Nome é obrigatório'),
-  last_name: yup.string().required('Sobrenome é obrigatório'),
-  email: yup.string().email('Email inválido').required('Email é obrigatório'),
-  phone: yup.string().required('Telefone é obrigatório'),
-}).required();
-
-function ClientProfile() {
-  const { user, updateProfile } = useAuth();
-  const { showToast } = useToast();
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [showAddAddress, setShowAddAddress] = useState(false);
+const validateProfile = (data) => {
+  const errors = {};
   
-  // Inicializar formulário com dados do usuário
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      first_name: user?.first_name || '',
-      last_name: user?.last_name || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
-    }
+  if (!data.name) errors.name = 'Nome é obrigatório';
+  if (!data.email) errors.email = 'Email é obrigatório';
+  if (!data.phone) errors.phone = 'Telefone é obrigatório';
+  
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  };
+};
+
+const ProfilePage = () => {
+  const { user, updateProfile, isLoading } = useAuth();
+  const { showToast } = useToast();
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
   });
   
-  // Lidar com a atualização do perfil
-  const onSubmit = async (data) => {
+  const [errors, setErrors] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
+  
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        address: user.address || ''
+      });
+    }
+  }, [user]);
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    
+    // Limpar erro deste campo
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: null
+      });
+    }
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validar formulário
+    const validation = validateProfile(formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      return;
+    }
+    
+    setIsSaving(true);
+    
     try {
-      setIsUpdating(true);
-      const success = await updateProfile(data);
-      if (success) {
-        showToast('Perfil atualizado com sucesso!', 'success');
-      }
+      // Simular atualização (em uma versão real, chamaríamos a API)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Em uma implementação real:
+      // await updateProfile(formData);
+      
+      showToast('Perfil atualizado com sucesso!', 'success');
     } catch (error) {
       console.error('Erro ao atualizar perfil:', error);
       showToast('Erro ao atualizar perfil. Tente novamente.', 'error');
     } finally {
-      setIsUpdating(false);
+      setIsSaving(false);
     }
   };
   
+  if (isLoading) {
+    return (
+      <ClientDashboardLayout>
+        <div className="p-4">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+          </div>
+        </div>
+      </ClientDashboardLayout>
+    );
+  }
+  
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-2xl font-medium text-gray-900 mb-2">Meu Perfil</h1>
-      <p className="text-gray-500 mb-6">Gerencie suas informações pessoais</p>
-      
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="p-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">Informações Pessoais</h2>
-            
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nome
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User size={18} className="text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    {...register("first_name")}
-                    className="w-full pl-10 p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                  />
-                </div>
-                {errors.first_name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.first_name.message}</p>
-                )}
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Sobrenome
-                </label>
-                <input
-                  type="text"
-                  {...register("last_name")}
-                  className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                />
-                {errors.last_name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.last_name.message}</p>
-                )}
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail size={18} className="text-gray-400" />
-                  </div>
-                  <input
-                    type="email"
-                    {...register("email")}
-                    className="w-full pl-10 p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                  />
-                </div>
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                )}
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Telefone
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone size={18} className="text-gray-400" />
-                  </div>
-                  <input
-                    type="tel"
-                    {...register("phone")}
-                    className="w-full pl-10 p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                  />
-                </div>
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
-                )}
-              </div>
-            </div>
-            
-            <button
-              type="submit"
-              disabled={isUpdating}
-              className="mt-6 w-full sm:w-auto px-6 py-3 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-700 transition-colors"
-            >
-              {isUpdating ? 'Salvando...' : 'Salvar alterações'}
-            </button>
-          </div>
-        </form>
-      </div>
-      
-      {/* Seção de endereços */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium text-gray-900">Endereços</h2>
-            <button
-              type="button"
-              onClick={() => setShowAddAddress(!showAddAddress)}
-              className="text-sm text-purple-600 font-medium"
-            >
-              {showAddAddress ? 'Cancelar' : 'Adicionar endereço'}
-            </button>
-          </div>
+    <ProtectedRoute userType="client">
+      <ClientDashboardLayout>
+        <div className="p-4 max-w-3xl mx-auto">
+          <h1 className="text-2xl font-medium mb-6">Meu Perfil</h1>
           
-          {showAddAddress && (
-            <div className="bg-gray-50 p-4 rounded-xl mb-4">
-              <h3 className="font-medium text-gray-900 mb-3">Novo Endereço</h3>
+          <div className="bg-white rounded-xl p-6 mb-6">
+            <h2 className="text-lg font-medium mb-4">Informações Pessoais</h2>
+            
+            <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nome do endereço (ex: Casa, Trabalho)
+                    Nome Completo
                   </label>
-                  <input
-                    type="text"
-                    className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                    placeholder="Ex: Minha casa"
-                  />
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <User size={18} className="text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className={`pl-10 w-full p-3 bg-white border ${
+                        errors.name ? 'border-red-500' : 'border-gray-200'
+                      } rounded-xl`}
+                      placeholder="Digite seu nome completo"
+                    />
+                  </div>
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                  )}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    CEP
+                    Email
                   </label>
-                  <input
-                    type="text"
-                    className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                    placeholder="00000-000"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Rua
-                    </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Mail size={18} className="text-gray-400" />
+                    </div>
                     <input
-                      type="text"
-                      className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`pl-10 w-full p-3 bg-white border ${
+                        errors.email ? 'border-red-500' : 'border-gray-200'
+                      } rounded-xl`}
+                      placeholder="Digite seu email"
                     />
                   </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Número
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                    />
-                  </div>
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Complemento
+                    Telefone
                   </label>
-                  <input
-                    type="text"
-                    className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                    placeholder="Apto, bloco, etc."
-                  />
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Phone size={18} className="text-gray-400" />
+                    </div>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`pl-10 w-full p-3 bg-white border ${
+                        errors.phone ? 'border-red-500' : 'border-gray-200'
+                      } rounded-xl`}
+                      placeholder="(00) 00000-0000"
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                  )}
                 </div>
                 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Bairro
-                    </label>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Endereço
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <MapPin size={18} className="text-gray-400" />
+                    </div>
                     <input
                       type="text"
-                      className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Cidade
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full p-3 bg-white border border-gray-200 rounded-xl focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      className="pl-10 w-full p-3 bg-white border border-gray-200 rounded-xl"
+                      placeholder="Digite seu endereço"
                     />
                   </div>
                 </div>
+                
+                <div className="flex items-start pt-2">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="notifications"
+                      type="checkbox"
+                      className="h-4 w-4 text-purple-600 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="notifications" className="text-gray-700">
+                      Desejo receber notificações sobre promoções e novidades
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-6 flex items-center space-x-4">
+                <button
+                  type="submit"
+                  disabled={isSaving}
+                  className={`px-6 py-3 bg-purple-600 text-white font-medium rounded-xl ${
+                    isSaving ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {isSaving ? 'Salvando...' : 'Salvar Alterações'}
+                </button>
                 
                 <button
                   type="button"
-                  className="w-full py-3 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-700 transition-colors"
+                  className="px-6 py-3 border border-gray-200 text-gray-700 font-medium rounded-xl"
                 >
-                  Salvar endereço
+                  Cancelar
                 </button>
               </div>
-            </div>
-          )}
+            </form>
+          </div>
           
-          {user?.addresses && user.addresses.length > 0 ? (
-            <div className="space-y-3">
-              {user.addresses.map((address, index) => (
-                <div key={index} className="bg-gray-50 p-4 rounded-xl flex justify-between items-center">
-                  <div className="flex items-start">
-                    <MapPin size={18} className="text-gray-500 mr-3 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-sm">{address.name}</p>
-                      <p className="text-gray-600 text-sm">{address.street}, {address.number}</p>
-                      <p className="text-gray-600 text-sm">{address.district}, {address.city}</p>
-                    </div>
-                  </div>
-                  <button className="text-red-600 text-sm font-medium">
-                    Remover
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8 bg-gray-50 rounded-xl">
-              <MapPin className="mx-auto h-10 w-10 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">Sem endereços</h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Você ainda não adicionou nenhum endereço.
+          <div className="bg-amber-50 p-4 rounded-xl flex items-start">
+            <AlertCircle size={20} className="text-amber-600 mr-3 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="text-sm font-medium text-amber-800">Importante</h3>
+              <p className="text-sm text-amber-700 mt-1">
+                Para alterar sua senha, acesse a seção "Segurança" no menu lateral.
               </p>
             </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Seção de segurança */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div className="p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Segurança</h2>
-          
-          <button
-            type="button"
-            className="w-full sm:w-auto px-6 py-3 bg-white border border-gray-200 text-purple-600 font-medium rounded-xl hover:bg-gray-50 transition-colors"
-          >
-            Alterar senha
-          </button>
-          
-          <div className="mt-6 flex items-start bg-purple-50 p-4 rounded-xl">
-            <AlertCircle size={18} className="text-purple-600 mr-3 flex-shrink-0 mt-0.5" />
-            <p className="text-purple-700 text-sm">
-              Por segurança, use senhas fortes e não compartilhe suas credenciais. 
-              Se notar atividade suspeita, altere sua senha imediatamente.
-            </p>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-// Componente envolvendo a rota protegida
-export default function ClientProfilePage() {
-  return (
-    <ProtectedRoute>
-      <ClientDashboardLayout>
-        <ClientProfile />
       </ClientDashboardLayout>
     </ProtectedRoute>
   );
-}
+};
+
+export default ProfilePage;

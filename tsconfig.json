@@ -35,7 +35,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "pages/auth/register.js", "pages/auth/login.js", "pages/dashboard/client/profile.js", "pages/dashboard/client/index.js", "pages/dashboard/client/history.js", "pages/dashboard/client/appointments.js"  ],
   "exclude": [
     "node_modules"
   ]

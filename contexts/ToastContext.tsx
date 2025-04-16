@@ -1,120 +1,95 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { AlertCircle, CheckCircle, Info, X } from 'lucide-react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 
-// Contexto para o gerenciamento de notificações toast
-const ToastContext = createContext();
-
-// Componente individual de toast
-const Toast = ({ id, message, type, onClose }) => {
-  useEffect(() => {
-    // Fechar automaticamente após 5 segundos
-    const timer = setTimeout(() => {
-      onClose(id);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [id, onClose]);
-
-  // Definição de estilos com base no tipo
-  const getToastStyles = () => {
-    switch (type) {
-      case 'success':
-        return {
-          bg: 'bg-green-50',
-          border: 'border-green-200',
-          icon: <CheckCircle className="h-5 w-5 text-green-500" aria-hidden="true" />,
-          text: 'text-green-800'
-        };
-      case 'error':
-        return {
-          bg: 'bg-red-50',
-          border: 'border-red-200',
-          icon: <AlertCircle className="h-5 w-5 text-red-500" aria-hidden="true" />,
-          text: 'text-red-800'
-        };
-      case 'info':
-        return {
-          bg: 'bg-blue-50',
-          border: 'border-blue-200',
-          icon: <Info className="h-5 w-5 text-blue-500" aria-hidden="true" />,
-          text: 'text-blue-800'
-        };
-      default:
-        return {
-          bg: 'bg-gray-50',
-          border: 'border-gray-200',
-          icon: <Info className="h-5 w-5 text-gray-500" aria-hidden="true" />,
-          text: 'text-gray-800'
-        };
-    }
-  };
-
-  const styles = getToastStyles();
-
-  return (
-    <div className={`${styles.bg} p-4 rounded-lg shadow-md border ${styles.border} mb-2`}>
-      <div className="flex">
-        <div className="flex-shrink-0">
-          {styles.icon}
-        </div>
-        <div className="ml-3 flex-1">
-          <p className={`text-sm font-medium ${styles.text}`}>{message}</p>
-        </div>
-        <div className="ml-4 flex-shrink-0 flex">
-          <button
-            className="rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
-            onClick={() => onClose(id)}
-          >
-            <span className="sr-only">Fechar</span>
-            <X className="h-5 w-5" aria-hidden="true" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+// Definição do tipo de toast
+const TOAST_TYPES = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  INFO: 'info',
+  WARNING: 'warning'
 };
 
-// Provider component
-export function ToastProvider({ children }) {
-  const [toasts, setToasts] = useState([]);
+// Interface do context
+const ToastContext = createContext({
+  showToast: () => {},
+  hideToast: () => {},
+  toasts: []
+});
 
-  // Adicionar um novo toast
-  const showToast = useCallback((message, type = 'info') => {
-    const id = Date.now();
-    setToasts(prevToasts => [...prevToasts, { id, message, type }]);
+// Provider component
+export const ToastProvider = ({ children }) => {
+  const [toasts, setToasts] = useState([]);
+  
+  // Função para mostrar um toast
+  const showToast = useCallback((message, type = TOAST_TYPES.INFO, duration = 5000) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    
+    // Adicionar novo toast à lista
+    setToasts(prevToasts => [
+      ...prevToasts,
+      { id, message, type, duration }
+    ]);
+    
+    // Configurar timer para remover o toast após a duração
+    setTimeout(() => {
+      hideToast(id);
+    }, duration);
+    
     return id;
   }, []);
-
-  // Remover um toast específico
+  
+  // Função para esconder um toast específico
   const hideToast = useCallback((id) => {
     setToasts(prevToasts => prevToasts.filter(toast => toast.id !== id));
   }, []);
-
-  const value = { showToast, hideToast };
-
-  return (
-    <ToastContext.Provider value={value}>
-      {children}
-
-      {/* Container de toasts fixo no canto inferior direito */}
-      <div className="fixed bottom-0 right-0 p-6 w-full max-w-sm z-50 pointer-events-none">
-        <div className="flex flex-col pointer-events-auto">
+  
+  // Componente de UI para renderizar os toasts
+  const ToastContainer = () => {
+    if (toasts.length === 0) return null;
+    
+    return (
+      <div className="fixed bottom-0 right-0 p-4 z-50">
+        <div className="flex flex-col space-y-2">
           {toasts.map(toast => (
-            <Toast
+            <div 
               key={toast.id}
-              id={toast.id}
-              message={toast.message}
-              type={toast.type}
-              onClose={hideToast}
-            />
+              className={`px-4 py-3 rounded-lg shadow-lg flex items-center justify-between ${
+                toast.type === TOAST_TYPES.SUCCESS ? 'bg-green-50 text-green-800 border-l-4 border-green-500' :
+                toast.type === TOAST_TYPES.ERROR ? 'bg-red-50 text-red-800 border-l-4 border-red-500' :
+                toast.type === TOAST_TYPES.WARNING ? 'bg-amber-50 text-amber-800 border-l-4 border-amber-500' :
+                'bg-blue-50 text-blue-800 border-l-4 border-blue-500'
+              }`}
+            >
+              <span>{toast.message}</span>
+              <button 
+                onClick={() => hideToast(toast.id)}
+                className="ml-3 text-gray-400 hover:text-gray-600"
+              >
+                &times;
+              </button>
+            </div>
           ))}
         </div>
       </div>
+    );
+  };
+  
+  return (
+    <ToastContext.Provider value={{ showToast, hideToast, toasts }}>
+      {children}
+      <ToastContainer />
     </ToastContext.Provider>
   );
-}
+};
 
-// Hook para usar o contexto
-export function useToast() {
-  return useContext(ToastContext);
-}
+// Hook customizado para usar o contexto
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  
+  if (context === undefined) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  
+  return context;
+};
+
+export default ToastContext;

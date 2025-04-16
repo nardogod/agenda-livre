@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { format, parseISO } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Star, AlertCircle } from 'lucide-react';
 import ClientDashboardLayout from '../../components/layouts/ClientDashboardLayout';
 import ProtectedRoute from '../../components/auth/ProtectedRoute';
-import { appointmentService } from '../../services/api';
 import { useToast } from '../../contexts/ToastContext';
+import { useRouter } from 'next/router';
 
 // Componente de card de agendamento do histórico
 const HistoryAppointmentCard = ({ appointment }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
   // Formatação de data e hora
-  const formattedDate = format(parseISO(appointment.start_datetime), "d 'de' MMMM, yyyy", { locale: ptBR });
-  const formattedTime = format(parseISO(appointment.start_datetime), "HH:mm");
+  const formattedDate = new Date(appointment.start_datetime).toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  
+  const formattedTime = new Date(appointment.start_datetime).toLocaleTimeString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
   
   // Cálculo de status de cor com base no status
   const getStatusColor = () => {
@@ -50,7 +56,7 @@ const HistoryAppointmentCard = ({ appointment }) => {
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-medium text-gray-900">{appointment.service.name}</h3>
-            <p className="text-gray-500 text-sm">com {appointment.professional.user.first_name || user.first_name} {appointment.professional.user.lastName || user.last_name}</p>
+            <p className="text-gray-500 text-sm">com {appointment.professional.user.first_name} {appointment.professional.user.last_name}</p>
           </div>
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor()}`}>
             {getStatusText()}
@@ -125,20 +131,68 @@ const HistoryAppointmentCard = ({ appointment }) => {
 // Componente principal de histórico
 function ClientHistory() {
   const { showToast } = useToast();
-  
-  // Buscar o histórico de agendamentos (concluídos ou cancelados)
-  const { data: appointments, isLoading, error } = useQuery(
-    'clientAppointmentsHistory', 
-    () => appointmentService.getAll({ status: 'completed,cancelled,no_show' })
-      .then(res => res.data)
-      .catch(err => {
+  const router = useRouter();
+  const [appointments, setAppointments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Simulação de dados para testes
+    setTimeout(() => {
+      try {
+        // Dados mockados para teste
+        const mockAppointments = [
+          {
+            id: 1,
+            service: {
+              name: 'Box Braids',
+              price: 250
+            },
+            professional: {
+              user: {
+                first_name: 'Ana',
+                last_name: 'Oliveira'
+              }
+            },
+            start_datetime: '2025-04-10T14:00:00',
+            end_datetime: '2025-04-10T17:00:00',
+            status: 'completed',
+            has_review: false,
+            use_own_hair: true,
+            total_price: 250,
+            notes: 'Cliente pediu para fazer tranças mais finas.'
+          },
+          {
+            id: 2,
+            service: {
+              name: 'Manutenção de Tranças',
+              price: 100
+            },
+            professional: {
+              user: {
+                first_name: 'Ana',
+                last_name: 'Oliveira'
+              }
+            },
+            start_datetime: '2025-03-15T10:00:00',
+            end_datetime: '2025-03-15T11:30:00',
+            status: 'cancelled',
+            has_review: false,
+            use_own_hair: true,
+            total_price: 100,
+            notes: ''
+          }
+        ];
+        
+        setAppointments(mockAppointments);
+        setIsLoading(false);
+      } catch (err) {
         showToast('Erro ao carregar histórico', 'error');
-        throw err;
-      }),
-    {
-      staleTime: 1000 * 60 * 10, // 10 minutos
-    }
-  );
+        setError(err);
+        setIsLoading(false);
+      }
+    }, 1000);
+  }, [showToast]);
   
   // Renderização de estado de carregamento
   if (isLoading) {
@@ -226,6 +280,4 @@ export default function ClientHistoryPage() {
       </ClientDashboardLayout>
     </ProtectedRoute>
   );
-}gray-200 rounded w-1/4 mb-3"></div>
-              <div className="h-3 bg-gray-200 rounded w-1/2 mb-3"></div>
-              <div className="h-3 bg-
+}

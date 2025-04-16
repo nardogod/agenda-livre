@@ -1,4 +1,6 @@
-// Redirecionamento automático para o componente canônico
+// Redirecionamento automático para o componente original
 // Este arquivo foi gerado automaticamente para resolver duplicações
-export * from "../../'../src;
-export { default } from "../../'../src;
+
+import Component from '../../src/components/booking/FilterGroup.tsx';
+
+export default Component;
