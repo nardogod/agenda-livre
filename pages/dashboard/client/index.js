@@ -18,7 +18,7 @@ const ClientDashboard = () => {
           id: 1,
           serviceName: 'Box Braids',
           professionalName: 'Ana Oliveira',
-          professionalImage: '/api/placeholder/300/300',
+          professionalImage: '/images/profile-placeholder.jpg',
           date: new Date('2025-04-20T14:00:00'),
           price: 250,
           status: 'confirmed'
@@ -27,7 +27,7 @@ const ClientDashboard = () => {
           id: 2,
           serviceName: 'Penteado para Festa',
           professionalName: 'Mariana Santos',
-          professionalImage: '/api/placeholder/300/300',
+          professionalImage: '/images/profile-placeholder.jpg',
           date: new Date('2025-04-25T10:30:00'),
           price: 150,
           status: 'pending_payment'

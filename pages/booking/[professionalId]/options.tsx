@@ -1,257 +1,299 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
 import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowLeft, Star } from 'lucide-react';
+import { useBooking } from '../../../contexts/BookingContext';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import ToggleOption from '../../../components/booking/ToggleOption';
+import RadioOption from '../../../components/booking/RadioOption';
 
-// Componente Toggle
-const ToggleOption = ({ label, value, onChange }) => (
-  <div className="flex items-center justify-between p-4 bg-white rounded-xl mb-3">
-    <span className="font-medium">{label}</span>
-    <div 
-      className={`w-12 h-6 rounded-full flex items-center p-1 cursor-pointer ${value ? 'bg-purple-600' : 'bg-gray-300'}`}
-      onClick={() => onChange(!value)}
-    >
-      <div 
-        className={`w-4 h-4 rounded-full bg-white transform duration-200 ${value ? 'translate-x-6' : 'translate-x-0'}`} 
-      />
-    </div>
-  </div>
-);
-
-// Componente Radio
-const RadioOption = ({ options, selected, onChange }) => (
-  <div className="flex bg-white rounded-xl mb-3 overflow-hidden">
-    {options.map((option, idx) => (
-      <button
-        key={idx}
-        className={`flex-1 py-3 text-sm ${
-          selected === option.value 
-            ? "bg-purple-600 text-white" 
-            : "text-gray-700 hover:bg-gray-50"
-        }`}
-        onClick={() => onChange(option.value)}
-      >
-        {option.label}
-      </button>
-    ))}
-  </div>
-);
-
-export default function OptionsPage() {
+export default function BookingOptionsSelection() {
   const router = useRouter();
   const { professionalId } = router.query;
+  const { 
+    bookingState, 
+    setUseOwnHair, 
+    setHairLength, 
+    setHomeService, 
+    setAddress, 
+    setHasAllergies, 
+    setAllergiesDescription, 
+    calculateTotal 
+  } = useBooking();
   
-  const [useOwnHair, setUseOwnHair] = useState(true);
-  const [hairLength, setHairLength] = useState('medium');
-  const [isHomeService, setIsHomeService] = useState(false);
-  const [address, setAddress] = useState('');
-  const [hasAllergies, setHasAllergies] = useState(false);
-  const [allergiesDescription, setAllergiesDescription] = useState('');
-  const [service, setService] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  
-  // Mock de dados (em uma implementação real, viria do Context)
+  // Inicializar estados com os valores do contexto
+  const [useOwnHair, setUseOwnHairState] = useState(bookingState.useOwnHair);
+  const [hairLength, setHairLengthState] = useState<'small' | 'medium' | 'large'>(
+    bookingState.hairLength || 'medium'
+  );
+  const [homeService, setHomeServiceState] = useState(bookingState.isHomeService);
+  const [address, setAddressState] = useState(bookingState.address || '');
+  const [hasAllergies, setHasAllergiesState] = useState(bookingState.hasAllergies);
+  const [allergiesDescription, setAllergiesDescriptionState] = useState(
+    bookingState.allergiesDescription || ''
+  );
+
+  // Efeito para redirecionar se os dados necessários não existirem
   useEffect(() => {
-    // Simulando dados anteriores
-    setService({
-      id: 1,
-      name: "Box Braids",
-      price: 250,
-      duration: 180
-    });
-    setSelectedTime("14:00");
-  }, []);
+    if (typeof window !== 'undefined') {
+      if (!bookingState.professional || !bookingState.service || !bookingState.date || !bookingState.time) {
+        router.push(`/booking/${professionalId}`);
+      }
+    }
+  }, [bookingState.professional, bookingState.service, bookingState.date, bookingState.time, professionalId, router]);
   
-  // Opções para o comprimento do cabelo
-  const hairLengthOptions = [
-    { label: 'Curto', value: 'small' },
-    { label: 'Médio', value: 'medium' },
-    { label: 'Longo', value: 'large' }
-  ];
+  // Os useEffects para atualizar o contexto devem ser executados apenas uma vez
+  // quando os valores do estado LOCAL mudam, e não a cada renderização
   
-  // Preços de referência para mostrar na interface
-  const hairPrices = {
-    small: 60,
-    medium: 80,
-    large: 120
+  // Atualizar o contexto quando o toggleOwnHair mudar
+  const handleToggleOwnHair = (value: boolean) => {
+    setUseOwnHairState(value);
+    setUseOwnHair(value);
   };
   
+  // Atualizar o contexto quando o hairLength mudar
+  const handleHairLengthChange = (value: string) => {
+    const typedValue = value as 'small' | 'medium' | 'large';
+    setHairLengthState(typedValue);
+    setHairLength(useOwnHair ? null : typedValue);
+  };
+  
+  // Atualizar o contexto quando o homeService mudar
+  const handleHomeServiceToggle = (value: boolean) => {
+    setHomeServiceState(value);
+    setHomeService(value);
+  };
+  
+  // Atualizar o contexto quando o address mudar
+  const handleAddressChange = (value: string) => {
+    setAddressState(value);
+    setAddress(value);
+  };
+  
+  // Atualizar o contexto quando o hasAllergies mudar
+  const handleAllergiesToggle = (value: boolean) => {
+    setHasAllergiesState(value);
+    setHasAllergies(value);
+  };
+  
+  // Atualizar o contexto quando o allergiesDescription mudar
+  const handleAllergiesDescriptionChange = (value: string) => {
+    setAllergiesDescriptionState(value);
+    setAllergiesDescription(value);
+  };
+  
+  // Função para continuar para a próxima etapa
   const handleContinue = () => {
-    // Em uma implementação real, salvaria no contexto
-    console.log("Opções selecionadas:", {
-      useOwnHair,
-      hairLength: useOwnHair ? null : hairLength,
-      isHomeService,
-      address: isHomeService ? address : null,
-      hasAllergies,
-      allergiesDescription: hasAllergies ? allergiesDescription : null
-    });
+    // Validar o endereço se serviço a domicílio estiver selecionado
+    if (homeService && !address.trim()) {
+      alert('Por favor, informe o endereço para serviço a domicílio.');
+      return;
+    }
     
-    // Navegar para a próxima etapa
+    // Validar a descrição de alergias se tiver alergias
+    if (hasAllergies && !allergiesDescription.trim()) {
+      alert('Por favor, descreva suas alergias.');
+      return;
+    }
+    
+    // Seguir para a próxima etapa
     router.push(`/booking/${professionalId}/client`);
   };
   
-  const handleBack = () => {
-    router.back();
-  };
+  // Verificação para renderização condicional
+  if (!bookingState.professional || !bookingState.service || !bookingState.date || !bookingState.time) {
+    return null; // O useEffect acima cuidará do redirecionamento no lado do cliente
+  }
   
-  // Calcular preço total
-  const calculateTotal = () => {
-    if (!service) return 0;
-    
-    let total = service.price;
-    
-    // Adicionar taxa de serviço em domicílio
-    if (isHomeService) {
-      total += 50; // Valor fixo de taxa de deslocamento
-    }
-    
-    // Adicionar preço do cabelo se não for próprio
-    if (!useOwnHair && hairLength) {
-      total += hairPrices[hairLength];
-    }
-    
-    return total;
-  };
+  // Formatar a data para exibição
+  const formattedDate = bookingState.date 
+    ? format(new Date(bookingState.date), "dd 'de' MMMM", { locale: ptBR }) 
+    : '';
   
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
+    <>
       <Head>
-        <title>Opções Adicionais | Agenda Livre</title>
+        <title>Opções adicionais | Agenda Livre</title>
+        <meta name="description" content="Escolha opções adicionais para seu agendamento" />
       </Head>
       
-      {/* Header simples */}
-      <header className="bg-purple-600 text-white py-4 px-5">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
-            Agenda Livre
-          </Link>
-        </div>
-      </header>
-      
-      <div className="p-4 max-w-lg mx-auto">
-        <div className="flex items-center mb-6">
-          <button 
-            className="mr-3 p-2 rounded-full hover:bg-gray-100"
-            onClick={handleBack}
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <div>
-            <h2 className="text-lg font-medium">Adicione detalhes</h2>
-            {service && selectedTime && (
-              <div className="text-sm text-gray-500">
-                {service.name} - {selectedTime}
+      <div className="bg-gray-50 min-h-screen pb-6">
+        {/* Header */}
+        <div className="relative">
+          <div className="h-28 bg-purple-100"></div>
+          
+          <div className="px-5 pb-5">
+            <div className="flex items-center -mt-16">
+              <Link href={`/booking/${professionalId}/datetime`} className="mr-3 p-2 rounded-full bg-white shadow-sm hover:bg-gray-50">
+                <ArrowLeft size={18} />
+              </Link>
+              <div className="w-16 h-16 rounded-xl bg-white p-1 shadow-sm">
+                <Image 
+                  src={bookingState.professional.profileImage} 
+                  alt={bookingState.professional.name} 
+                  width={64} 
+                  height={64} 
+                  className="object-cover rounded-lg" 
+                />
               </div>
-            )}
-          </div>
-        </div>
-        
-        <h3 className="font-medium text-sm text-gray-500 mb-3">OPÇÕES ADICIONAIS</h3>
-        
-        <ToggleOption 
-          label="Usar cabelo próprio" 
-          value={useOwnHair} 
-          onChange={setUseOwnHair} 
-        />
-        
-        {!useOwnHair && (
-          <>
-            <h3 className="font-medium text-sm text-gray-500 mb-3">COMPRIMENTO DO CABELO</h3>
-            <RadioOption 
-              options={hairLengthOptions}
-              selected={hairLength}
-              onChange={setHairLength}
-            />
-            <div className="mb-5 px-1 text-sm text-gray-500">
-              Preço do cabelo: R$ {hairPrices[hairLength].toFixed(2)}
+              <div className="ml-4 pt-2">
+                <h1 className="font-medium text-lg">{bookingState.professional.name}</h1>
+                <div className="flex items-center mt-1">
+                  <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                  <span className="ml-1 text-sm">{bookingState.professional.rating}</span>
+                </div>
+              </div>
             </div>
-          </>
-        )}
-        
-        <ToggleOption 
-          label="Serviço a domicílio (+R$ 50,00)" 
-          value={isHomeService} 
-          onChange={setIsHomeService} 
-        />
-        
-        {isHomeService && (
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Endereço completo
-            </label>
-            <input 
-              type="text" 
-              className="w-full p-3 bg-white border border-gray-200 rounded-xl"
-              placeholder="Rua, número, complemento" 
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-        )}
-        
-        <ToggleOption 
-          label="Possuo alergias" 
-          value={hasAllergies} 
-          onChange={setHasAllergies} 
-        />
-        
-        {hasAllergies && (
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Descreva suas alergias
-            </label>
-            <textarea 
-              className="w-full p-3 bg-white border border-gray-200 rounded-xl"
-              rows={2}
-              placeholder="Ex: alergia a látex, óleos essenciais..."
-              value={allergiesDescription}
-              onChange={(e) => setAllergiesDescription(e.target.value)}
-            />
-          </div>
-        )}
-        
-        <div className="mt-6 bg-purple-50 p-4 rounded-xl">
-          <h3 className="font-medium mb-3">Resumo do pedido</h3>
-          <div className="space-y-2 mb-3">
-            {service && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">{service.name}</span>
-                <span>R$ {service.price.toFixed(2)}</span>
-              </div>
-            )}
             
-            {isHomeService && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">Taxa de deslocamento</span>
-                <span>R$ 50,00</span>
+            <p className="text-sm text-purple-700 font-medium mt-2">{bookingState.professional.specialty}</p>
+          </div>
+        </div>
+        
+        {/* Passos de agendamento */}
+        <div className="px-5 mb-3 flex">
+          {[1, 2, 3, 4, 5].map(i => (
+            <div key={i} className="flex-1 flex items-center">
+              <div 
+                className={`w-2 h-2 rounded-full ${
+                  i <= 3 
+                    ? "bg-purple-600" 
+                    : "bg-gray-300"
+                }`}
+              />
+              {i < 5 && (
+                <div 
+                  className={`flex-1 h-0.5 ${
+                    i < 3 
+                      ? "bg-purple-600" 
+                      : "bg-gray-300"
+                  }`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        
+        {/* Conteúdo da página */}
+        <div className="px-5">
+          <div className="flex items-center mb-6">
+            <div>
+              <h2 className="text-lg font-medium">Adicione detalhes</h2>
+              <div className="text-sm text-gray-500">
+                {bookingState.service.name} - {formattedDate} às {bookingState.time}
               </div>
-            )}
-            
-            {!useOwnHair && (
-              <div className="flex justify-between">
-                <span className="text-gray-600">
-                  Cabelo ({hairLength === 'small' ? 'Curto' : hairLength === 'medium' ? 'Médio' : 'Longo'})
-                </span>
-                <span>R$ {hairPrices[hairLength].toFixed(2)}</span>
-              </div>
-            )}
+            </div>
           </div>
           
-          <div className="border-t pt-3 flex justify-between font-medium">
-            <span>Total</span>
-            <span>R$ {calculateTotal().toFixed(2)}</span>
+          <h3 className="font-medium text-sm text-gray-500 mb-3">OPÇÕES ADICIONAIS</h3>
+          
+          <ToggleOption 
+            label="Usar cabelo próprio" 
+            value={useOwnHair} 
+            onChange={handleToggleOwnHair} 
+          />
+          
+          {!useOwnHair && (
+            <>
+              <h3 className="font-medium text-sm text-gray-500 mb-3">COMPRIMENTO DO CABELO</h3>
+              <RadioOption 
+                options={[
+                  { label: 'Curto', value: 'small' },
+                  { label: 'Médio', value: 'medium' },
+                  { label: 'Longo', value: 'large' }
+                ]}
+                selected={hairLength}
+                onChange={handleHairLengthChange}
+              />
+              <div className="mb-5 px-1 text-sm text-gray-500">
+                Preço do cabelo: R$ {bookingState.professional.hairPrices[hairLength].toFixed(2)}
+              </div>
+            </>
+          )}
+          
+          <ToggleOption 
+            label={`Serviço a domicílio (+R$ ${bookingState.professional.homeServiceFee.toFixed(2)})`} 
+            value={homeService} 
+            onChange={handleHomeServiceToggle} 
+          />
+          
+          {homeService && (
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Endereço completo
+              </label>
+              <input 
+                type="text" 
+                className="w-full p-3 bg-white border border-gray-200 rounded-xl"
+                placeholder="Rua, número, complemento" 
+                value={address}
+                onChange={(e) => handleAddressChange(e.target.value)}
+              />
+            </div>
+          )}
+          
+          <ToggleOption 
+            label="Possuo alergias" 
+            value={hasAllergies} 
+            onChange={handleAllergiesToggle} 
+          />
+          
+          {hasAllergies && (
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Descreva suas alergias
+              </label>
+              <textarea 
+                className="w-full p-3 bg-white border border-gray-200 rounded-xl"
+                rows={2}
+                placeholder="Ex: alergia a látex, óleos essenciais..."
+                value={allergiesDescription}
+                onChange={(e) => handleAllergiesDescriptionChange(e.target.value)}
+              />
+            </div>
+          )}
+          
+          <div className="mt-6 bg-purple-50 p-4 rounded-xl">
+            <h3 className="font-medium mb-3">Resumo do pedido</h3>
+            <div className="space-y-2 mb-3">
+              <div className="flex justify-between">
+                <span className="text-gray-600">{bookingState.service.name}</span>
+                <span>R$ {bookingState.service.price.toFixed(2)}</span>
+              </div>
+              
+              {homeService && (
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Taxa de deslocamento</span>
+                  <span>R$ {bookingState.professional.homeServiceFee.toFixed(2)}</span>
+                </div>
+              )}
+              
+              {!useOwnHair && (
+                <div className="flex justify-between">
+                  <span className="text-gray-600">
+                    Cabelo ({hairLength === 'small' ? 'Curto' : hairLength === 'medium' ? 'Médio' : 'Longo'})
+                  </span>
+                  <span>R$ {bookingState.professional.hairPrices[hairLength].toFixed(2)}</span>
+                </div>
+              )}
+            </div>
+            
+            <div className="border-t pt-3 flex justify-between font-medium">
+              <span>Total</span>
+              <span>R$ {calculateTotal().toFixed(2)}</span>
+            </div>
           </div>
+          
+          <button 
+            className="w-full py-3 bg-purple-600 text-white font-medium rounded-xl mt-6"
+            onClick={handleContinue}
+          >
+            Prosseguir para seus dados
+          </button>
         </div>
-        
-        <button 
-          className="w-full py-3 bg-purple-600 text-white font-medium rounded-xl mt-6"
-          onClick={handleContinue}
-        >
-          Prosseguir para seus dados
-        </button>
       </div>
-    </div>
+    </>
   );
 }

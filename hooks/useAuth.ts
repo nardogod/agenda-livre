@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
-import AuthContext from '../src/contexts/AuthContext';
+import AuthContext from '../contexts/AuthContext';
 
 // Hook personalizado para acessar e utilizar o contexto de autenticação
 export const useAuth = () => {

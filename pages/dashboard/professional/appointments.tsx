@@ -1,6 +1,14 @@
-// Redirecionamento automático para o componente original
-// Este arquivo foi gerado automaticamente para resolver duplicações
+// pages/dashboard/professional/appointments.tsx
+import React from 'react';
+import ProfessionalAppointments from '../../../components/professional/Appointments';
+import ProfessionalDashboardLayout from '../../../components/layout/ProfessionalDashboardLayout';
 
-import Component from '../../src/components/booking/appointments.tsx';
+const ProfessionalAppointmentsPage = () => {
+  return (
+    <ProfessionalDashboardLayout>
+      <ProfessionalAppointments />
+    </ProfessionalDashboardLayout>
+  );
+};
 
-export default Component;
+export default ProfessionalAppointmentsPage;

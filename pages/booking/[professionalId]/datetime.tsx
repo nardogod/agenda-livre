@@ -1,44 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { ChevronLeft, Clock } from 'lucide-react';
 import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowLeft, Star } from 'lucide-react';
+import { useBooking } from '../../../contexts/BookingContext';
+import DateSelector from '../../../components/booking/DateSelector';
 
-// Componente de seleção de data
-const DateSelector = ({ selectedDate, onSelectDate }) => {
-  const days = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
-  const today = new Date();
-  const dates = [];
-  
-  for (let i = 0; i < 14; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
-    dates.push(date);
-  }
-  
-  return (
-    <div className="flex overflow-x-auto py-3">
-      {dates.map((date, idx) => {
-        const isSelected = date.toDateString() === selectedDate.toDateString();
-        return (
-          <button
-            key={idx}
-            className={`flex flex-col items-center justify-center mr-4 w-12 h-16 rounded-xl ${
-              isSelected ? "bg-purple-600 text-white" : "bg-white text-gray-700"
-            }`}
-            onClick={() => onSelectDate(date)}
-          >
-            <span className="text-xs font-medium mb-1">{days[date.getDay()]}</span>
-            <span className="text-lg font-semibold">{date.getDate()}</span>
-          </button>
-        );
-      })}
-    </div>
-  );
-};
+// Componente para slot de horário
+interface TimeSlotProps {
+  time: string;
+  selected: boolean;
+  onSelect: () => void;
+}
 
-// Componente de horário
-const TimeSlot = ({ time, selected, onSelect }) => (
+const TimeSlot: React.FC<TimeSlotProps> = ({ time, selected, onSelect }) => (
   <button
     className={`px-5 py-2.5 rounded-xl text-sm mr-2 mb-2 ${
       selected 
@@ -46,167 +22,253 @@ const TimeSlot = ({ time, selected, onSelect }) => (
         : "bg-white border border-gray-200 text-gray-700 hover:border-purple-300"
     }`}
     onClick={onSelect}
+    aria-pressed={selected}
   >
     {time}
   </button>
 );
 
-export default function DateTimePage() {
+// Dados mockados do profissional
+const getMockedProfessional = (id: string | number) => ({
+  id: Number(id),
+  name: "Ana Oliveira",
+  specialty: "Especialista em Tranças e Penteados",
+  profileImage: "https://placehold.co/300x300", // Corrigido: usar um placeholder externo
+  rating: 4.8,
+  reviewCount: 124,
+  location: {
+    district: "Pinheiros",
+    zone: "Zona Oeste"
+  },
+  offersHomeService: true,
+  services: [
+    { id: 1, name: "Box Braids", price: 250, duration: 180, description: "Tranças finas a médias, estilo box braids tradicionais." },
+    { id: 2, name: "Twist Senegalês", price: 290, duration: 240, description: "Twists estilo senegalês com acabamento profissional." },
+    { id: 3, name: "Penteado para Festa", price: 150, duration: 90, description: "Penteados elegantes para ocasiões especiais." },
+    { id: 4, name: "Manutenção de Tranças", price: 100, duration: 60, description: "Retoque e manutenção de tranças existentes." }
+  ],
+  homeServiceFee: 50,
+  hairPrices: {
+    small: 60,
+    medium: 80,
+    large: 120
+  }
+});
+
+export default function BookingDateTimeSelection() {
   const router = useRouter();
   const { professionalId } = router.query;
+  const { bookingState, setProfessional, setService, setTime } = useBooking();
   
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [availableTimes, setAvailableTimes] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [service, setService] = useState(null);
+  // Use o valor do contexto como estado inicial, se existir
+  const [selectedTime, setSelectedTime] = useState<string | null>(
+    bookingState.time || null
+  );
   
-  // Mock de dados do serviço (em uma implementação real, viria do Context)
+  const [loading, setLoading] = useState(true);
+  
+  // Horários disponíveis (em uma implementação real, isso viria da API)
+  const availableTimes = useMemo(() => ['09:00', '11:30', '14:00', '16:30'], []);
+  
+  // Efeito para configurar dados iniciais - corrigido para evitar loops infinitos
   useEffect(() => {
-    // Simulando serviço selecionado anteriormente
-    setService({
-      id: 1,
-      name: "Box Braids",
-      price: 250,
-      duration: 180
-    });
-  }, []);
-  
-  // Carregar horários disponíveis quando a data mudar
-  useEffect(() => {
-    if (selectedDate) {
-      loadAvailableTimes(selectedDate);
-    }
-  }, [selectedDate]);
-  
-  const loadAvailableTimes = (date) => {
-    setLoading(true);
+    // Verificar se temos professionalId e se estamos no cliente
+    if (!professionalId || typeof window === 'undefined') return;
     
-    // Simulação de chamada API para obter horários disponíveis
-    setTimeout(() => {
-      // Dados mockados para demonstração
-      const mockTimes = ["09:00", "11:30", "14:00", "16:30"];
-      setAvailableTimes(mockTimes);
-      setSelectedTime(null);
-      setLoading(false);
-    }, 500);
-  };
+    // Usamos uma flag para controlar se já carregamos os dados iniciais
+    const hasLoadedInitialData = sessionStorage.getItem(`loaded-${professionalId}`);
+    
+    // Se ainda não carregamos e não temos os dados necessários
+    if (!hasLoadedInitialData && (!bookingState.professional || !bookingState.service)) {
+      try {
+        // Converte ID para número
+        const id = Array.isArray(professionalId) ? professionalId[0] : professionalId;
+        const numericId = Number(id);
+        
+        // Dados mockados do profissional
+        const professionalData = getMockedProfessional(numericId);
+        
+        // Define profissional no contexto apenas se necessário
+        if (!bookingState.professional || bookingState.professional.id !== numericId) {
+          setProfessional(professionalData);
+        }
+        
+        // Define primeiro serviço como padrão se não houver um selecionado
+        if (!bookingState.service && professionalData.services.length > 0) {
+          setService(professionalData.services[0]);
+        }
+        
+        // Marcamos que já carregamos os dados iniciais
+        sessionStorage.setItem(`loaded-${professionalId}`, 'true');
+      } catch (error) {
+        console.error("Erro ao configurar dados iniciais:", error);
+      }
+    }
+    
+    // Desativa o loading independentemente do resultado
+    setLoading(false);
+    
+  }, [professionalId, bookingState.professional, bookingState.service, setProfessional, setService]);
   
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-  };
-  
-  const handleTimeSelect = (time) => {
+  // Função para selecionar um horário - CORRIGIDA
+  const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
+    
+    // Atualizamos o contexto apenas quando o usuário seleciona explicitamente um horário
+    // Isso evita o loop de renderização
+    setTime(time);
   };
   
+  // Função para continuar para a próxima etapa
   const handleContinue = () => {
     if (selectedTime) {
-      // Em uma implementação real, salvaria no contexto
-      console.log("Data e hora selecionadas:", {
-        date: selectedDate,
-        time: selectedTime
-      });
-      
-      // Navegar para a próxima etapa
       router.push(`/booking/${professionalId}/options`);
     }
   };
   
-  const handleBack = () => {
-    router.back();
-  };
+  // Renderização se estiver carregando
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+  
+  // Renderização se não tiver dados
+  if (!bookingState.professional || !bookingState.service) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50 flex-col">
+        <div className="text-red-600 mb-4">Erro ao carregar dados</div>
+        <Link href={`/booking/${professionalId}`} className="text-purple-600 underline">
+          Voltar para seleção de serviço
+        </Link>
+      </div>
+    );
+  }
   
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
+    <>
       <Head>
-        <title>Selecionar Data e Hora | Agenda Livre</title>
+        <title>Escolha data e horário | Agenda Livre</title>
       </Head>
       
-      {/* Header simples */}
-      <header className="bg-purple-600 text-white py-4 px-5">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
-            Agenda Livre
-          </Link>
-        </div>
-      </header>
-      
-      <div className="p-4 max-w-lg mx-auto">
-        <div className="flex items-center mb-6">
-          <button 
-            className="mr-3 p-2 rounded-full hover:bg-gray-100"
-            onClick={handleBack}
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <div>
-            <h2 className="text-lg font-medium">Escolha data e horário</h2>
-            {service && (
-              <div className="text-sm text-gray-500">{service.name}</div>
-            )}
+      <div className="bg-gray-50 min-h-screen pb-6">
+        {/* Header */}
+        <div className="relative">
+          <div className="h-28 bg-purple-100"></div>
+          
+          <div className="px-5 pb-5">
+            <div className="flex items-center -mt-16">
+              <Link href={`/booking/${professionalId}`} className="mr-3 p-2 rounded-full bg-white shadow-sm hover:bg-gray-50">
+                <ArrowLeft size={18} />
+              </Link>
+              <div className="w-16 h-16 rounded-xl bg-white p-1 shadow-sm">
+                <Image 
+                  src={bookingState.professional.profileImage}
+                  alt={bookingState.professional.name}
+                  width={64}
+                  height={64}
+                  className="object-cover rounded-lg"
+                />
+              </div>
+              <div className="ml-4 pt-2">
+                <h1 className="font-medium text-lg">
+                  {bookingState.professional.name}
+                </h1>
+                <div className="flex items-center mt-1">
+                  <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                  <span className="ml-1 text-sm">
+                    {bookingState.professional.rating}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-sm text-purple-700 font-medium mt-2">
+              {bookingState.professional.specialty}
+            </p>
           </div>
         </div>
         
-        {service && (
-          <div className="bg-white px-4 py-3 rounded-xl mb-5">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="font-medium">{service.name}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{service.duration} min</div>
-              </div>
-              <div className="text-purple-600 font-medium">
-                R$ {service.price.toFixed(2)}
+        {/* Passos de agendamento */}
+        <div className="px-5 mb-3 flex">
+          {[1, 2, 3, 4, 5].map(i => (
+            <div key={i} className="flex-1 flex items-center">
+              <div 
+                className={`w-2 h-2 rounded-full ${
+                  i <= 2 
+                    ? "bg-purple-600" 
+                    : "bg-gray-300"
+                }`}
+              />
+              {i < 5 && (
+                <div 
+                  className={`flex-1 h-0.5 ${
+                    i < 2 
+                      ? "bg-purple-600" 
+                      : "bg-gray-300"
+                  }`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        
+        {/* Conteúdo da página */}
+        <div className="px-5">
+          <div className="flex items-center mb-6">
+            <div>
+              <h2 className="text-lg font-medium">Escolha data e horário</h2>
+              <div className="text-sm text-gray-500">
+                {bookingState.service.name}
               </div>
             </div>
           </div>
-        )}
-        
-        <h3 className="text-sm font-medium text-gray-700 mb-2">Selecione uma data</h3>
-        <DateSelector 
-          selectedDate={selectedDate} 
-          onSelectDate={handleDateSelect} 
-        />
-        
-        <h3 className="text-sm font-medium text-gray-700 mt-6 mb-2">Horários disponíveis</h3>
-        
-        {loading ? (
-          <div className="animate-pulse flex flex-wrap">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-gray-100 h-10 w-20 rounded-xl mr-2 mb-2"></div>
-            ))}
+          
+          <div className="bg-white px-4 py-3 rounded-xl mb-5">
+            <div className="flex justify-between items-center">
+              <div>
+                <div className="font-medium">
+                  {bookingState.service.name}
+                </div>
+                <div className="text-xs text-gray-500 mt-0.5">
+                  {bookingState.service.duration} min
+                </div>
+              </div>
+              <div className="text-purple-600 font-medium">
+                R$ {bookingState.service.price.toFixed(2)}
+              </div>
+            </div>
           </div>
-        ) : (
+          
+          <DateSelector />
+          
+          <h3 className="text-sm font-medium text-gray-600 mt-6 mb-2">Horários disponíveis</h3>
           <div className="flex flex-wrap">
-            {availableTimes.map((time) => (
+            {availableTimes.map((time, idx) => (
               <TimeSlot 
-                key={time} 
+                key={idx} 
                 time={time} 
                 selected={time === selectedTime}
                 onSelect={() => handleTimeSelect(time)}
               />
             ))}
-            
-            {availableTimes.length === 0 && (
-              <p className="text-sm text-gray-500 py-2">
-                Nenhum horário disponível para esta data. Por favor, selecione outra data.
-              </p>
-            )}
           </div>
-        )}
-        
-        <button 
-          className={`w-full py-3 rounded-xl text-white font-medium mt-8 ${
-            selectedTime 
-              ? "bg-purple-600" 
-              : "bg-gray-300 cursor-not-allowed"
-          }`}
-          disabled={!selectedTime}
-          onClick={handleContinue}
-        >
-          Continuar
-        </button>
+          
+          <button 
+            className={`w-full py-3 rounded-xl text-white font-medium mt-8 ${
+              selectedTime 
+                ? "bg-purple-600" 
+                : "bg-gray-300"
+            }`}
+            disabled={!selectedTime}
+            onClick={handleContinue}
+          >
+            Continuar
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

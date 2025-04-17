@@ -1,61 +1,73 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        // Cores primárias
-        primary: {
-          DEFAULT: '#8B5CF6', // Roxo Primário
-          dark: '#7C3AED',    // Roxo Escuro
-          light: '#EDE9FE',   // Roxo Claro
+        purple: {
+          50: '#EDE9FE',
+          100: '#DDD6FE',
+          200: '#C4B5FD',
+          300: '#A78BFA',
+          400: '#8B5CF6',
+          500: '#7C3AED',
+          600: '#7C3AED',  // Roxo Primário
+          700: '#6D28D9',  // Roxo Escuro
+          800: '#5B21B6',
+          900: '#4C1D95',
         },
-        // Cores neutras
-        'gray': {
-          50: '#F9FAFB',      // Cinza Fundo
-          100: '#F3F4F6',     // Cinza Claro
-          200: '#E5E7EB',     // Cinza Médio
+        gray: {
+          50: '#F9FAFB',   // Cinza Fundo
+          100: '#F3F4F6',  // Cinza Claro
+          200: '#E5E7EB',  // Cinza Médio
           300: '#D1D5DB',
-          400: '#9CA3AF',     // Cinza Texto Claro
-          500: '#6B7280',     // Cinza Texto
-          800: '#1F2937',     // Preto Texto
-        },
-        // Cores de estados
-        success: {
-          DEFAULT: '#10B981', // Verde
-          light: '#ECFDF5',
-        },
-        warning: {
-          DEFAULT: '#F59E0B', // Âmbar
-          light: '#FFFBEB',
-        },
-        error: {
-          DEFAULT: '#EF4444', // Vermelho
-          light: '#FEF2F2',
-        },
-        info: {
-          DEFAULT: '#3B82F6', // Azul
-          light: '#EFF6FF',
+          400: '#9CA3AF',  // Cinza Texto Claro
+          500: '#6B7280',  // Cinza Texto
+          600: '#4B5563',
+          700: '#374151',
+          800: '#1F2937',  // Preto Texto
+          900: '#111827',
         },
       },
       borderRadius: {
         'xl': '12px',
       },
+      boxShadow: {
+        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+      },
       fontFamily: {
         sans: [
           'Inter',
-          'SF Pro Display',
+          'ui-sans-serif',
+          'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
-          'Segoe UI',
+          '"Segoe UI"',
           'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
           'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
         ],
+      },
+      fontSize: {
+        'xs': ['12px', { lineHeight: '16px' }],
+        'sm': ['14px', { lineHeight: '20px' }],
+        'base': ['16px', { lineHeight: '24px' }],
+        'lg': ['18px', { lineHeight: '28px' }],
+        'xl': ['20px', { lineHeight: '28px' }],
+        '2xl': ['24px', { lineHeight: '32px' }],
+        '3xl': ['30px', { lineHeight: '36px' }],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

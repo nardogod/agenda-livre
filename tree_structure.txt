@@ -3,7 +3,6 @@
 │   ├── cache
 │   │   ├── swc
 │   │   │   └── plugins
-│   │   │       ├── v7_windows_x86_64_0.106.15
 │   │   │       └── v7_windows_x86_64_9.0.0
 │   │   └── webpack
 │   │       ├── client-development
@@ -24,18 +23,7 @@
 │   │       │   ├── 21.pack.gz
 │   │       │   ├── 22.pack.gz
 │   │       │   ├── 23.pack.gz
-│   │       │   ├── 24.pack.gz
-│   │       │   ├── 25.pack.gz
-│   │       │   ├── 26.pack.gz
-│   │       │   ├── 27.pack.gz
-│   │       │   ├── 28.pack.gz
-│   │       │   ├── 29.pack.gz
 │   │       │   ├── 3.pack.gz
-│   │       │   ├── 30.pack.gz
-│   │       │   ├── 31.pack.gz
-│   │       │   ├── 32.pack.gz
-│   │       │   ├── 33.pack.gz
-│   │       │   ├── 34.pack.gz
 │   │       │   ├── 4.pack.gz
 │   │       │   ├── 5.pack.gz
 │   │       │   ├── 6.pack.gz
@@ -46,15 +34,10 @@
 │   │       │   └── index.pack.gz.old
 │   │       ├── client-development-fallback
 │   │       │   ├── 0.pack.gz
-│   │       │   ├── 1.pack.gz
-│   │       │   ├── 2.pack.gz
-│   │       │   ├── index.pack.gz
-│   │       │   └── index.pack.gz.old
+│   │       │   └── index.pack.gz
 │   │       ├── edge-server-development
 │   │       │   ├── 0.pack.gz
-│   │       │   ├── 1.pack.gz
-│   │       │   ├── index.pack.gz
-│   │       │   └── index.pack.gz.old
+│   │       │   └── index.pack.gz
 │   │       └── server-development
 │   │           ├── 0.pack.gz
 │   │           ├── 1.pack.gz
@@ -75,7 +58,6 @@
 │   │           ├── 23.pack.gz
 │   │           ├── 24.pack.gz
 │   │           ├── 25.pack.gz
-│   │           ├── 26.pack.gz
 │   │           ├── 3.pack.gz
 │   │           ├── 4.pack.gz
 │   │           ├── 5.pack.gz
@@ -85,10 +67,10 @@
 │   │           ├── 9.pack.gz
 │   │           ├── index.pack.gz
 │   │           └── index.pack.gz.old
+│   ├── fallback-build-manifest.json
 │   ├── package.json
 │   ├── react-loadable-manifest.json
 │   ├── server
-│   │   ├── _error.js
 │   │   ├── edge-runtime-webpack.js
 │   │   ├── interception-route-rewrite-manifest.js
 │   │   ├── middleware-build-manifest.js
@@ -101,18 +83,24 @@
 │   │   │   ├── _app.js
 │   │   │   ├── _document.js
 │   │   │   ├── _error.js
-│   │   │   ├── auth
-│   │   │   │   ├── login.js
-│   │   │   │   └── register.js
 │   │   │   ├── booking
 │   │   │   │   ├── [professionalId]
-│   │   │   │   │   └── client.js
+│   │   │   │   │   ├── client.js
+│   │   │   │   │   ├── confirmation.js
+│   │   │   │   │   ├── datetime.js
+│   │   │   │   │   ├── options.js
+│   │   │   │   │   └── payment.js
 │   │   │   │   └── [professionalId].js
 │   │   │   ├── client
 │   │   │   │   ├── appointments.js
 │   │   │   │   ├── history.js
 │   │   │   │   └── profile.js
-│   │   │   └── index.js
+│   │   │   ├── index.js
+│   │   │   ├── login.js
+│   │   │   ├── onboarding
+│   │   │   │   └── professional.js
+│   │   │   ├── professionals.js
+│   │   │   └── register.js
 │   │   ├── pages-manifest.json
 │   │   ├── static
 │   │   │   └── webpack
@@ -125,23 +113,40 @@
 │   │   └── webpack-runtime.js
 │   ├── static
 │   │   ├── chunks
-│   │   │   ├── _error.js
+│   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
+│   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
+│   │   │   ├── fallback
+│   │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__app_js.js
+│   │   │   │   ├── _pages-dir-browser_node_modules_next_dist_pages__error_js.js
+│   │   │   │   ├── amp.js
+│   │   │   │   ├── main.js
+│   │   │   │   ├── pages
+│   │   │   │   │   ├── _app.js
+│   │   │   │   │   └── _error.js
+│   │   │   │   ├── react-refresh.js
+│   │   │   │   └── webpack.js
 │   │   │   ├── main.js
 │   │   │   ├── pages
 │   │   │   │   ├── _app.js
 │   │   │   │   ├── _error.js
-│   │   │   │   ├── auth
-│   │   │   │   │   ├── login.js
-│   │   │   │   │   └── register.js
 │   │   │   │   ├── booking
 │   │   │   │   │   ├── [professionalId]
-│   │   │   │   │   │   └── client.js
+│   │   │   │   │   │   ├── client.js
+│   │   │   │   │   │   ├── confirmation.js
+│   │   │   │   │   │   ├── datetime.js
+│   │   │   │   │   │   ├── options.js
+│   │   │   │   │   │   └── payment.js
 │   │   │   │   │   └── [professionalId].js
 │   │   │   │   ├── client
 │   │   │   │   │   ├── appointments.js
 │   │   │   │   │   ├── history.js
 │   │   │   │   │   └── profile.js
-│   │   │   │   └── index.js
+│   │   │   │   ├── index.js
+│   │   │   │   ├── login.js
+│   │   │   │   ├── onboarding
+│   │   │   │   │   └── professional.js
+│   │   │   │   ├── professionals.js
+│   │   │   │   └── register.js
 │   │   │   ├── polyfills.js
 │   │   │   ├── react-refresh.js
 │   │   │   └── webpack.js
@@ -149,43 +154,104 @@
 │   │   │   ├── _buildManifest.js
 │   │   │   └── _ssgManifest.js
 │   │   └── webpack
-│   │       ├── 051d6ab5f5fa320e.webpack.hot-update.json
-│   │       ├── 086b5e97e45fcc51.webpack.hot-update.json
-│   │       ├── 0be286aa1ce3e58f.webpack.hot-update.json
-│   │       ├── 17a2b8087fdb8f90.webpack.hot-update.json
-│   │       ├── 499001ece6ab598f.webpack.hot-update.json
-│   │       ├── 59a95dbd7bce7fb4.webpack.hot-update.json
+│   │       ├── 05b3e24ecf6e4245.webpack.hot-update.json
+│   │       ├── 191ad8791908868b.webpack.hot-update.json
+│   │       ├── 1cb934a740161759.webpack.hot-update.json
+│   │       ├── 2c4d23e158b71f18.webpack.hot-update.json
+│   │       ├── 2f16a99998a507e4.webpack.hot-update.json
+│   │       ├── 350a33a2673656bf.webpack.hot-update.json
+│   │       ├── 388417fab713633b.webpack.hot-update.json
+│   │       ├── 39636442bfdc356f.webpack.hot-update.json
+│   │       ├── 3cb017df1acba23f.webpack.hot-update.json
+│   │       ├── 47ebe49a2120aee5.webpack.hot-update.json
+│   │       ├── 4c0b3460ead04c3a.webpack.hot-update.json
 │   │       ├── 633457081244afec._.hot-update.json
-│   │       ├── 673d1867fe169623.webpack.hot-update.json
-│   │       ├── 7c95820e86f6f6f3.webpack.hot-update.json
-│   │       ├── 7d1d6e0d76e3570c.webpack.hot-update.json
-│   │       ├── 89f0d0f454e7ae1a.webpack.hot-update.json
-│   │       ├── 8a99b9315557bb6f.webpack.hot-update.json
-│   │       ├── bfeeab67ab2dbde8.webpack.hot-update.json
-│   │       ├── e06cc639597b727a.webpack.hot-update.json
-│   │       ├── eadc732046ef0811.webpack.hot-update.json
-│   │       ├── f3ed415eb074cd3b.webpack.hot-update.json
+│   │       ├── 6717cb2b1621c6e8.webpack.hot-update.json
+│   │       ├── 690d8925d4e8b2aa.webpack.hot-update.json
+│   │       ├── 6a171a010a19507c.webpack.hot-update.json
+│   │       ├── 7105ca5cac9788a1.webpack.hot-update.json
+│   │       ├── 7897eedf49718a32.webpack.hot-update.json
+│   │       ├── 7a9301e820231a0b.webpack.hot-update.json
+│   │       ├── 7b72ce9b103c5775.webpack.hot-update.json
+│   │       ├── 7e3352343e8c8dab.webpack.hot-update.json
+│   │       ├── 8335f185ebe5064f.webpack.hot-update.json
+│   │       ├── 94780b21e0edb5d3.webpack.hot-update.json
+│   │       ├── 9770892084be538b.webpack.hot-update.json
+│   │       ├── a2a529f60adb79f3.webpack.hot-update.json
+│   │       ├── a949c0325feb93b9.webpack.hot-update.json
+│   │       ├── ac00702ff7e0d410.webpack.hot-update.json
+│   │       ├── ad08197cfac53e4c.webpack.hot-update.json
+│   │       ├── b4559d719cff97bd.webpack.hot-update.json
+│   │       ├── b49cc6e93547a78a.webpack.hot-update.json
+│   │       ├── b91e3c1decd3f770.webpack.hot-update.json
+│   │       ├── bc40a06c1974a18e.webpack.hot-update.json
+│   │       ├── bf97ea2f97f6961e.webpack.hot-update.json
+│   │       ├── c656a9910d15121f.webpack.hot-update.json
+│   │       ├── c774a2b87c2269d8.webpack.hot-update.json
+│   │       ├── c951edbeb6f6dcfa.webpack.hot-update.json
+│   │       ├── ce0f6828fb76e013.webpack.hot-update.json
+│   │       ├── d628ba79af843578.webpack.hot-update.json
+│   │       ├── d8b4e079ebc7b68a.webpack.hot-update.json
+│   │       ├── dd199cf193f84683.webpack.hot-update.json
+│   │       ├── e1098bd9d3c82ffe.webpack.hot-update.json
+│   │       ├── ef53e9005bcbdc2c.webpack.hot-update.json
+│   │       ├── f186f55ecc29a75b.webpack.hot-update.json
+│   │       ├── fd8b4c8c050e431b.webpack.hot-update.json
 │   │       ├── pages
-│   │       │   ├── _app.59a95dbd7bce7fb4.hot-update.js
-│   │       │   └── client
-│   │       │       ├── appointments.7c95820e86f6f6f3.hot-update.js
-│   │       │       ├── history.051d6ab5f5fa320e.hot-update.js
-│   │       │       └── history.59a95dbd7bce7fb4.hot-update.js
-│   │       ├── webpack.051d6ab5f5fa320e.hot-update.js
-│   │       ├── webpack.086b5e97e45fcc51.hot-update.js
-│   │       ├── webpack.0be286aa1ce3e58f.hot-update.js
-│   │       ├── webpack.17a2b8087fdb8f90.hot-update.js
-│   │       ├── webpack.499001ece6ab598f.hot-update.js
-│   │       ├── webpack.59a95dbd7bce7fb4.hot-update.js
-│   │       ├── webpack.673d1867fe169623.hot-update.js
-│   │       ├── webpack.7c95820e86f6f6f3.hot-update.js
-│   │       ├── webpack.7d1d6e0d76e3570c.hot-update.js
-│   │       ├── webpack.89f0d0f454e7ae1a.hot-update.js
-│   │       ├── webpack.8a99b9315557bb6f.hot-update.js
-│   │       ├── webpack.bfeeab67ab2dbde8.hot-update.js
-│   │       ├── webpack.e06cc639597b727a.hot-update.js
-│   │       ├── webpack.eadc732046ef0811.hot-update.js
-│   │       └── webpack.f3ed415eb074cd3b.hot-update.js
+│   │       │   ├── _app.2c4d23e158b71f18.hot-update.js
+│   │       │   ├── _app.2f16a99998a507e4.hot-update.js
+│   │       │   ├── _app.350a33a2673656bf.hot-update.js
+│   │       │   ├── _app.7a9301e820231a0b.hot-update.js
+│   │       │   ├── _app.f186f55ecc29a75b.hot-update.js
+│   │       │   ├── _error.7105ca5cac9788a1.hot-update.js
+│   │       │   ├── _error.94780b21e0edb5d3.hot-update.js
+│   │       │   ├── _error.a949c0325feb93b9.hot-update.js
+│   │       │   ├── _error.b49cc6e93547a78a.hot-update.js
+│   │       │   ├── _error.ce0f6828fb76e013.hot-update.js
+│   │       │   └── onboarding
+│   │       │       └── professional.2c4d23e158b71f18.hot-update.js
+│   │       ├── webpack.05b3e24ecf6e4245.hot-update.js
+│   │       ├── webpack.191ad8791908868b.hot-update.js
+│   │       ├── webpack.1cb934a740161759.hot-update.js
+│   │       ├── webpack.2c4d23e158b71f18.hot-update.js
+│   │       ├── webpack.2f16a99998a507e4.hot-update.js
+│   │       ├── webpack.350a33a2673656bf.hot-update.js
+│   │       ├── webpack.388417fab713633b.hot-update.js
+│   │       ├── webpack.39636442bfdc356f.hot-update.js
+│   │       ├── webpack.3cb017df1acba23f.hot-update.js
+│   │       ├── webpack.47ebe49a2120aee5.hot-update.js
+│   │       ├── webpack.4c0b3460ead04c3a.hot-update.js
+│   │       ├── webpack.6717cb2b1621c6e8.hot-update.js
+│   │       ├── webpack.690d8925d4e8b2aa.hot-update.js
+│   │       ├── webpack.6a171a010a19507c.hot-update.js
+│   │       ├── webpack.7105ca5cac9788a1.hot-update.js
+│   │       ├── webpack.7897eedf49718a32.hot-update.js
+│   │       ├── webpack.7a9301e820231a0b.hot-update.js
+│   │       ├── webpack.7b72ce9b103c5775.hot-update.js
+│   │       ├── webpack.7e3352343e8c8dab.hot-update.js
+│   │       ├── webpack.8335f185ebe5064f.hot-update.js
+│   │       ├── webpack.94780b21e0edb5d3.hot-update.js
+│   │       ├── webpack.9770892084be538b.hot-update.js
+│   │       ├── webpack.a2a529f60adb79f3.hot-update.js
+│   │       ├── webpack.a949c0325feb93b9.hot-update.js
+│   │       ├── webpack.ac00702ff7e0d410.hot-update.js
+│   │       ├── webpack.ad08197cfac53e4c.hot-update.js
+│   │       ├── webpack.b4559d719cff97bd.hot-update.js
+│   │       ├── webpack.b49cc6e93547a78a.hot-update.js
+│   │       ├── webpack.b91e3c1decd3f770.hot-update.js
+│   │       ├── webpack.bc40a06c1974a18e.hot-update.js
+│   │       ├── webpack.bf97ea2f97f6961e.hot-update.js
+│   │       ├── webpack.c656a9910d15121f.hot-update.js
+│   │       ├── webpack.c774a2b87c2269d8.hot-update.js
+│   │       ├── webpack.c951edbeb6f6dcfa.hot-update.js
+│   │       ├── webpack.ce0f6828fb76e013.hot-update.js
+│   │       ├── webpack.d628ba79af843578.hot-update.js
+│   │       ├── webpack.d8b4e079ebc7b68a.hot-update.js
+│   │       ├── webpack.dd199cf193f84683.hot-update.js
+│   │       ├── webpack.e1098bd9d3c82ffe.hot-update.js
+│   │       ├── webpack.ef53e9005bcbdc2c.hot-update.js
+│   │       ├── webpack.f186f55ecc29a75b.hot-update.js
+│   │       └── webpack.fd8b4c8c050e431b.hot-update.js
 │   └── trace
 ├── .swc
 │   └── plugins
@@ -200,13 +266,18 @@
 ├── README.md
 ├── VERIFICATION_STEPS.md
 ├── auth_context_fixer.py
+├── check-all-links.js
+├── check-critical-files.js
+├── check-specific-links.js
 ├── component_deduplication_report.json
 ├── component_deduplication_report.txt
 ├── component_deduplicator.py
 ├── components
+│   ├── Layout.tsx
 │   ├── auth
 │   │   └── ProtectedRoute.tsx
 │   ├── booking
+│   │   ├── DateSelector.tsx
 │   │   ├── PaymentMethod.tsx
 │   │   ├── RadioOption.tsx
 │   │   ├── ServiceCard.tsx
@@ -229,11 +300,13 @@
 │   ├── layouts
 │   │   ├── ClientDashboardLayout.js
 │   │   └── ProfessionalDashboardLayout.js
-│   └── professional
-│       ├── ProfessionalService.tsx
-│       ├── ProfessionalService.tsx.bak
-│       ├── ReviewCard.tsx
-│       └── ReviewCard.tsx.bak
+│   ├── professional
+│   │   ├── Appointments.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Onboarding.tsx
+│   │   └── Services.tsx
+│   └── professionals
+│       └── ProfessionalsList.tsx
 ├── consolidar_authcontext.py
 ├── contexts
 │   ├── AuthContext.tsx
@@ -282,9 +355,11 @@
 ├── critical_fixes_report.txt
 ├── eslint.config.mjs
 ├── falhas_teste.txt
+├── find-link-problems.js
 ├── fix-auth-context.js
 ├── fix-index.js
 ├── fix-project-structure.sh
+├── fix-redirected-components.js
 ├── fix-redirects.js
 ├── fix-redirects.js.bak
 ├── hooks
@@ -300,12 +375,17 @@
 ├── package-lock.json
 ├── package.json
 ├── pages
-│   ├── _app.js
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── _error.tsx
+│   ├── appointments
+│   │   └── [id].tsx
 │   ├── auth
 │   │   ├── login.js
 │   │   └── register.js
 │   ├── booking
 │   │   └── [professionalId]
+│   │       ├── PaymentMethod.tsx
 │   │       ├── client.tsx
 │   │       ├── confirmation.tsx
 │   │       ├── datetime.tsx
@@ -324,29 +404,31 @@
 │   │   │   └── profile.js
 │   │   └── professional
 │   │       ├── analytics.tsx
-│   │       ├── analytics.tsx.bak
 │   │       ├── appointments.tsx
-│   │       ├── appointments.tsx.bak
 │   │       ├── index.tsx
-│   │       ├── index.tsx.bak
 │   │       ├── profile.tsx
-│   │       ├── profile.tsx.bak
 │   │       ├── schedule.tsx
-│   │       ├── schedule.tsx.bak
 │   │       ├── services.tsx
-│   │       ├── services.tsx.bak
 │   │       └── settings
 │   │           ├── calendar.tsx
 │   │           ├── calendar.tsx.bak
 │   │           ├── notifications.tsx
 │   │           └── notifications.tsx.bak
 │   ├── index.tsx
-│   ├── login.js
+│   ├── login.tsx
+│   ├── onboarding
+│   │   └── professional.tsx
 │   ├── professional
 │   │   ├── dashboard.js
 │   │   ├── services.js
 │   │   └── services.js.bak
-│   └── register.js
+│   ├── professionals
+│   │   ├── [id].tsx
+│   │   └── index.tsx
+│   ├── profile
+│   │   └── index.tsx
+│   ├── register.tsx
+│   └── search.tsx
 ├── postcss.config.js
 ├── postcss.config.mjs
 ├── project_analysis_report.json
@@ -360,13 +442,15 @@
 │   ├── favicon.ico
 │   ├── file.svg
 │   ├── globe.svg
+│   ├── images
+│   │   └── profile-placeholder.jpg
 │   ├── next.svg
 │   ├── service-worker.js
 │   ├── vercel.svg
 │   └── window.svg
 ├── senha teste(pessoal).txt
 ├── services
-│   ├── api.js
+│   ├── api.ts
 │   ├── auth.ts
 │   └── professionals.ts
 ├── setup-agenda-livre.sh
@@ -518,12 +602,9 @@
 │   │   ├── AuthContext.tsx
 │   │   ├── BookingContext.tsx
 │   │   ├── FilterContext.tsx
-│   │   ├── FilterContext.tsx.bak
 │   │   ├── NotificationContext.tsx
-│   │   ├── NotificationContext.tsx.bak
 │   │   └── ToastContext.js
 │   ├── hooks
-│   │   ├── useBooking.ts
 │   │   ├── useFilters.ts
 │   │   ├── useNotifications.ts
 │   │   ├── useProfessional.ts
@@ -542,27 +623,6 @@
 │   │   │   ├── login.tsx
 │   │   │   ├── password-reset.tsx
 │   │   │   └── register.tsx
-│   │   ├── booking
-│   │   │   ├── DateSelector.tsx
-│   │   │   ├── DateSelector.tsx.bak
-│   │   │   ├── PaymentMethodItem.tsx
-│   │   │   ├── RadioOption.tsx
-│   │   │   ├── RadioOption.tsx.bak
-│   │   │   ├── ServiceCard.tsx
-│   │   │   ├── ServiceCard.tsx.bak
-│   │   │   ├── TimeSlot.tsx
-│   │   │   ├── TimeSlot.tsx.bak
-│   │   │   ├── ToggleOption.tsx
-│   │   │   ├── ToggleOption.tsx.bak
-│   │   │   └── [professionalId]
-│   │   │       ├── [id].jsx
-│   │   │       ├── client.tsx
-│   │   │       ├── confirmation.tsx
-│   │   │       ├── datetime.tsx
-│   │   │       ├── index.tsx
-│   │   │       ├── options.tsx
-│   │   │       ├── payment.tsx
-│   │   │       └── service.tsx
 │   │   ├── client
 │   │   ├── dashboard
 │   │   │   ├── client
@@ -597,9 +657,7 @@
 │   │   ├── professional
 │   │   ├── professionals
 │   │   │   ├── [id].tsx
-│   │   │   ├── [id].tsx.bak
-│   │   │   ├── index.tsx
-│   │   │   └── index.tsx.bak
+│   │   │   └── index.tsx
 │   │   ├── terms.tsx
 │   │   ├── terms.tsx.bak
 │   │   ├── test.tsx
