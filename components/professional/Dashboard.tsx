@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { Calendar, Clock, Users, TrendingUp, Settings, Scissors, ChevronRight } from 'lucide-react';
 
 // Layout que seria importado na página real
-import ProfessionalLayout from '../layout/ProfessionalDashboardLayout';
+import ProfessionalLayut from '../layout/ProfessionalDashboardLayout';
+import ProfessionalLayout from '../../components/layouts/ProfessionalDashboardLayout.js';
 
 interface Appointment {
   id: number;

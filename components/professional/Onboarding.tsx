@@ -1,5 +1,5 @@
 // components/professional/Onboarding.tsx
-import React, { useState, ReactNode, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Camera, MapPin, Instagram, ShieldCheck, ArrowRight, Check, X, Clock, Home, Calendar } from 'lucide-react';
@@ -34,6 +34,7 @@ interface ScheduleDay {
 }
 
 interface ScheduleType {
+  [key: string]: ScheduleDay;
   monday: ScheduleDay;
   tuesday: ScheduleDay;
   wednesday: ScheduleDay;
@@ -43,16 +44,18 @@ interface ScheduleType {
   sunday: ScheduleDay;
 }
 
-// Componentes que você pode extrair posteriormente
-interface MainButtonProps {
+interface DayNames {
+  [key: string]: string;
+}
+
+// Componentes de UI
+const MainButton: React.FC<{
   children: ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
-}
-
-const MainButton = ({ children, onClick, disabled = false, type = 'button', className = '' }: MainButtonProps) => (
+}> = ({ children, onClick, disabled = false, type = 'button', className = '' }) => (
   <button
     type={type}
     onClick={onClick}
@@ -65,13 +68,11 @@ const MainButton = ({ children, onClick, disabled = false, type = 'button', clas
   </button>
 );
 
-interface SecondaryButtonProps {
+const SecondaryButton: React.FC<{
   children: ReactNode;
   onClick: () => void;
   className?: string;
-}
-
-const SecondaryButton = ({ children, onClick, className = '' }: SecondaryButtonProps) => (
+}> = ({ children, onClick, className = '' }) => (
   <button
     type="button"
     onClick={onClick}
@@ -81,13 +82,11 @@ const SecondaryButton = ({ children, onClick, className = '' }: SecondaryButtonP
   </button>
 );
 
-interface ToggleSwitchProps {
+const ToggleSwitch: React.FC<{
   enabled: boolean;
   onChange: (enabled: boolean) => void;
   label: string;
-}
-
-const ToggleSwitch = ({ enabled, onChange, label }: ToggleSwitchProps) => (
+}> = ({ enabled, onChange, label }) => (
   <div className="flex items-center justify-between">
     <span className="text-sm font-medium text-gray-700">{label}</span>
     <button
@@ -102,12 +101,10 @@ const ToggleSwitch = ({ enabled, onChange, label }: ToggleSwitchProps) => (
   </div>
 );
 
-interface StepIndicatorProps {
+const StepIndicator: React.FC<{
   currentStep: number;
   totalSteps: number;
-}
-
-const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) => (
+}> = ({ currentStep, totalSteps }) => (
   <div className="flex mb-6">
     {Array.from({ length: totalSteps }).map((_, i) => (
       <div key={i} className="flex-1 flex items-center">
@@ -128,7 +125,7 @@ const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) => (
   </div>
 );
 
-const ProfessionalOnboarding = () => {
+const ProfessionalOnboarding: React.FC = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormDataType>({
@@ -161,13 +158,18 @@ const ProfessionalOnboarding = () => {
   });
   
   // Gerenciar alterações nos campos de formulário
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     
     if (type === 'checkbox') {
       setFormData({
         ...formData,
         [name]: (e.target as HTMLInputElement).checked,
+      });
+    } else if (type === 'number') {
+      setFormData({
+        ...formData,
+        [name]: parseFloat(value) || 0,
       });
     } else {
       setFormData({
@@ -191,20 +193,21 @@ const ProfessionalOnboarding = () => {
   
   // Remover serviço
   const removeService = (index: number) => {
+    if (services.length <= 1) return;
     const updatedServices = [...services];
     updatedServices.splice(index, 1);
     setServices(updatedServices);
   };
   
   // Gerenciar alterações na agenda
-  const handleScheduleChange = (day: keyof ScheduleType, field: keyof ScheduleDay, value: string | boolean) => {
-    setSchedule({
-      ...schedule,
+  const handleScheduleChange = (day: string, field: keyof ScheduleDay, value: string | boolean) => {
+    setSchedule(prev => ({
+      ...prev,
       [day]: {
-        ...schedule[day],
+        ...prev[day],
         [field]: value,
       }
-    });
+    }));
   };
   
   // Avançar para próximo passo
@@ -219,8 +222,14 @@ const ProfessionalOnboarding = () => {
     window.scrollTo(0, 0);
   };
   
+  // Alterar para um passo específico
+  const goToStep = (stepNumber: number) => {
+    setStep(stepNumber);
+    window.scrollTo(0, 0);
+  };
+  
   // Submeter formulário
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Aqui você faria a requisição para sua API
@@ -233,6 +242,23 @@ const ProfessionalOnboarding = () => {
     } catch (error) {
       console.error('Erro ao cadastrar profissional:', error);
     }
+  };
+  
+  // Toggler para especialidades
+  const toggleSpecialty = (specialty: string) => {
+    const updatedSpecialties = formData.specialties.includes(specialty)
+      ? formData.specialties.filter(s => s !== specialty)
+      : [...formData.specialties, specialty];
+    
+    setFormData({ ...formData, specialties: updatedSpecialties });
+  };
+  
+  // Handle file uploads
+  const handleFileChange = (name: 'profileImage' | 'coverImage', file: File | null) => {
+    setFormData({
+      ...formData,
+      [name]: file
+    });
   };
   
   // Renderizar passo de Perfil Básico
@@ -267,7 +293,7 @@ const ProfessionalOnboarding = () => {
                 onChange={(e) => {
                   const files = e.target.files;
                   if (files && files.length > 0) {
-                    setFormData({ ...formData, profileImage: files[0] });
+                    handleFileChange('profileImage', files[0]);
                   }
                 }}
               />
@@ -309,7 +335,7 @@ const ProfessionalOnboarding = () => {
               onChange={(e) => {
                 const files = e.target.files;
                 if (files && files.length > 0) {
-                  setFormData({ ...formData, coverImage: files[0] });
+                  handleFileChange('coverImage', files[0]);
                 }
               }}
             />
@@ -357,12 +383,7 @@ const ProfessionalOnboarding = () => {
                   type="checkbox"
                   className="hidden"
                   checked={formData.specialties.includes(specialty)}
-                  onChange={() => {
-                    const updatedSpecialties = formData.specialties.includes(specialty)
-                      ? formData.specialties.filter(s => s !== specialty)
-                      : [...formData.specialties, specialty];
-                    setFormData({ ...formData, specialties: updatedSpecialties });
-                  }}
+                  onChange={() => toggleSpecialty(specialty)}
                 />
                 {specialty}
               </label>
@@ -411,7 +432,7 @@ const ProfessionalOnboarding = () => {
           onClick={nextStep}
           disabled={!formData.name || !formData.profileImage || formData.specialties.length === 0}
         >
-          Próximo passo <ArrowRight size={16} className="ml-2" />
+          Próximo passo <ArrowRight size={16} className="inline ml-2" />
         </MainButton>
         <Link href="/" className="block text-center mt-4 text-sm text-gray-500">
           Cancelar e voltar à página inicial
@@ -506,7 +527,12 @@ const ProfessionalOnboarding = () => {
         <div className="p-4 bg-white rounded-xl shadow-sm">
           <ToggleSwitch
             enabled={formData.offersHomeService}
-            onChange={(checked) => setFormData({ ...formData, offersHomeService: checked })}
+            onChange={(checked) => {
+              setFormData({
+                ...formData,
+                offersHomeService: checked
+              });
+            }}
             label="Oferecer serviço a domicílio"
           />
           
@@ -538,7 +564,7 @@ const ProfessionalOnboarding = () => {
           onClick={nextStep}
           disabled={!formData.zone || !formData.district || !formData.location}
         >
-          Próximo passo <ArrowRight size={16} className="ml-2" />
+          Próximo passo <ArrowRight size={16} className="inline ml-2" />
         </MainButton>
       </div>
     </div>
@@ -647,36 +673,36 @@ const ProfessionalOnboarding = () => {
           onClick={nextStep}
           disabled={!services.some(s => s.name && s.price && s.duration)}
         >
-          Próximo passo <ArrowRight size={16} className="ml-2" />
+          Próximo passo <ArrowRight size={16} className="inline ml-2" />
         </MainButton>
       </div>
     </div>
   );
   
   // Renderizar passo de Agenda
-  const renderScheduleStep = () => (
-    <div>
-      <h2 className="text-xl font-medium mb-6">Configure sua disponibilidade</h2>
-      
-      <div className="space-y-4">
-        {Object.entries(schedule).map(([day, daySchedule]) => {
-          const dayNames: Record<string, string> = {
-            monday: 'Segunda-feira',
-            tuesday: 'Terça-feira',
-            wednesday: 'Quarta-feira',
-            thursday: 'Quinta-feira',
-            friday: 'Sexta-feira',
-            saturday: 'Sábado',
-            sunday: 'Domingo'
-          };
-          
-          return (
+  const renderScheduleStep = () => {
+    const dayNames: DayNames = {
+      monday: 'Segunda-feira',
+      tuesday: 'Terça-feira',
+      wednesday: 'Quarta-feira',
+      thursday: 'Quinta-feira',
+      friday: 'Sexta-feira',
+      saturday: 'Sábado',
+      sunday: 'Domingo'
+    };
+    
+    return (
+      <div>
+        <h2 className="text-xl font-medium mb-6">Configure sua disponibilidade</h2>
+        
+        <div className="space-y-4">
+          {Object.entries(schedule).map(([day, daySchedule]) => (
             <div key={day} className="bg-white p-4 rounded-xl shadow-sm">
               <div className="flex justify-between items-center">
                 <h3 className="font-medium">{dayNames[day]}</h3>
                 <ToggleSwitch
                   enabled={daySchedule.active}
-                  onChange={(checked) => handleScheduleChange(day as keyof ScheduleType, 'active', checked)}
+                  onChange={(checked) => handleScheduleChange(day, 'active', checked)}
                   label=""
                 />
               </div>
@@ -690,7 +716,7 @@ const ProfessionalOnboarding = () => {
                     <input 
                       type="time" 
                       value={daySchedule.start}
-                      onChange={(e) => handleScheduleChange(day as keyof ScheduleType, 'start', e.target.value)}
+                      onChange={(e) => handleScheduleChange(day, 'start', e.target.value)}
                       className="w-full p-3 bg-white border border-gray-200 rounded-xl"
                     />
                   </div>
@@ -702,35 +728,34 @@ const ProfessionalOnboarding = () => {
                     <input 
                       type="time" 
                       value={daySchedule.end}
-                      onChange={(e) => handleScheduleChange(day as keyof ScheduleType, 'end', e.target.value)}
+                      onChange={(e) => handleScheduleChange(day, 'end', e.target.value)}
                       className="w-full p-3 bg-white border border-gray-200 rounded-xl"
                     />
                   </div>
                 </div>
               )}
             </div>
-          );
-        })}
+          ))}
+        </div>
+        
+        <div className="mt-8 flex space-x-4">
+          <SecondaryButton onClick={prevStep}>
+            Voltar
+          </SecondaryButton>
+          <MainButton 
+            onClick={nextStep}
+            disabled={!Object.values(schedule).some(day => day.active)}
+          >
+            Próximo passo <ArrowRight size={16} className="inline ml-2" />
+          </MainButton>
+        </div>
       </div>
-      
-      <div className="mt-8 flex space-x-4">
-        <SecondaryButton onClick={prevStep}>
-          Voltar
-        </SecondaryButton>
-        <MainButton 
-          onClick={nextStep}
-          disabled={!Object.values(schedule).some(day => day.active)}
-        >
-          Próximo passo <ArrowRight size={16} className="ml-2" />
-        </MainButton>
-      </div>
-    </div>
-  );
+    );
+  };
   
   // Renderizar passo de Revisão
   const renderReviewStep = () => {
-    // Mapear dias da semana de inglês para português
-    const dayNames: Record<string, string> = {
+    const dayNames: DayNames = {
       monday: 'Segunda',
       tuesday: 'Terça',
       wednesday: 'Quarta',
@@ -751,7 +776,7 @@ const ProfessionalOnboarding = () => {
               <h3 className="font-medium">Informações do perfil</h3>
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={() => goToStep(1)}
                 className="text-purple-600 text-sm"
               >
                 Editar
@@ -788,7 +813,7 @@ const ProfessionalOnboarding = () => {
               <h3 className="font-medium">Localização</h3>
               <button
                 type="button"
-                onClick={() => setStep(2)}
+                onClick={() => goToStep(2)}
                 className="text-purple-600 text-sm"
               >
                 Editar
@@ -814,63 +839,104 @@ const ProfessionalOnboarding = () => {
           {/* Serviços */}
           <div className="bg-white p-4 rounded-xl shadow-sm">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">Serviços</h3>
-              <button type="button" onClick={() => setStep(3)} className="text-purple-600 text-sm">
+              <h3 className="font-medium">Serviços ({services.length})</h3>
+              <button
+                type="button"
+                onClick={() => goToStep(3)}
+                className="text-purple-600 text-sm"
+              >
                 Editar
               </button>
             </div>
-            {services.map((service, i) => (
-              <div key={i} className="mb-3">
-                <p className="font-medium">{service.name}</p>
-                <p className="text-sm text-gray-600">
-                  R$ {Number(service.price).toFixed(2)} &bull; {service.duration} min
-                </p>
-                {service.description && <p className="text-sm text-gray-600">{service.description}</p>}
-              </div>
-            ))}
+            
+            <div className="space-y-3">
+              {services.map((service, index) => (
+                <div key={index} className="flex justify-between items-center border-b border-gray-100 pb-2 last:border-0 last:pb-0">
+                  <div>
+                    <p className="font-medium">{service.name}</p>
+                    <p className="text-xs text-gray-500 flex items-center">
+                      <Clock size={12} className="mr-1" />
+                      {service.duration} min
+                    </p>
+                  </div>
+                  <p className="font-medium text-purple-600">R$ {parseFloat(service.price || "0").toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
           </div>
-
+          
           {/* Agenda */}
           <div className="bg-white p-4 rounded-xl shadow-sm">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">Agenda</h3>
-              <button type="button" onClick={() => setStep(4)} className="text-purple-600 text-sm">
+              <h3 className="font-medium">Disponibilidade</h3>
+              <button
+                type="button"
+                onClick={() => goToStep(4)}
+                className="text-purple-600 text-sm"
+              >
                 Editar
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(schedule)
-                .filter(([_, day]) => day.active)
-                .map(([dayKey, day]) => (
-                  <div key={dayKey} className="flex items-center">
-                    <Calendar size={16} className="mr-2 text-gray-400" />
-                    <span className="text-sm">
-                      {dayNames[dayKey]}: {day.start} - {day.end}
-                    </span>
+            
+            <div className="grid grid-cols-2 gap-2">
+              {Object.entries(schedule).map(([day, daySchedule]) => {
+                if (!daySchedule.active) return null;
+                
+                return (
+                  <div key={day} className="text-sm">
+                    <span className="font-medium">{dayNames[day]}: </span>
+                    <span className="text-gray-600">{daySchedule.start} - {daySchedule.end}</span>
                   </div>
-                ))}
+                );
+              })}
             </div>
           </div>
         </div>
-
-        <div className="mt-8 flex space-x-4">
-          <SecondaryButton onClick={() => setStep(4)}>Voltar</SecondaryButton>
-          <MainButton type="submit">Confirmar e finalizar</MainButton>
+        
+        <div className="mt-8 space-y-4">
+          <MainButton 
+            type="submit"
+            onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
+          >
+            Concluir cadastro
+          </MainButton>
+          
+          <SecondaryButton onClick={prevStep}>
+            Voltar
+          </SecondaryButton>
+          
+          <p className="text-xs text-center text-gray-500 mt-4">
+            Ao concluir, você concorda com nossos Termos de Serviço e Política de Privacidade
+          </p>
         </div>
       </div>
     );
   };
-
-  // Render completo do formulário
+  
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6">
-      <StepIndicator currentStep={step} totalSteps={5} />
-      {step === 1 && renderProfileStep()}
-      {step === 2 && renderLocationStep()}
-      {step === 3 && renderServicesStep()}
-      {step === 4 && renderScheduleStep()}
-      {step === 5 && renderReviewStep()}
-    </form>
+    <div className="min-h-screen bg-gray-50 py-10">
+      <div className="max-w-md mx-auto px-5">
+        <div className="mb-6">
+          <Link href="/" className="text-2xl font-bold text-purple-600">
+            Agenda Livre
+          </Link>
+          <h1 className="text-2xl font-bold mt-4">Cadastro de Profissional</h1>
+          <p className="text-gray-600 mt-1">Preencha as informações para criar seu perfil profissional</p>
+        </div>
+        
+        <StepIndicator currentStep={step - 1} totalSteps={5} />
+        
+        <div className="bg-white p-6 rounded-xl shadow-sm">
+          <form onSubmit={handleSubmit}>
+            {step === 1 && renderProfileStep()}
+            {step === 2 && renderLocationStep()}
+            {step === 3 && renderServicesStep()}
+            {step === 4 && renderScheduleStep()}
+            {step === 5 && renderReviewStep()}
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

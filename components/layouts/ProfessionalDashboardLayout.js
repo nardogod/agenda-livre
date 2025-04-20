@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Calendar, Clock, Settings, Users, Scissors, LogOut, Menu, X, PieChart } from 'lucide-react';
-import { useAuth } from '../../'../src;
+import { useAuth } from '../../hooks/useAuth';
 
 export default function ProfessionalDashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
